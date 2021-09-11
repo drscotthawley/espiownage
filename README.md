@@ -10,25 +10,8 @@ This file will become your README and also the index of your documentation.
 
 ## How to use
 
-
-
-#### ellipse editor:
+### ellipse editor
 
 ```bash
 $ ellipse_editor --files=*.csv
 ```
-
-
-
-
-
-```python
-1+1
-```
-
-
-
-
-    2
-
-
