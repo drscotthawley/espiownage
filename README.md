@@ -2,7 +2,7 @@
 > Utterly dominating ESPI image inference
 
 
-This file will become your README and also the index of your documentation.
+Welcome to the new phase of [SPNet](https://github.com/drscotthawley/SPNet) developement.  In this incarnation, we'll make it an image-segmentation code instead of an object detector, and we'll use [fast.ai](fast.ai).   
 
 ## Install
 
