@@ -380,7 +380,7 @@ def setup_file_lists(file_args):
     img_file_list = []
     return_code = 0
 
-    print("file_args = ",file_args)
+    #print("file_args = ",file_args)
     # first iterate through the arugment list and if an arg is a directory, than grab names of all the csv files in it
     for path in file_args:
         if os.path.isdir(path):
