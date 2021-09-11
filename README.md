@@ -1,5 +1,5 @@
 # espiownage
-> Utterly dominating ESPI image inference
+> Utterly dominating ESPI image inference (Pronounced like "espionage" but with an extra "own" in the middle: "espi-own-aaaage".)
 
 
 Welcome to the new phase of [SPNet](https://github.com/drscotthawley/SPNet) developement.  In this incarnation, we'll make it an image-segmentation code instead of an object detector, and we'll use [fast.ai](fast.ai).   
