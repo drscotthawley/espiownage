@@ -208,13 +208,13 @@ class EllipseEditor(tk.Frame):
         self.df.to_csv(self.meta_file,index=False,header=None)
     def on_rightarrow(self,event):
         self.file_index += 1
-        if (self.file_index >= len(meta_file_list)):
+        if (self.file_index >= len(self.meta_file_list)):
             self.file_index = 0
         self.load_new_files()
     def on_leftarrow(self,event):
         self.file_index -= 1
         if (self.file_index < 0):
-            self.file_index = len(meta_file_list)-1
+            self.file_index = len(self.meta_file_list)-1
         self.load_new_files()
 
 
