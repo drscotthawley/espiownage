@@ -60,12 +60,13 @@ from pathlib import Path
 from fastcore.script import *
 import re
 
+img_bank='~/datasets/steelpan_real_images/'  # as a backup: repository of all images
+
 
 def meta_to_img_path(meta_file, # filename of .csv file with annotations
-    img_dir='~/datasets/steelpan_real_images/',  # as a backup: repository of all images
     ):
     '''Suggest the image file that corresponds with an annotation CSV file'''
-    meta_file, img_dir = Path(meta_file), Path(os.path.expanduser(img_dir))
+    meta_file, img_dir = Path(meta_file), Path(os.path.expanduser(img_bank))
     img_file = meta_file.with_suffix('.png')  # check same directory as csv first
     if os.path.exists(img_file): return img_file
     return img_dir / Path(img_file.name)  # return from image storage directory
@@ -170,7 +171,6 @@ class EllipseEditor(tk.Frame):
 
         self.meta_file = self.meta_file_list[self.file_index]
         self.img_file = meta_to_img_path(self.meta_file)
-
         self.read_assign_image()
         self.read_assign_csv()
         self.read_prev_next_imgs()
@@ -407,12 +407,15 @@ class EllipseEditor(tk.Frame):
 
 
 @call_parse
-def ellipse_editor(files:Param("List of csv files", list)=[]):
+def ellipse_editor(
+    files:Param("**NOT OPTIONAL**  Wildcard namee CSV files or directory", str)='',
+    imgbank:Param("(Optional) Directory where all the (unlabeled) images are",str)=img_bank,
+    ):
     # typical command-line calling sequence:
     #  $ ./ellipse_editor.py *.csv
     files = ''.join(files)
     meta_file_list = glob.glob(files)
-
+    img_bank = imgbank
 
     print("Instructions:")
     print(" Mouse bindings:")
