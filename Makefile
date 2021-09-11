@@ -1,12 +1,13 @@
 .ONESHELL:
 SHELL := /bin/bash
 SRC = $(wildcard ./*.ipynb)
+PACKAGE = espiownage
 
-all: espiownage docs
+all: main docs
 
-espiownage: $(SRC)
+main: $(SRC)
 	nbdev_build_lib
-	touch espiownage
+	touch $(PACKAGE)
 
 sync:
 	nbdev_update_lib
@@ -17,6 +18,13 @@ docs_serve: docs
 docs: $(SRC)
 	nbdev_build_docs
 	touch docs
+
+git_update: main docs
+	nbdev_build_lib
+	nbdev_build_docs
+	git add *.ipynb settings.ini README.md $(PACKAGE) docs
+	git commit
+	git push
 
 test:
 	nbdev_test_nbs
