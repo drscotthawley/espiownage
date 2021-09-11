@@ -2,7 +2,7 @@
 > Utterly dominating ESPI image inference
 
 
-This file will become your README and also the index of your documentation.
+(Pronounced "espi-own-aaaaage" )
 
 ## Install
 
