@@ -10,30 +10,30 @@ Welcome to the new phase of [SPNet](https://github.com/drscotthawley/SPNet) deve
 
 Ubuntu (& probably other Linuxes):
 ```bash
-$ sudo apt-get install python3-tk
+sudo apt-get install python3-tk
 ```
 
 Mac (with [Homebrew](https://brew.sh/))
 ```bash
-$ brew install python3-tk
+brew install python3-tk
 ```
 
 Then on all systems, let's set up a virtual environment called `espi`. 
 I like to put my environments in `~/envs`:
 
 ```
-$ mkdir ~/envs; python3 -m venv ~/envs/espi; source ~/envs/espi/bin/activate
+mkdir ~/envs; python3 -m venv ~/envs/espi; source ~/envs/espi/bin/activate
 ```
 And then you want/need to update `pip` in case it gave you an ancient version:
 
 ```bash
-$ python3 -m pip install pip --upgrade
+python3 -m pip install pip --upgrade
 ```
 
 ### Then to install this package all you do is...
 
 ```bash
-$ pip install espiownage
+pip install espiownage
 ```
 Note: the requirements on this package follow a "kitchen sink" approach so that everything a student might need gets installed, e.g. `jupyter` and more. (And `wheel` because it speeds up the installations...I think.)
 
@@ -48,7 +48,7 @@ $ cd ~/Dropbox/Data/espiownage-data
 **AND THEN**, so we don't "clobber" each other's work, make *your own copy* (~17MB) of the main `annotations` directory, as in append your last name (hawley, morrison, morgan, etc):
 
 ```bash
-$ cp -r annotations annotations_yourlastname
+cp -r annotations annotations_yourlastname
 ```
 and then we'll each edit our own copy just to avoid...confusion. 
 
@@ -57,20 +57,20 @@ and then we'll each edit our own copy just to avoid...confusion.
 ### ellipse editor
 
 ```bash
-$ ellipse_editor --files=annotations_yourlastname/*.csv
+ellipse_editor --files=annotations_yourlastname/*.csv
 ```
 
 See `ellipse_editor -h` for command-line options.   You can, for example, edit only one strike's worth of data by running
 
 ```bash
-$ ellipse_editor --files=annotations_yourlastname/06241902*.csv
+ellipse_editor --files=annotations_yourlastname/06241902*.csv
 ```
 or a range of annotations, as in `ellipse editor --files=annotations_yourlastname/06241902_proc_001*.csv`
 
 ### generate segmentation masks
 ...from annotations:
 ```bash
-$ gen_masks --files=annotations/*.csv
+gen_masks --files=annotations/*.csv
 ```
 
 ## Contributing / Development 
@@ -78,12 +78,12 @@ $ gen_masks --files=annotations/*.csv
 You'll want to install more things:
 
 ```bash
-$ pip install nbdev twine 
+pip install nbdev twine 
 ```
 
 Fork this repo.  When you want to update your repo, one macro does it all (see `Makefile`):
 ```bash
-$ make git_update
+make git_update
 ```
 
 ## Asides
@@ -97,7 +97,7 @@ gimme() { source ~/envs/"$1"/bin/activate;  }
 
 Then when I want to load environment like `espi` I just type...
 ```bash
-$ gimme espi
+gimme espi
 ```
 
 

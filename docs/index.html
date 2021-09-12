@@ -45,17 +45,17 @@ nb_path: "index.ipynb"
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Preliminaries">Preliminaries<a class="anchor-link" href="#Preliminaries"> </a></h3><p>Ubuntu (&amp; probably other Linuxes):</p>
-<div class="highlight"><pre><span></span>$ sudo apt-get install python3-tk
+<div class="highlight"><pre><span></span>sudo apt-get install python3-tk
 </pre></div>
 <p>Mac (with <a href="https://brew.sh/">Homebrew</a>)</p>
-<div class="highlight"><pre><span></span>$ brew install python3-tk
+<div class="highlight"><pre><span></span>brew install python3-tk
 </pre></div>
 <p>Then on all systems, let's set up a virtual environment called <code>espi</code>. 
 I like to put my environments in <code>~/envs</code>:</p>
 
-<pre><code>$ mkdir ~/envs; python3 -m venv ~/envs/espi; source ~/envs/espi/bin/activate</code></pre>
+<pre><code>mkdir ~/envs; python3 -m venv ~/envs/espi; source ~/envs/espi/bin/activate</code></pre>
 <p>And then you want/need to update <code>pip</code> in case it gave you an ancient version:</p>
-<div class="highlight"><pre><span></span>$ python3 -m pip install pip --upgrade
+<div class="highlight"><pre><span></span>python3 -m pip install pip --upgrade
 </pre></div>
 
 </div>
@@ -63,7 +63,7 @@ I like to put my environments in <code>~/envs</code>:</p>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Then-to-install-this-package-all-you-do-is...">Then to install this package all you do is...<a class="anchor-link" href="#Then-to-install-this-package-all-you-do-is..."> </a></h3><div class="highlight"><pre><span></span>$ pip install espiownage
+<h3 id="Then-to-install-this-package-all-you-do-is...">Then to install this package all you do is...<a class="anchor-link" href="#Then-to-install-this-package-all-you-do-is..."> </a></h3><div class="highlight"><pre><span></span>pip install espiownage
 </pre></div>
 <p>Note: the requirements on this package follow a "kitchen sink" approach so that everything a student might need gets installed, e.g. <code>jupyter</code> and more. (And <code>wheel</code> because it speeds up the installations...I think.)</p>
 
@@ -83,17 +83,17 @@ I like to put my environments in <code>~/envs</code>:</p>
 <pre><code>$ cd ~/Dropbox/Data/espiownage-data</code></pre>
 <p>...(or whereever you've got it) for what follows.</p>
 <p><strong>AND THEN</strong>, so we don't "clobber" each other's work, make <em>your own copy</em> (~17MB) of the main <code>annotations</code> directory, as in append your last name (hawley, morrison, morgan, etc):</p>
-<div class="highlight"><pre><span></span>$ cp -r annotations annotations_yourlastname
+<div class="highlight"><pre><span></span>cp -r annotations annotations_yourlastname
 </pre></div>
 <p>and then we'll each edit our own copy just to avoid...confusion.</p>
-<h3 id="ellipse-editor">ellipse editor<a class="anchor-link" href="#ellipse-editor"> </a></h3><div class="highlight"><pre><span></span>$ ellipse_editor --files<span class="o">=</span>annotations_yourlastname/*.csv
+<h3 id="ellipse-editor">ellipse editor<a class="anchor-link" href="#ellipse-editor"> </a></h3><div class="highlight"><pre><span></span>ellipse_editor --files<span class="o">=</span>annotations_yourlastname/*.csv
 </pre></div>
 <p>See <code>ellipse_editor -h</code> for command-line options.   You can, for example, edit only one strike's worth of data by running</p>
-<div class="highlight"><pre><span></span>$ ellipse_editor --files<span class="o">=</span>annotations_yourlastname/06241902*.csv
+<div class="highlight"><pre><span></span>ellipse_editor --files<span class="o">=</span>annotations_yourlastname/06241902*.csv
 </pre></div>
 <p>or a range of annotations, as in <code>ellipse editor --files=annotations_yourlastname/06241902_proc_001*.csv</code></p>
 <h3 id="generate-segmentation-masks">generate segmentation masks<a class="anchor-link" href="#generate-segmentation-masks"> </a></h3><p>...from annotations:</p>
-<div class="highlight"><pre><span></span>$ gen_masks --files<span class="o">=</span>annotations/*.csv
+<div class="highlight"><pre><span></span>gen_masks --files<span class="o">=</span>annotations/*.csv
 </pre></div>
 
 </div>
@@ -102,10 +102,10 @@ I like to put my environments in <code>~/envs</code>:</p>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Contributing-/-Development">Contributing / Development<a class="anchor-link" href="#Contributing-/-Development"> </a></h2><p>You'll want to install more things:</p>
-<div class="highlight"><pre><span></span>$ pip install nbdev twine
+<div class="highlight"><pre><span></span>pip install nbdev twine
 </pre></div>
 <p>Fork this repo.  When you want to update your repo, one macro does it all (see <code>Makefile</code>):</p>
-<div class="highlight"><pre><span></span>$ make git_update
+<div class="highlight"><pre><span></span>make git_update
 </pre></div>
 
 </div>
@@ -118,7 +118,7 @@ I like to put my environments in <code>~/envs</code>:</p>
 </pre></div>
 <p>(note that in order for this alias to be recognized, you need to either logout and log back in or else run <code>$ source ~/.bashrc</code>)</p>
 <p>Then when I want to load environment like <code>espi</code> I just type...</p>
-<div class="highlight"><pre><span></span>$ gimme espi
+<div class="highlight"><pre><span></span>gimme espi
 </pre></div>
 
 </div>
