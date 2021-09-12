@@ -59,6 +59,7 @@ import sys
 from pathlib import Path
 from fastcore.script import *
 import re
+from espiownage.core import *
 
 # default repository of all images, can change via --imgbank
 img_bank='images/'  # as a backup: repository of all images
@@ -160,7 +161,7 @@ class EllipseEditor(tk.Frame):
 
         self.infostr = ""
         self.text = self.canvas.create_text(self.width+10, 10+self.height, text=self.infostr,
-            anchor=tk.NW, font=tk.font.Font(size=11,family='Consolas'))
+            anchor=tk.NW, font=tk.font.Font(size=15,family='Consolas'))
         self.df = ''
 
         self.load_new_files()
@@ -168,7 +169,7 @@ class EllipseEditor(tk.Frame):
     def load_new_files(self):
         self.canvas.delete("all")  #destroy old tokens
         self.text = self.canvas.create_text(self.width+10, 10+self.y0, text=self.infostr,
-            anchor=tk.NW, font=tk.font.Font(size=11,family='Consolas'))
+            anchor=tk.NW, font=tk.font.Font(size=15,family='Consolas'))
 
         self.meta_file = self.meta_file_list[self.file_index]
         self.img_file = meta_to_img_path(self.meta_file)
@@ -189,9 +190,8 @@ class EllipseEditor(tk.Frame):
         self.df.drop_duplicates(inplace=True)  # sometimes the data from Zooniverse has duplicate rows
         # assign  ellipse tokens (and their handles)
         for index, row in self.df.iterrows() :
-            cx, cy = row['cx'], row['cy']
-            a, b = row['a'], row['b']
-            angle, rings = float(row['angle']), row['rings']
+            cx, cy, a, b, angle, rings = row['cx'], row['cy'], row['a'], row['b'], float(row['angle']), row['rings']
+            a, b, angle = fix_abangle(a,b,angle)
             if (0!=rings):    # 0 rings means no antinode, i.e. nothing there
                 self._create_token((cx, cy), (a, b), angle, rings, self.color)
         self.update_readout(None)
@@ -390,13 +390,6 @@ class EllipseEditor(tk.Frame):
         self.canvas.focus_set()           # that dialog box stole the focus. get it back
         self.update_readout(None)
 
-    def fix_abangle(self,a,b,angle):
-        if b > a:
-            a, b, angle = b, a, angle+90
-        if angle < 0: angle += 180
-        elif angle >= 180: angle -= 180
-        return a, b, angle
-
     def update_readout(self, event):
         mains = self.canvas.find_withtag( "main" )
         self.infostr = self.meta_file+'\n'+str(self.img_file)+'\n\n'
@@ -406,7 +399,9 @@ class EllipseEditor(tk.Frame):
         for main_id in mains:
             tokentag = self.canvas.gettags( main_id )[0]
             cx, cy, a, b, angle, rings, coords = self.retrieve_ellipse_info( tokentag )
-            a,b,angle = self.fix_abangle(a,b,angle)
+            a,b,angle = fix_abangle(a,b,angle)
+            [cx, cy, a, b, angle] = [int(round(x)) for x in [cx, cy, a, b, angle]]
+            #x, cy, a, b, angle = int(round(cx,0)), int(round(cy,0)), int(round(a,0), round(b,0), round(angle,0)
             new_df = new_df.append({'cx':cx, 'cy':cy, 'a':a, 'b':b, 'angle':angle, 'rings':rings},ignore_index=True)
 
         self.df = new_df
