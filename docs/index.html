@@ -53,8 +53,8 @@ nb_path: "index.ipynb"
 <p>Then on all systems, let's set up a virtual environment called <code>espi</code>. 
 I like to put my environments in <code>~/envs</code>:</p>
 
-<pre><code>$ mkdir ~/envs; cd ~/envs; python3 -m venv espi; source ~/envs/espi/bin/activate</code></pre>
-<p>And then you gotta update <code>pip</code> or else you're gonna have a bad time:</p>
+<pre><code>$ mkdir ~/envs; python3 -m venv ~/envs/espi; source ~/envs/espi/bin/activate</code></pre>
+<p>And then you want/need to update <code>pip</code> in case it gave you an ancient version:</p>
 <div class="highlight"><pre><span></span>$ python3 -m pip install pip --upgrade
 </pre></div>
 
@@ -65,6 +65,7 @@ I like to put my environments in <code>~/envs</code>:</p>
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Then-to-install-this-package-all-you-do-is...">Then to install this package all you do is...<a class="anchor-link" href="#Then-to-install-this-package-all-you-do-is..."> </a></h3><div class="highlight"><pre><span></span>$ pip install espiownage
 </pre></div>
+<p>Note: the requirements on this package follow a "kitchen sink" approach so that everything a student might need gets installed, e.g. <code>jupyter</code> and more. (And <code>wheel</code> because it speeds up the installations...I think.)</p>
 
 </div>
 </div>
@@ -79,6 +80,26 @@ I like to put my environments in <code>~/envs</code>:</p>
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="ellipse-editor">ellipse editor<a class="anchor-link" href="#ellipse-editor"> </a></h3><div class="highlight"><pre><span></span>ellipse_editor --files<span class="o">=</span>*.csv
 </pre></div>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Asides">Asides<a class="anchor-link" href="#Asides"> </a></h2><h4 id="Handy-tips-for-students">Handy tips for students<a class="anchor-link" href="#Handy-tips-for-students"> </a></h4><p>I can never remember how to start up virtual environments / or I don't <em>want</em> to remember. So in my <code>~/.bashrc</code> file (you may have a <code>~/.zshrc</code>) I put in a line where I define an alias/function I call <code>gimme</code>, that reads like so:</p>
+<div class="highlight"><pre><span></span>gimme<span class="o">()</span> <span class="o">{</span> <span class="nb">source</span> ~/envs/<span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span>/bin/activate<span class="p">;</span>  <span class="o">}</span>
+</pre></div>
+<p>(note that in order for this alias to be recognized, you need to either logout and log back in or else run <code>$ source ~/.bashrc</code>)</p>
+<p>Then when I want to load environment like <code>espi</code> I just type...</p>
+<div class="highlight"><pre><span></span>$ gimme espi
+</pre></div>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>--Scott H. Hawley, September 2021</p>
 
 </div>
 </div>
