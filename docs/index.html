@@ -6,8 +6,8 @@ title: espiownage
 keywords: fastai
 sidebar: home_sidebar
 
-summary: "Utterly dominating ESPI image inference (Pronounced like "espionage" but with an extra "own" in the middle.)"
-description: "Utterly dominating ESPI image inference (Pronounced like "espionage" but with an extra "own" in the middle.)"
+summary: "Utterly dominating ESPI image inference (Pronounced like "espionage" but with a little "own" in the middle.)"
+description: "Utterly dominating ESPI image inference (Pronounced like "espionage" but with a little "own" in the middle.)"
 nb_path: "index.ipynb"
 ---
 <!--
@@ -44,7 +44,27 @@ nb_path: "index.ipynb"
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><code>pip install espiownage</code></p>
+<h3 id="Preliminaries">Preliminaries<a class="anchor-link" href="#Preliminaries"> </a></h3><p>Ubuntu (&amp; probably other Linuxes):</p>
+<div class="highlight"><pre><span></span>$ sudo apt-get install python3-tk
+</pre></div>
+<p>Mac (with <a href="https://brew.sh/">Homebrew</a>)</p>
+<div class="highlight"><pre><span></span>$ brew install python3-tk
+</pre></div>
+<p>Then on all systems, let's set up a virtual environment called <code>espi</code>. 
+I like to put my environments in <code>~/envs</code>:</p>
+
+<pre><code>$ mkdir ~/envs; cd ~/envs; python3 -m venv espi; source ~/envs/espi/bin/activate</code></pre>
+<p>And then you gotta update <code>pip</code> or else you're gonna have a bad time:</p>
+<div class="highlight"><pre><span></span>$ python3 -m pip install pip --upgrade
+</pre></div>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Then-to-install-this-package-all-you-do-is...">Then to install this package all you do is...<a class="anchor-link" href="#Then-to-install-this-package-all-you-do-is..."> </a></h3><div class="highlight"><pre><span></span>$ pip install espiownage
+</pre></div>
 
 </div>
 </div>
@@ -57,7 +77,7 @@ nb_path: "index.ipynb"
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="ellipse-editor">ellipse editor<a class="anchor-link" href="#ellipse-editor"> </a></h3><div class="highlight"><pre><span></span>$ ellipse_editor --files<span class="o">=</span>*.csv
+<h3 id="ellipse-editor">ellipse editor<a class="anchor-link" href="#ellipse-editor"> </a></h3><div class="highlight"><pre><span></span>ellipse_editor --files<span class="o">=</span>*.csv
 </pre></div>
 
 </div>
