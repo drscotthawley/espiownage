@@ -39,10 +39,36 @@ Note: the requirements on this package follow a "kitchen sink" approach so that 
 
 ## How to use
 
+If you're reading this, you probably have access to the "real" data, which sit (on my machine) in `~/Dropbox/Data/espiownage-data`.  So change to that directory, i.e.,
+```
+$ cd ~/Dropbox/Data/espiownage-data
+```
+...(or whereever you've got it) for what follows. 
+
 ### ellipse editor
 
 ```bash
-ellipse_editor --files=*.csv
+$ ellipse_editor
+```
+
+See `ellipse_editor -h` for command-line options.   You can, for example, edit only one strike's worth of data by running
+
+```bash
+$ ellipse_editor --files=annotations/06241902*.csv
+```
+or a range of annotations, as in `ellipse editor --files=annotations/06241902_proc_001*.csv`
+
+## Contributing / Development 
+
+You'll want to install more things:
+
+```bash
+$ pip install nbdev twine 
+```
+
+Fork this repo.  When you want to update your repo, one macro does it all (see `Makefile`):
+```bash
+$ make git_update
 ```
 
 ## Asides

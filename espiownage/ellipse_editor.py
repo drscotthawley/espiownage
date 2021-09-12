@@ -60,7 +60,8 @@ from pathlib import Path
 from fastcore.script import *
 import re
 
-img_bank='~/datasets/steelpan_real_images/'  # as a backup: repository of all images
+# default repository of all images, can change via --imgbank
+img_bank='images/'  # as a backup: repository of all images
 
 
 def meta_to_img_path(meta_file, # filename of .csv file with annotations
@@ -408,14 +409,15 @@ class EllipseEditor(tk.Frame):
 
 @call_parse
 def ellipse_editor(
-    files:Param("**NOT OPTIONAL**  Wildcard namee CSV files or directory", str)='',
-    imgbank:Param("(Optional) Directory where all the (unlabeled) images are",str)=img_bank,
+    files:Param("Wildcard name for all CSV files to edit", str)='annotations/*.csv',
+    imgdir:Param("Directory where all the (unlabeled) images are",str)=img_bank,
     ):
+    global img_bank
     # typical command-line calling sequence:
     #  $ ./ellipse_editor.py *.csv
     files = ''.join(files)
     meta_file_list = glob.glob(files)
-    img_bank = imgbank
+    img_bank = imgdir
 
     print("Instructions:")
     print(" Mouse bindings:")

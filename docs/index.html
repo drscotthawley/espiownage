@@ -78,7 +78,27 @@ I like to put my environments in <code>~/envs</code>:</p>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="ellipse-editor">ellipse editor<a class="anchor-link" href="#ellipse-editor"> </a></h3><div class="highlight"><pre><span></span>ellipse_editor --files<span class="o">=</span>*.csv
+<p>If you're reading this, you probably have access to the "real" data, which sit (on my machine) in <code>~/Dropbox/Data/espiownage-data</code>.  So change to that directory, i.e.,</p>
+
+<pre><code>$ cd ~/Dropbox/Data/espiownage-data</code></pre>
+<p>...(or whereever you've got it) for what follows.</p>
+<h3 id="ellipse-editor">ellipse editor<a class="anchor-link" href="#ellipse-editor"> </a></h3><div class="highlight"><pre><span></span>$ ellipse_editor
+</pre></div>
+<p>See <code>ellipse_editor -h</code> for command-line options.   You can, for example, edit only one strike's worth of data by running</p>
+<div class="highlight"><pre><span></span>$ ellipse_editor --files<span class="o">=</span>annotations/06241902*.csv
+</pre></div>
+<p>or a range of annotations, as in <code>ellipse editor --files=annotations/06241902_proc_001*.csv</code></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Contributing-/-Development">Contributing / Development<a class="anchor-link" href="#Contributing-/-Development"> </a></h2><p>You'll want to install more things:</p>
+<div class="highlight"><pre><span></span>$ pip install nbdev twine
+</pre></div>
+<p>Fork this repo.  When you want to update your repo, one macro does it all (see <code>Makefile</code>):</p>
+<div class="highlight"><pre><span></span>$ make git_update
 </pre></div>
 
 </div>
