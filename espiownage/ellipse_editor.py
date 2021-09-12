@@ -61,28 +61,17 @@ from fastcore.script import *
 import re
 from espiownage.core import *
 
-# default repository of all images, can change via --imgbank
-img_bank='images/'  # as a backup: repository of all images
-
-
-def meta_to_img_path(meta_file, # filename of .csv file with annotations
-    ):
-    '''Suggest the image file that corresponds with an annotation CSV file'''
-    meta_file, img_dir = Path(meta_file), Path(os.path.expanduser(img_bank))
-    img_file = meta_file.with_suffix('.png')  # check same directory as csv first
-    if os.path.exists(img_file): return img_file
-    return img_dir / Path(img_file.name)  # return from image storage directory
 
 
 def increment(num, digits,step):
     # return the first part of match as is, Return the 2nd match + 1 which is 'x + 1'
     return num.group(1) + str(int(num.group(2)) + step).zfill(digits)
 
-def get_next_img(meta_file, step=1):
+def get_next_img(meta_file, step=1, img_bank='images/'):
     "Increments the number of the image filename and tries to load it"
     digits = len(Path(meta_file).stem.split('_')[-1]) # num digits in ending number part of the name
     next_meta = re.sub('(proc_)([0-9]{'+str(digits)+'})', lambda m: increment(m,digits,step), meta_file)
-    next_img_path = meta_to_img_path(next_meta)
+    next_img_path = meta_to_img_path(next_meta, img_bank=img_bank)
     if os.path.exists(str(next_img_path)):
         return ImageTk.PhotoImage(image=Image.open(next_img_path)), str(next_img_path)
     blank_img = Image.new('RGB', (512, 384), (255, 255, 255))
@@ -122,7 +111,7 @@ def poly_oval(cx, cy, a, b, angle=0, steps=100 ):
 class EllipseEditor(tk.Frame):
     '''Edit ellipses for steelpan images'''
 
-    def __init__(self, parent, meta_file_list):
+    def __init__(self, parent, meta_file_list,img_bank='images/'):
         tk.Frame.__init__(self, parent)
 
         # create a canvas
@@ -134,7 +123,9 @@ class EllipseEditor(tk.Frame):
         self.file_index = 0
         self.meta_file_list = meta_file_list
         self.meta_file = meta_file_list[self.file_index]
-        self.img_file = str(meta_to_img_path(self.meta_file))
+        self.img_bank = img_bank
+        self.img_file = str(meta_to_img_path(self.meta_file, img_bank=self.img_bank))
+
 
         self.color = "green"
 
@@ -172,7 +163,7 @@ class EllipseEditor(tk.Frame):
             anchor=tk.NW, font=tk.font.Font(size=15,family='Consolas'))
 
         self.meta_file = self.meta_file_list[self.file_index]
-        self.img_file = meta_to_img_path(self.meta_file)
+        self.img_file = meta_to_img_path(self.meta_file, img_bank=self.img_bank)
         self.read_assign_image()
         self.read_assign_csv()
         self.read_prev_next_imgs()
@@ -197,11 +188,11 @@ class EllipseEditor(tk.Frame):
         self.update_readout(None)
 
     def read_prev_next_imgs(self):
-        self.prev_img, name = get_next_img(self.meta_file, -1)
+        self.prev_img, name = get_next_img(self.meta_file, -1, img_bank=self.img_bank)
         if self.prev_img: self.canvas.create_image(self.width/2, self.y0 + self.height+20 + self.height/2, image=self.prev_img)
         imlabel = f"Previous Image: {name.split('/')[-1]}"
         self.canvas.create_text(10, self.y0+self.height, text=imlabel, anchor=tk.NW, font=tk.font.Font(size=12), fill='black')
-        self.next_img, name = get_next_img(self.meta_file, 1)
+        self.next_img, name = get_next_img(self.meta_file, 1, img_bank=self.img_bank)
         if self.next_img: self.canvas.create_image(self.width+20+self.width/2, self.y0 + self.height+20 + self.height/2, image=self.next_img)
         imlabel = f"Next Image: {name.split('/')[-1]}"
         self.canvas.create_text(self.width+30, self.y0+self.height, text=imlabel, anchor=tk.NW, font=tk.font.Font(size=12), fill='black')
@@ -413,14 +404,14 @@ class EllipseEditor(tk.Frame):
 @call_parse
 def ellipse_editor(
     files:Param("Wildcard name for all CSV files to edit", str)='annotations/*.csv',
-    imgdir:Param("Directory where all the (unlabeled) images are",str)=img_bank,
+    imgbank:Param("Directory where all the (unlabeled) images are",str)='images/',
     ):
     global img_bank
     # typical command-line calling sequence:
     #  $ ./ellipse_editor.py *.csv
     files = ''.join(files)
     meta_file_list = sorted(glob.glob(files))
-    img_bank = imgdir
+    img_bank = imgbank
 
     print("Instructions:")
     print(" Mouse bindings:")
@@ -437,5 +428,5 @@ def ellipse_editor(
 
 
     root = tk.Tk()
-    EllipseEditor(root, meta_file_list ).pack(fill="both", expand=True)
+    EllipseEditor(root, meta_file_list, img_bank=img_bank).pack(fill="both", expand=True)
     root.mainloop()

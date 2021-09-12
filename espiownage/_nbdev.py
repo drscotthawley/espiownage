@@ -2,7 +2,9 @@
 
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
-index = {"fix_abangle": "00_core.ipynb",
+index = {"meta_to_img_path": "00_core.ipynb",
+         "meta_to_mask_path": "00_core.ipynb",
+         "fix_abangle": "00_core.ipynb",
          "draw_ellipse": "00_core.ipynb"}
 
 modules = ["core.py"]
