@@ -45,18 +45,27 @@ $ cd ~/Dropbox/Data/espiownage-data
 ```
 ...(or whereever you've got it) for what follows. 
 
+**AND THEN**, so we don't "clobber" each other's work, make *your own copy* (~17MB) of the main `annotations` directory, as in append your last name (hawley, morrison, morgan, etc):
+
+```bash
+$ cp -r annotations annotations_yourlastname
+```
+and then we'll each edit our own copy just to avoid...confusion. 
+
+
+
 ### ellipse editor
 
 ```bash
-$ ellipse_editor
+$ ellipse_editor --files=annotations_yourlastname/*.csv
 ```
 
 See `ellipse_editor -h` for command-line options.   You can, for example, edit only one strike's worth of data by running
 
 ```bash
-$ ellipse_editor --files=annotations/06241902*.csv
+$ ellipse_editor --files=annotations_yourlastname/06241902*.csv
 ```
-or a range of annotations, as in `ellipse editor --files=annotations/06241902_proc_001*.csv`
+or a range of annotations, as in `ellipse editor --files=annotations_yourlastname/06241902_proc_001*.csv`
 
 ## Contributing / Development 
 

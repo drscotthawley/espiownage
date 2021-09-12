@@ -82,12 +82,16 @@ I like to put my environments in <code>~/envs</code>:</p>
 
 <pre><code>$ cd ~/Dropbox/Data/espiownage-data</code></pre>
 <p>...(or whereever you've got it) for what follows.</p>
-<h3 id="ellipse-editor">ellipse editor<a class="anchor-link" href="#ellipse-editor"> </a></h3><div class="highlight"><pre><span></span>$ ellipse_editor
+<p><strong>AND THEN</strong>, so we don't "clobber" each other's work, make <em>your own copy</em> (~17MB) of the main <code>annotations</code> directory, as in append your last name (hawley, morrison, morgan, etc):</p>
+<div class="highlight"><pre><span></span>$ cp -r annotations annotations_yourlastname
+</pre></div>
+<p>and then we'll each edit our own copy just to avoid...confusion.</p>
+<h3 id="ellipse-editor">ellipse editor<a class="anchor-link" href="#ellipse-editor"> </a></h3><div class="highlight"><pre><span></span>$ ellipse_editor --files<span class="o">=</span>annotations_yourlastname/*.csv
 </pre></div>
 <p>See <code>ellipse_editor -h</code> for command-line options.   You can, for example, edit only one strike's worth of data by running</p>
-<div class="highlight"><pre><span></span>$ ellipse_editor --files<span class="o">=</span>annotations/06241902*.csv
+<div class="highlight"><pre><span></span>$ ellipse_editor --files<span class="o">=</span>annotations_yourlastname/06241902*.csv
 </pre></div>
-<p>or a range of annotations, as in <code>ellipse editor --files=annotations/06241902_proc_001*.csv</code></p>
+<p>or a range of annotations, as in <code>ellipse editor --files=annotations_yourlastname/06241902_proc_001*.csv</code></p>
 
 </div>
 </div>
