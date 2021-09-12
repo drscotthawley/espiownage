@@ -86,6 +86,8 @@ I like to put my environments in <code>~/envs</code>:</p>
 <div class="highlight"><pre><span></span>cp -r annotations annotations_yourlastname
 </pre></div>
 <p>and then we'll each edit our own copy just to avoid...confusion.</p>
+<blockquote><p><em>Note:If you don't have access to the real data,</em> you can still grab the <a href="https://zenodo.org/record/4445434">fake SPNet data</a> and then, for each of those datasets: Move (or symlink) all the images to a directory called <code>images/</code>, and all the <code>.csv</code> files to a directory called <code>annotations/</code>, and proceed.</p>
+</blockquote>
 <h3 id="ellipse-editor">ellipse editor<a class="anchor-link" href="#ellipse-editor"> </a></h3><div class="highlight"><pre><span></span>ellipse_editor --files<span class="o">=</span>annotations_yourlastname/*.csv
 </pre></div>
 <p>See <code>ellipse_editor -h</code> for command-line options.   You can, for example, edit only one strike's worth of data by running</p>

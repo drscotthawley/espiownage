@@ -60,6 +60,7 @@ def gen_masks(files:Param("Wildcard name for all CSV files to edit", str)='annot
     #    handle_one_file(meta_file_list, maskdir, step, i)
 
     # parallel processing
+    mkdir_if_needed(maskdir)
     wrapper = partial(handle_one_file, meta_file_list, maskdir, step)
     pool = mp.Pool(mp.cpu_count())
     results = pool.map(wrapper, range(len(meta_file_list)))

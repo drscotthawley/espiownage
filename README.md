@@ -51,8 +51,7 @@ $ cd ~/Dropbox/Data/espiownage-data
 cp -r annotations annotations_yourlastname
 ```
 and then we'll each edit our own copy just to avoid...confusion. 
-
-
+> *Note:If you don't have access to the real data,* you can still grab the [fake SPNet data](https://zenodo.org/record/4445434) and then, for each of those datasets: Move (or symlink) all the images to a directory called `images/`, and all the `.csv` files to a directory called `annotations/`, and proceed.
 
 ### ellipse editor
 

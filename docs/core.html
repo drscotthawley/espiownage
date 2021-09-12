@@ -47,7 +47,38 @@ nb_path: "00_core.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="meta_to_img_path" class="doc_header"><code>meta_to_img_path</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L12" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>meta_to_img_path</code>(<strong><code>meta_file</code></strong>, <strong><code>img_bank</code></strong>=<em><code>'images/'</code></em>)</p>
+<h4 id="mkdir_if_needed" class="doc_header"><code>mkdir_if_needed</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L12" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>mkdir_if_needed</code>(<strong><code>path</code></strong>)</p>
+</blockquote>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="meta_to_img_path" class="doc_header"><code>meta_to_img_path</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L20" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>meta_to_img_path</code>(<strong><code>meta_file</code></strong>, <strong><code>img_bank</code></strong>=<em><code>'images/'</code></em>)</p>
 </blockquote>
 <p>Suggest the image file that corresponds with an annotation CSV file</p>
 
@@ -112,7 +143,7 @@ nb_path: "00_core.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="meta_to_mask_path" class="doc_header"><code>meta_to_mask_path</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L22" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>meta_to_mask_path</code>(<strong><code>meta_file</code></strong>, <strong><code>mask_dir</code></strong>=<em><code>'masks/'</code></em>)</p>
+<h4 id="meta_to_mask_path" class="doc_header"><code>meta_to_mask_path</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L30" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>meta_to_mask_path</code>(<strong><code>meta_file</code></strong>, <strong><code>mask_dir</code></strong>=<em><code>'masks/'</code></em>)</p>
 </blockquote>
 <p>provides name for segmentation mask file</p>
 
@@ -177,7 +208,7 @@ nb_path: "00_core.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="fix_abangle" class="doc_header"><code>fix_abangle</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L31" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>fix_abangle</code>(<strong><code>a</code></strong>, <strong><code>b</code></strong>, <strong><code>angle</code></strong>)</p>
+<h4 id="fix_abangle" class="doc_header"><code>fix_abangle</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L39" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>fix_abangle</code>(<strong><code>a</code></strong>, <strong><code>b</code></strong>, <strong><code>angle</code></strong>)</p>
 </blockquote>
 <p>Makes sure semimajor axis &gt; semiminor axis, and angles are consistent</p>
 
@@ -242,7 +273,7 @@ nb_path: "00_core.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="draw_ellipse" class="doc_header"><code>draw_ellipse</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L40" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>draw_ellipse</code>(<strong><code>img</code></strong>, <strong><code>center</code></strong>, <strong><code>axes</code></strong>, <strong><code>angle</code></strong>, <strong><code>startAngle</code></strong>=<em><code>0</code></em>, <strong><code>endAngle</code></strong>=<em><code>360</code></em>, <strong><code>color</code></strong>=<em><code>0</code></em>, <strong><code>thickness</code></strong>=<em><code>2</code></em>, <strong><code>lineType</code></strong>=<em><code>16</code></em>, <strong><code>shift</code></strong>=<em><code>10</code></em>, <strong><code>filled</code></strong>=<em><code>False</code></em>)</p>
+<h4 id="draw_ellipse" class="doc_header"><code>draw_ellipse</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L48" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>draw_ellipse</code>(<strong><code>img</code></strong>, <strong><code>center</code></strong>, <strong><code>axes</code></strong>, <strong><code>angle</code></strong>, <strong><code>startAngle</code></strong>=<em><code>0</code></em>, <strong><code>endAngle</code></strong>=<em><code>360</code></em>, <strong><code>color</code></strong>=<em><code>0</code></em>, <strong><code>thickness</code></strong>=<em><code>2</code></em>, <strong><code>lineType</code></strong>=<em><code>16</code></em>, <strong><code>shift</code></strong>=<em><code>10</code></em>, <strong><code>filled</code></strong>=<em><code>False</code></em>)</p>
 </blockquote>
 <p>"Draws an ellipse into image.
 startAngle &amp; endAngle should are arc-angles. They should stay at 0 &amp; 360 for full ellipses.</p>
