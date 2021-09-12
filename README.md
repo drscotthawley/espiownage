@@ -67,6 +67,12 @@ $ ellipse_editor --files=annotations_yourlastname/06241902*.csv
 ```
 or a range of annotations, as in `ellipse editor --files=annotations_yourlastname/06241902_proc_001*.csv`
 
+### generate segmentation masks
+...from annotations:
+```bash
+$ gen_masks --files=annotations/*.csv
+```
+
 ## Contributing / Development 
 
 You'll want to install more things:
