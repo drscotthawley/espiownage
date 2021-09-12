@@ -416,7 +416,7 @@ def ellipse_editor(
     # typical command-line calling sequence:
     #  $ ./ellipse_editor.py *.csv
     files = ''.join(files)
-    meta_file_list = glob.glob(files)
+    meta_file_list = sorted(glob.glob(files))
     img_bank = imgdir
 
     print("Instructions:")
