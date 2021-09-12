@@ -117,7 +117,7 @@ class EllipseEditor(tk.Frame):
         # create a canvas
         self.width, self.height = 512, 384   # size of images
         self.y0 = 0# self.height    # y offset for all operations
-        self.readout = 750                   # width for additional annotation text
+        self.readout = 700                   # width for additional annotation text
         self.canvas = tk.Canvas(width=self.width + self.readout, height=20+2*self.height )
         self.canvas.pack(fill="both", expand=True)
         self.file_index = 0
@@ -428,5 +428,6 @@ def ellipse_editor(
 
 
     root = tk.Tk()
+    root.title('espiownage: ellipse_editor')
     EllipseEditor(root, meta_file_list, img_bank=img_bank).pack(fill="both", expand=True)
     root.mainloop()
