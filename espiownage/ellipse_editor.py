@@ -390,6 +390,13 @@ class EllipseEditor(tk.Frame):
         self.canvas.focus_set()           # that dialog box stole the focus. get it back
         self.update_readout(None)
 
+    def fix_abangle(self,a,b,angle):
+        if b > a:
+            a, b, angle = b, a, angle+90
+        if angle < 0: angle += 180
+        elif angle >= 180: angle -= 180
+        return a, b, angle
+
     def update_readout(self, event):
         mains = self.canvas.find_withtag( "main" )
         self.infostr = self.meta_file+'\n'+str(self.img_file)+'\n\n'
@@ -399,6 +406,7 @@ class EllipseEditor(tk.Frame):
         for main_id in mains:
             tokentag = self.canvas.gettags( main_id )[0]
             cx, cy, a, b, angle, rings, coords = self.retrieve_ellipse_info( tokentag )
+            a,b,angle = self.fix_abangle(a,b,angle)
             new_df = new_df.append({'cx':cx, 'cy':cy, 'a':a, 'b':b, 'angle':angle, 'rings':rings},ignore_index=True)
 
         self.df = new_df
