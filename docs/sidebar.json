@@ -1,6 +1,7 @@
 {
   "espiownage": {
     "Overview": "/",
-    "espiownage core": "core.html"
+    "espiownage core": "core.html",
+    "segmentation regression ": "seg_reg_camvid.html"
   }
 }
