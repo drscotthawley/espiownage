@@ -1084,7 +1084,7 @@ X = torch.linalg.solve(A, B) (Triggered internally at  /pytorch/aten/src/ATen/na
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="But-instead-of-using-the-vanilla-unet_learner,...">But instead of using the vanilla unet_learner,...<a class="anchor-link" href="#But-instead-of-using-the-vanilla-unet_learner,..."> </a></h2>
+<h1 id="UNet_learner,...">UNet_learner,...<a class="anchor-link" href="#UNet_learner,..."> </a></h1>
 </div>
 </div>
 </div>
@@ -1095,8 +1095,7 @@ X = torch.linalg.solve(A, B) (Triggered internally at  /pytorch/aten/src/ATen/na
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#learn = unet_learner(dls, resnet34, yrange=len(codes), loss_func=MSELossFlat(), metrics=acc_camvid, self_attention=True, act_cls=Mish, opt_func=opt)</span>
-<span class="n">learn</span> <span class="o">=</span> <span class="n">unet_learner</span><span class="p">(</span><span class="n">dls</span><span class="p">,</span> <span class="n">resnet34</span><span class="p">,</span> <span class="n">n_out</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">y_range</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">codes</span><span class="p">)),</span> <span class="n">loss_func</span><span class="o">=</span><span class="n">MSELossFlat</span><span class="p">(),</span> <span class="n">metrics</span><span class="o">=</span><span class="n">acc_camvid_reg</span><span class="p">,</span> <span class="n">self_attention</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">act_cls</span><span class="o">=</span><span class="n">Mish</span><span class="p">,</span> <span class="n">opt_func</span><span class="o">=</span><span class="n">opt</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">learn</span> <span class="o">=</span> <span class="n">unet_learner</span><span class="p">(</span><span class="n">dls</span><span class="p">,</span> <span class="n">resnet34</span><span class="p">,</span> <span class="n">n_out</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">y_range</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">codes</span><span class="p">)),</span> <span class="n">loss_func</span><span class="o">=</span><span class="n">MSELossFlat</span><span class="p">(),</span> <span class="n">metrics</span><span class="o">=</span><span class="n">acc_camvid_reg</span><span class="p">,</span> <span class="n">self_attention</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">act_cls</span><span class="o">=</span><span class="n">Mish</span><span class="p">,</span> <span class="n">opt_func</span><span class="o">=</span><span class="n">opt</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -1115,119 +1114,6 @@ X = torch.linalg.solve(A, B) (Triggered internally at  /pytorch/aten/src/ATen/na
 </div>
 </div>
 
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="We'll-switch-to-Zach's-other-lesson-on-Hybridizing-Models">We'll switch to Zach's <a href="https://walkwithfastai.com/Hybridizing_Models">other lesson on Hybridizing Models</a><a class="anchor-link" href="#We'll-switch-to-Zach's-other-lesson-on-Hybridizing-Models"> </a></h2><p>...and define a custom unet with only one class:</p>
-
-</div>
-</div>
-</div>
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">fastai.vision.models.unet</span> <span class="kn">import</span> <span class="n">_get_sz_change_idxs</span><span class="p">,</span> <span class="n">UnetBlock</span><span class="p">,</span> <span class="n">ResizeToOrig</span>
-<span class="kn">from</span> <span class="nn">fastai.vision.learner</span> <span class="kn">import</span> <span class="n">_default_meta</span><span class="p">,</span> <span class="n">_add_norm</span>
-
-<span class="k">class</span> <span class="nc">CustomUnet</span><span class="p">(</span><span class="n">SequentialEx</span><span class="p">):</span>
-    <span class="s2">&quot;Create a U-Net from a given architecture.&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">encoder</span><span class="p">,</span> <span class="n">n_classes</span><span class="p">,</span> <span class="n">img_size</span><span class="p">,</span> <span class="n">blur</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">blur_final</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">self_attention</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-                 <span class="n">y_range</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">last_cross</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">bottle</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">act_cls</span><span class="o">=</span><span class="n">defaults</span><span class="o">.</span><span class="n">activation</span><span class="p">,</span>
-                 <span class="n">init</span><span class="o">=</span><span class="n">nn</span><span class="o">.</span><span class="n">init</span><span class="o">.</span><span class="n">kaiming_normal_</span><span class="p">,</span> <span class="n">norm_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="n">imsize</span> <span class="o">=</span> <span class="n">img_size</span>
-        <span class="n">sizes</span> <span class="o">=</span> <span class="n">model_sizes</span><span class="p">(</span><span class="n">encoder</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">imsize</span><span class="p">)</span>
-        <span class="n">sz_chg_idxs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">_get_sz_change_idxs</span><span class="p">(</span><span class="n">sizes</span><span class="p">)))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">sfs</span> <span class="o">=</span> <span class="n">hook_outputs</span><span class="p">([</span><span class="n">encoder</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">sz_chg_idxs</span><span class="p">],</span> <span class="n">detach</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="n">dummy_eval</span><span class="p">(</span><span class="n">encoder</span><span class="p">,</span> <span class="n">imsize</span><span class="p">)</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span>
-
-        <span class="n">ni</span> <span class="o">=</span> <span class="n">sizes</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
-        <span class="n">middle_conv</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span><span class="n">ConvLayer</span><span class="p">(</span><span class="n">ni</span><span class="p">,</span> <span class="n">ni</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span> <span class="n">act_cls</span><span class="o">=</span><span class="n">act_cls</span><span class="p">,</span> <span class="n">norm_type</span><span class="o">=</span><span class="n">norm_type</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">),</span>
-                                    <span class="n">ConvLayer</span><span class="p">(</span><span class="n">ni</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span> <span class="n">ni</span><span class="p">,</span> <span class="n">act_cls</span><span class="o">=</span><span class="n">act_cls</span><span class="p">,</span> <span class="n">norm_type</span><span class="o">=</span><span class="n">norm_type</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">))</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="n">middle_conv</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-        <span class="n">layers</span> <span class="o">=</span> <span class="p">[</span><span class="n">encoder</span><span class="p">,</span> <span class="n">BatchNorm</span><span class="p">(</span><span class="n">ni</span><span class="p">),</span> <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span> <span class="n">middle_conv</span><span class="p">]</span>
-
-        <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">idx</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sz_chg_idxs</span><span class="p">):</span>
-            <span class="n">not_final</span> <span class="o">=</span> <span class="n">i</span><span class="o">!=</span><span class="nb">len</span><span class="p">(</span><span class="n">sz_chg_idxs</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span>
-            <span class="n">up_in_c</span><span class="p">,</span> <span class="n">x_in_c</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="nb">int</span><span class="p">(</span><span class="n">sizes</span><span class="p">[</span><span class="n">idx</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
-            <span class="n">do_blur</span> <span class="o">=</span> <span class="n">blur</span> <span class="ow">and</span> <span class="p">(</span><span class="n">not_final</span> <span class="ow">or</span> <span class="n">blur_final</span><span class="p">)</span>
-            <span class="n">sa</span> <span class="o">=</span> <span class="n">self_attention</span> <span class="ow">and</span> <span class="p">(</span><span class="n">i</span><span class="o">==</span><span class="nb">len</span><span class="p">(</span><span class="n">sz_chg_idxs</span><span class="p">)</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span>
-            <span class="n">unet_block</span> <span class="o">=</span> <span class="n">UnetBlock</span><span class="p">(</span><span class="n">up_in_c</span><span class="p">,</span> <span class="n">x_in_c</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sfs</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">final_div</span><span class="o">=</span><span class="n">not_final</span><span class="p">,</span> <span class="n">blur</span><span class="o">=</span><span class="n">do_blur</span><span class="p">,</span> <span class="n">self_attention</span><span class="o">=</span><span class="n">sa</span><span class="p">,</span>
-                                   <span class="n">act_cls</span><span class="o">=</span><span class="n">act_cls</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="n">init</span><span class="p">,</span> <span class="n">norm_type</span><span class="o">=</span><span class="n">norm_type</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
-            <span class="n">layers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">unet_block</span><span class="p">)</span>
-            <span class="n">x</span> <span class="o">=</span> <span class="n">unet_block</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-
-        <span class="n">ni</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-        <span class="k">if</span> <span class="n">imsize</span> <span class="o">!=</span> <span class="n">sizes</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="o">-</span><span class="mi">2</span><span class="p">:]:</span> <span class="n">layers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">PixelShuffle_ICNR</span><span class="p">(</span><span class="n">ni</span><span class="p">,</span> <span class="n">act_cls</span><span class="o">=</span><span class="n">act_cls</span><span class="p">,</span> <span class="n">norm_type</span><span class="o">=</span><span class="n">norm_type</span><span class="p">))</span>
-        <span class="n">layers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ResizeToOrig</span><span class="p">())</span>
-        <span class="k">if</span> <span class="n">last_cross</span><span class="p">:</span>
-            <span class="n">layers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">MergeLayer</span><span class="p">(</span><span class="n">dense</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
-            <span class="n">ni</span> <span class="o">+=</span> <span class="n">in_channels</span><span class="p">(</span><span class="n">encoder</span><span class="p">)</span>
-            <span class="n">layers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ResBlock</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">ni</span><span class="p">,</span> <span class="n">ni</span><span class="o">//</span><span class="mi">2</span> <span class="k">if</span> <span class="n">bottle</span> <span class="k">else</span> <span class="n">ni</span><span class="p">,</span> <span class="n">act_cls</span><span class="o">=</span><span class="n">act_cls</span><span class="p">,</span> <span class="n">norm_type</span><span class="o">=</span><span class="n">norm_type</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
-        <span class="c1">#layers += [ConvLayer(ni, n_classes, ks=1, act_cls=None, norm_type=norm_type, **kwargs)] # HERE</span>
-        <span class="n">nf</span> <span class="o">=</span> <span class="n">num_features_model</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span><span class="n">layers</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
-        <span class="n">layers</span> <span class="o">+=</span> <span class="n">create_head</span><span class="p">(</span><span class="n">nf</span><span class="p">,</span> <span class="n">n_classes</span><span class="p">)</span>
-        <span class="n">apply_init</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span><span class="n">layers</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">layers</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]),</span> <span class="n">init</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">y_range</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span> <span class="n">layers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">SigmoidRange</span><span class="p">(</span><span class="o">*</span><span class="n">y_range</span><span class="p">))</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">layers</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="fm">__del__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;sfs&quot;</span><span class="p">):</span> <span class="bp">self</span><span class="o">.</span><span class="n">sfs</span><span class="o">.</span><span class="n">remove</span><span class="p">()</span>
-            
-            
-<span class="nd">@delegates</span><span class="p">(</span><span class="n">CustomUnet</span><span class="o">.</span><span class="fm">__init__</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">create_custom_unet_model</span><span class="p">(</span><span class="n">arch</span><span class="p">,</span> <span class="n">n_out</span><span class="p">,</span> <span class="n">img_size</span><span class="p">,</span> <span class="n">pretrained</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cut</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">n_in</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    <span class="s2">&quot;Create custom unet architecture&quot;</span>
-    <span class="n">meta</span> <span class="o">=</span> <span class="n">model_meta</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">arch</span><span class="p">,</span> <span class="n">_default_meta</span><span class="p">)</span>
-    <span class="n">body</span> <span class="o">=</span> <span class="n">create_body</span><span class="p">(</span><span class="n">arch</span><span class="p">,</span> <span class="n">n_in</span><span class="p">,</span> <span class="n">pretrained</span><span class="p">,</span> <span class="n">ifnone</span><span class="p">(</span><span class="n">cut</span><span class="p">,</span> <span class="n">meta</span><span class="p">[</span><span class="s1">&#39;cut&#39;</span><span class="p">]))</span>
-    <span class="n">model</span> <span class="o">=</span> <span class="n">CustomUnet</span><span class="p">(</span><span class="n">body</span><span class="p">,</span> <span class="n">n_out</span><span class="p">,</span> <span class="n">img_size</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">model</span>
-
-
-<span class="nd">@delegates</span><span class="p">(</span><span class="n">create_custom_unet_model</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">custom_unet_learner</span><span class="p">(</span><span class="n">dls</span><span class="p">,</span> <span class="n">arch</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">n_out</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">pretrained</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                 <span class="c1"># learner args</span>
-                 <span class="n">loss_func</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">opt_func</span><span class="o">=</span><span class="n">Adam</span><span class="p">,</span> <span class="n">lr</span><span class="o">=</span><span class="n">defaults</span><span class="o">.</span><span class="n">lr</span><span class="p">,</span> <span class="n">splitter</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cbs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                 <span class="n">model_dir</span><span class="o">=</span><span class="s1">&#39;models&#39;</span><span class="p">,</span> <span class="n">wd</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">wd_bn_bias</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">train_bn</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">moms</span><span class="o">=</span><span class="p">(</span><span class="mf">0.95</span><span class="p">,</span><span class="mf">0.85</span><span class="p">,</span><span class="mf">0.95</span><span class="p">),</span>
-                 <span class="c1"># other model args</span>
-                 <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    <span class="s2">&quot;Build a unet learner from `dls` and `arch`&quot;</span>
-
-    <span class="k">if</span> <span class="n">config</span><span class="p">:</span>
-        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;config param is deprecated. Pass your args directly to unet_learner.&#39;</span><span class="p">)</span>
-        <span class="n">kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="o">**</span><span class="n">config</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">}</span>
-
-    <span class="n">meta</span> <span class="o">=</span> <span class="n">model_meta</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">arch</span><span class="p">,</span> <span class="n">_default_meta</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">normalize</span><span class="p">:</span> <span class="n">_add_norm</span><span class="p">(</span><span class="n">dls</span><span class="p">,</span> <span class="n">meta</span><span class="p">,</span> <span class="n">pretrained</span><span class="p">)</span>
-
-    <span class="n">n_out</span> <span class="o">=</span> <span class="n">ifnone</span><span class="p">(</span><span class="n">n_out</span><span class="p">,</span> <span class="n">get_c</span><span class="p">(</span><span class="n">dls</span><span class="p">))</span>
-    <span class="k">assert</span> <span class="n">n_out</span><span class="p">,</span> <span class="s2">&quot;`n_out` is not defined, and could not be inferred from data, set `dls.c` or pass `n_out`&quot;</span>
-    <span class="n">img_size</span> <span class="o">=</span> <span class="n">dls</span><span class="o">.</span><span class="n">one_batch</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">:]</span>
-    <span class="k">assert</span> <span class="n">img_size</span><span class="p">,</span> <span class="s2">&quot;image size could not be inferred from data&quot;</span>
-    <span class="n">model</span> <span class="o">=</span> <span class="n">create_custom_unet_model</span><span class="p">(</span><span class="n">arch</span><span class="p">,</span> <span class="n">n_out</span><span class="p">,</span> <span class="n">img_size</span><span class="p">,</span> <span class="n">pretrained</span><span class="o">=</span><span class="n">pretrained</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="c1"># HERE</span>
-
-    <span class="n">splitter</span><span class="o">=</span><span class="n">ifnone</span><span class="p">(</span><span class="n">splitter</span><span class="p">,</span> <span class="n">meta</span><span class="p">[</span><span class="s1">&#39;split&#39;</span><span class="p">])</span>
-    <span class="n">learn</span> <span class="o">=</span> <span class="n">Learner</span><span class="p">(</span><span class="n">dls</span><span class="o">=</span><span class="n">dls</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">loss_func</span><span class="o">=</span><span class="n">loss_func</span><span class="p">,</span> <span class="n">opt_func</span><span class="o">=</span><span class="n">opt_func</span><span class="p">,</span> <span class="n">lr</span><span class="o">=</span><span class="n">lr</span><span class="p">,</span> <span class="n">splitter</span><span class="o">=</span><span class="n">splitter</span><span class="p">,</span> <span class="n">cbs</span><span class="o">=</span><span class="n">cbs</span><span class="p">,</span>
-                   <span class="n">metrics</span><span class="o">=</span><span class="n">metrics</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="n">path</span><span class="p">,</span> <span class="n">model_dir</span><span class="o">=</span><span class="n">model_dir</span><span class="p">,</span> <span class="n">wd</span><span class="o">=</span><span class="n">wd</span><span class="p">,</span> <span class="n">wd_bn_bias</span><span class="o">=</span><span class="n">wd_bn_bias</span><span class="p">,</span> <span class="n">train_bn</span><span class="o">=</span><span class="n">train_bn</span><span class="p">,</span>
-                   <span class="n">moms</span><span class="o">=</span><span class="n">moms</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">pretrained</span><span class="p">:</span> <span class="n">learn</span><span class="o">.</span><span class="n">freeze</span><span class="p">()</span>
-    <span class="c1"># keep track of args for loggers</span>
-    <span class="n">store_attr</span><span class="p">(</span><span class="s1">&#39;arch,normalize,n_out,pretrained&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">=</span><span class="n">learn</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">kwargs</span><span class="p">:</span> <span class="n">store_attr</span><span class="p">(</span><span class="bp">self</span><span class="o">=</span><span class="n">learn</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">learn</span>
-
-<span class="c1">#learn = custom_unet_learner(dls, resnet34, n_out=1, y_range=(0,len(codes)), loss_func=MSELossFlat())</span>
-</pre></div>
-
-    </div>
 </div>
 </div>
 
@@ -2311,7 +2197,8 @@ Callbacks:
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="^^Hawley-stopped-here.">^^Hawley stopped here.<a class="anchor-link" href="#^^Hawley-stopped-here."> </a></h2><hr>
+<h2 id="^^Hawley-stopped-here.">^^Hawley stopped here.<a class="anchor-link" href="#^^Hawley-stopped-here."> </a></h2><p>I didn't run the rest of Zach's notebook beyond this point.</p>
+<hr>
 
 </div>
 </div>
