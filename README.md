@@ -2,7 +2,9 @@
 > Ownage (domination) of ESPI image inference. (Pronounced like "espionage" but with a little "own" in the middle.)
 
 
-Welcome to the new phase of [SPNet](https://github.com/drscotthawley/SPNet) developement.  In this incarnation, we'll make it an image-segmentation code instead of an object detector, and we'll use [fast.ai](fast.ai).   
+Welcome to the new phase of [SPNet](https://github.com/drscotthawley/SPNet) developement -- IN PROGRESS.  
+
+In this incarnation, we'll be making it an image-segmentation code instead of an object detector, and we'll use [fast.ai](fast.ai).   
 
 ## Install
 
