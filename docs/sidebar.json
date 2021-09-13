@@ -2,6 +2,7 @@
   "espiownage": {
     "Overview": "/",
     "espiownage core": "core.html",
+    "segmentation classification - cyclegan": "seg_class_cyclegan.html",
     "segmentation regression - camvid test": "seg_reg_camvid.html"
   }
 }

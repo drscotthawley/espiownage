@@ -12,6 +12,7 @@ import os
 def mkdir_if_needed(path):
     try:                # go ahead and try to make the the directory
         os.makedirs(path)
+    except FileExistsError: pass
     except OSError as exception:
         if exception.errno != errno.EEXIST:  # ignore error if dir already exists
             raise
@@ -55,7 +56,7 @@ def draw_ellipse(
     """
     center = [int(round(x* 2**shift)) for x in center]
     axes = [int(round(x* 2**shift)) for x in axes]
-    thickness = -1 if filled else thickness
+    if filled: lineType,thickness = cv2.FILLED, -1
     ellipse = cv2.ellipse(
         img, center, axes, -angle,   # -angle because the web interface is "upside down"
         startAngle, endAngle, color,
