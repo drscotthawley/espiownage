@@ -89,7 +89,7 @@ make git_update
 
 ## Asides
 
-#### Handy tips for students
+### Handy tips for students
 I can never remember how to start up virtual environments / or I don't *want* to remember. So in my `~/.bashrc` file (you may have a `~/.zshrc`) I put in a line where I define an alias/function I call `gimme`, that reads like so:
 ```bash
 gimme() { source ~/envs/"$1"/bin/activate;  }
