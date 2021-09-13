@@ -13,7 +13,7 @@ entries:
       title: espiownage core
       url: core.html
     - output: web,pdf
-      title: 'segmentation regression '
+      title: segmentation regression - camvid test
       url: seg_reg_camvid.html
     output: web
     title: espiownage
