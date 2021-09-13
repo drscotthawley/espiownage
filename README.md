@@ -42,7 +42,7 @@ Note: the requirements on this package follow a "kitchen sink" approach so that 
 
 ## How to use
 
-If you're reading this, you probably have access to the "real" data, which sit (on my machine) in `~/Dropbox/Data/espiownage-data`.  So change to that directory, i.e.,
+If you're reading this, you probably have access to the "real" data, which sits (on my machine) in `~/Dropbox/Data/espiownage-data`.  So `cd` to that directory, i.e.,
 ```
 $ cd ~/Dropbox/Data/espiownage-data
 ```
