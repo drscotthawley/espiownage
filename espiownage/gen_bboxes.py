@@ -12,24 +12,6 @@ import errno
 import sys
 from espiownage.core import *
 
-'''
-def ellipse_to_bb(x, y, major, minor, angle_deg,clip=True,width=512,height=384):  # cx, cy, a, b, angle
-    '''Get bounding box of ellipse,
-    cf. https://gist.github.com/smidm/b398312a13f60c24449a2c7533877dc0
-    '''
-    t = np.arctan(-minor / 2 * np.tan(np.radians(angle_deg)) / (major / 2))
-    [max_x, min_x] = sorted([x + major / 2 * np.cos(t) * np.cos(np.radians(angle_deg)) -
-                      minor / 2 * np.sin(t) * np.sin(np.radians(angle_deg)) for t in (t, t + np.pi)],reverse=True)
-    t = np.arctan(minor / 2 * 1. / np.tan(np.radians(angle_deg)) / (major / 2))
-    [max_y, min_y] = sorted([y + minor / 2 * np.sin(t) * np.cos(np.radians(angle_deg)) +
-                      major / 2 * np.cos(t) * np.sin(np.radians(angle_deg)) for t in (t, t + np.pi)],reverse=True)
-    if clip:
-      min_x = np.clip(min_x, 0, width)
-      max_x = np.clip(max_x, 0, width)
-      min_y = np.clip(min_y, 0, height)
-      max_y = np.clip(max_y, 0, height)
-    return int(min_x), int(min_y), int(max_x), int(max_y)
-'''
 
 datapath = '/home/shawley/datasets/'
 

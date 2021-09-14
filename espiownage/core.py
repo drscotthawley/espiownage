@@ -48,13 +48,18 @@ def fix_abangle(a,b,angle):
 
 # Cell
 def draw_ellipse(
-    img,     # a cv2 image, not a PIL image?
-    center, axes, angle,
-    startAngle=0, endAngle=360, color=(0) ,
-    thickness=2, lineType=cv2.LINE_8, shift=10, filled=False):
-    """"Draws an ellipse into image.
-    startAngle & endAngle should are arc-angles. They should stay at 0 & 360 for full ellipses.
-    """
+    img,         # a cv2 image, *not* a PIL image (similar for grayscale but not RGB)
+    center,      # (cx, cy) tuple
+    axes,        # (a,b) semimajor & minor axes
+    angle,       # angle in degrees
+    startAngle=0, endAngle=360, # arc-angles. should stay at 0 & 360 for full ellipses.
+    color=(0),  # color to draw. tuple or int
+    thickness=2,   # thickness ofthe lines we draw
+    lineType=cv2.LINE_8,  # as opposed to LINE_AA, typically we DON'T want antialiasing for this app
+    shift=0, #10,      # shift is for sub-pixel resolution and AA figures. don't need it.
+    filled=False,  # whether to draw the ellipse as filled or not
+    ):
+    """"Draws an ellipse into image.    """
     center = [int(round(x* 2**shift)) for x in center]
     axes = [int(round(x* 2**shift)) for x in axes]
     if filled: lineType, thickness = cv2.FILLED, -1
