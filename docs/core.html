@@ -47,11 +47,11 @@ nb_path: "nbs/00_core.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="mkdir_if_needed" class="doc_header"><code>mkdir_if_needed</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L13" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>mkdir_if_needed</code>(<strong><code>path</code></strong>)</p>
+<h4 id="mkdir_if_needed" class="doc_header"><code>mkdir_if_needed</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L13" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>mkdir_if_needed</code>(<strong><code>path</code></strong>:<code>str</code>)</p>
 </blockquote>
 <p><strong>Parameters:</strong></p>
 <ul>
-<li><strong><code>path</code></strong> : <em><code>&lt;class 'inspect._empty'&gt;</code></em></li>
+<li><strong><code>path</code></strong> : <em><code>&lt;class 'str'&gt;</code></em></li>
 </ul>
 
 </div>
@@ -300,7 +300,7 @@ nb_path: "nbs/00_core.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="draw_ellipse" class="doc_header"><code>draw_ellipse</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L51" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>draw_ellipse</code>(<strong><code>img</code></strong>, <strong><code>center</code></strong>, <strong><code>axes</code></strong>, <strong><code>angle</code></strong>, <strong><code>color</code></strong>=<em><code>0</code></em>, <strong><code>thickness</code></strong>=<em><code>2</code></em>, <strong><code>filled</code></strong>=<em><code>False</code></em>, <strong><code>lineType</code></strong>=<em><code>8</code></em>, <strong><code>startAngle</code></strong>=<em><code>0</code></em>, <strong><code>endAngle</code></strong>=<em><code>360</code></em>, <strong><code>shift</code></strong>=<em><code>0</code></em>)</p>
+<h4 id="draw_ellipse" class="doc_header"><code>draw_ellipse</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L51" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>draw_ellipse</code>(<strong><code>img</code></strong>, <strong><code>center</code></strong>:<code>tuple</code>, <strong><code>axes</code></strong>:<code>tuple</code>, <strong><code>angle</code></strong>, <strong><code>color</code></strong>=<em><code>0</code></em>, <strong><code>thickness</code></strong>=<em><code>2</code></em>, <strong><code>filled</code></strong>=<em><code>False</code></em>, <strong><code>lineType</code></strong>=<em><code>8</code></em>, <strong><code>startAngle</code></strong>=<em><code>0</code></em>, <strong><code>endAngle</code></strong>=<em><code>360</code></em>, <strong><code>shift</code></strong>=<em><code>0</code></em>)</p>
 </blockquote>
 <p>"Draws an ellipse into image.</p>
 <p><strong>Parameters:</strong></p>
@@ -308,10 +308,10 @@ nb_path: "nbs/00_core.ipynb"
 <li><strong><code>img</code></strong> : <em><code>&lt;class 'inspect._empty'&gt;</code></em> <p>a cv2 image, *not* a PIL image (similar for grayscale but not RGB)</p></li>
 </ul>
 <ul>
-<li><strong><code>center</code></strong> : <em><code>&lt;class 'inspect._empty'&gt;</code></em>  <p>(cx, cy) tuple</p></li>
+<li><strong><code>center</code></strong> : <em><code>&lt;class 'tuple'&gt;</code></em>   <p>(cx, cy) tuple</p></li>
 </ul>
 <ul>
-<li><strong><code>axes</code></strong> : <em><code>&lt;class 'inspect._empty'&gt;</code></em>    <p>(a,b) semimajor & minor axes</p></li>
+<li><strong><code>axes</code></strong> : <em><code>&lt;class 'tuple'&gt;</code></em> <p>(a,b) semimajor & minor axes</p></li>
 </ul>
 <ul>
 <li><strong><code>angle</code></strong> : <em><code>&lt;class 'inspect._empty'&gt;</code></em>   <p>orientation angle in degrees</p></li>

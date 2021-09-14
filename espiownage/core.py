@@ -10,7 +10,7 @@ import os
 import matplotlib.pyplot as plt
 
 # Cell
-def mkdir_if_needed(path):
+def mkdir_if_needed(path:str):
     try:                # go ahead and try to make the the directory
         os.makedirs(path)
     except FileExistsError: pass
@@ -50,8 +50,8 @@ def fix_abangle(a,b,angle):
 # Cell
 def draw_ellipse(
     img,         # a cv2 image, *not* a PIL image (similar for grayscale but not RGB)
-    center,      # (cx, cy) tuple
-    axes,        # (a,b) semimajor & minor axes
+    center:tuple,      # (cx, cy) tuple
+    axes:tuple,        # (a,b) semimajor & minor axes
     angle,       # orientation angle in degrees
     color=(0),   # color to draw. tuple or int
     thickness=2, # thickness ofthe lines we draw
