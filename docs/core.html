@@ -49,6 +49,10 @@ nb_path: "nbs/00_core.ipynb"
 <div class="output_markdown rendered_html output_subarea ">
 <h4 id="mkdir_if_needed" class="doc_header"><code>mkdir_if_needed</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L13" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>mkdir_if_needed</code>(<strong><code>path</code></strong>)</p>
 </blockquote>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><strong><code>path</code></strong> : <em><code>&lt;class 'inspect._empty'&gt;</code></em></li>
+</ul>
 
 </div>
 
@@ -81,6 +85,13 @@ nb_path: "nbs/00_core.ipynb"
 <h4 id="meta_to_img_path" class="doc_header"><code>meta_to_img_path</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L22" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>meta_to_img_path</code>(<strong><code>meta_file</code></strong>:<code>str</code>, <strong><code>img_bank</code></strong>=<em><code>'images/'</code></em>)</p>
 </blockquote>
 <p>Suggest the image file that corresponds with an annotation CSV file</p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><strong><code>meta_file</code></strong> : <em><code>&lt;class 'str'&gt;</code></em>  <p>filename of .csv file with annotations</p></li>
+</ul>
+<ul>
+<li><strong><code>img_bank</code></strong> : <em><code>&lt;class 'str'&gt;</code></em>, <em>optional</em>   <p>alternate location of image files, if not in same dir as meta file</p></li>
+</ul>
 
 </div>
 
@@ -146,6 +157,13 @@ nb_path: "nbs/00_core.ipynb"
 <h4 id="meta_to_mask_path" class="doc_header"><code>meta_to_mask_path</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L33" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>meta_to_mask_path</code>(<strong><code>meta_file</code></strong>:<code>str</code>, <strong><code>mask_dir</code></strong>=<em><code>'masks/'</code></em>)</p>
 </blockquote>
 <p>provides name for segmentation mask file</p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><strong><code>meta_file</code></strong> : <em><code>&lt;class 'str'&gt;</code></em>  <p>filename of .csv file with annotations</p></li>
+</ul>
+<ul>
+<li><strong><code>mask_dir</code></strong> : <em><code>&lt;class 'str'&gt;</code></em>, <em>optional</em>   <p>output directory; assumed to exist</p></li>
+</ul>
 
 </div>
 
@@ -211,6 +229,15 @@ nb_path: "nbs/00_core.ipynb"
 <h4 id="fix_abangle" class="doc_header"><code>fix_abangle</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L42" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>fix_abangle</code>(<strong><code>a</code></strong>, <strong><code>b</code></strong>, <strong><code>angle</code></strong>)</p>
 </blockquote>
 <p>Makes sure semimajor axis &gt; semiminor axis, and angles are consistent</p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><p><strong><code>a</code></strong> : <em><code>&lt;class 'inspect._empty'&gt;</code></em></p>
+</li>
+<li><p><strong><code>b</code></strong> : <em><code>&lt;class 'inspect._empty'&gt;</code></em></p>
+</li>
+<li><p><strong><code>angle</code></strong> : <em><code>&lt;class 'inspect._empty'&gt;</code></em></p>
+</li>
+</ul>
 
 </div>
 
@@ -276,6 +303,40 @@ nb_path: "nbs/00_core.ipynb"
 <h4 id="draw_ellipse" class="doc_header"><code>draw_ellipse</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L51" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>draw_ellipse</code>(<strong><code>img</code></strong>, <strong><code>center</code></strong>, <strong><code>axes</code></strong>, <strong><code>angle</code></strong>, <strong><code>color</code></strong>=<em><code>0</code></em>, <strong><code>thickness</code></strong>=<em><code>2</code></em>, <strong><code>filled</code></strong>=<em><code>False</code></em>, <strong><code>lineType</code></strong>=<em><code>8</code></em>, <strong><code>startAngle</code></strong>=<em><code>0</code></em>, <strong><code>endAngle</code></strong>=<em><code>360</code></em>, <strong><code>shift</code></strong>=<em><code>0</code></em>)</p>
 </blockquote>
 <p>"Draws an ellipse into image.</p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><strong><code>img</code></strong> : <em><code>&lt;class 'inspect._empty'&gt;</code></em> <p>a cv2 image, *not* a PIL image (similar for grayscale but not RGB)</p></li>
+</ul>
+<ul>
+<li><strong><code>center</code></strong> : <em><code>&lt;class 'inspect._empty'&gt;</code></em>  <p>(cx, cy) tuple</p></li>
+</ul>
+<ul>
+<li><strong><code>axes</code></strong> : <em><code>&lt;class 'inspect._empty'&gt;</code></em>    <p>(a,b) semimajor & minor axes</p></li>
+</ul>
+<ul>
+<li><strong><code>angle</code></strong> : <em><code>&lt;class 'inspect._empty'&gt;</code></em>   <p>orientation angle in degrees</p></li>
+</ul>
+<ul>
+<li><strong><code>color</code></strong> : <em><code>&lt;class 'int'&gt;</code></em>, <em>optional</em>  <p>color to draw. tuple or int</p></li>
+</ul>
+<ul>
+<li><strong><code>thickness</code></strong> : <em><code>&lt;class 'int'&gt;</code></em>, <em>optional</em>  <p>thickness ofthe lines we draw</p></li>
+</ul>
+<ul>
+<li><strong><code>filled</code></strong> : <em><code>&lt;class 'bool'&gt;</code></em>, <em>optional</em>    <p>whether to draw the ellipse as filled or not</p></li>
+</ul>
+<ul>
+<li><strong><code>lineType</code></strong> : <em><code>&lt;class 'int'&gt;</code></em>, <em>optional</em>   <p>as opposed to LINE_AA, typically we DON'T want antialiasing for this app</p></li>
+</ul>
+<ul>
+<li><p><strong><code>startAngle</code></strong> : <em><code>&lt;class 'int'&gt;</code></em>, <em>optional</em></p>
+</li>
+<li><p><strong><code>endAngle</code></strong> : <em><code>&lt;class 'int'&gt;</code></em>, <em>optional</em>   <p>arc-angles. should stay at 0 & 360 for full ellipses.</p></p>
+</li>
+</ul>
+<ul>
+<li><strong><code>shift</code></strong> : <em><code>&lt;class 'int'&gt;</code></em>, <em>optional</em>  <p>10,      # shift is for sub-pixel resolution and AA figures. don't need it.</p></li>
+</ul>
 
 </div>
 
@@ -457,6 +518,25 @@ nb_path: "nbs/00_core.ipynb"
 <h4 id="ellipse_to_bbox" class="doc_header"><code>ellipse_to_bbox</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L74" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>ellipse_to_bbox</code>(<strong><code>x</code></strong>, <strong><code>y</code></strong>, <strong><code>a</code></strong>, <strong><code>b</code></strong>, <strong><code>angle_deg</code></strong>, <strong><code>clip</code></strong>=<em><code>True</code></em>, <strong><code>width</code></strong>=<em><code>512</code></em>, <strong><code>height</code></strong>=<em><code>384</code></em>)</p>
 </blockquote>
 <p>Get bounding box of ellipse, cf. <a href="https://gist.github.com/smidm/b398312a13f60c24449a2c7533877dc0">https://gist.github.com/smidm/b398312a13f60c24449a2c7533877dc0</a></p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><p><strong><code>x</code></strong> : <em><code>&lt;class 'inspect._empty'&gt;</code></em></p>
+</li>
+<li><p><strong><code>y</code></strong> : <em><code>&lt;class 'inspect._empty'&gt;</code></em></p>
+</li>
+<li><p><strong><code>a</code></strong> : <em><code>&lt;class 'inspect._empty'&gt;</code></em></p>
+</li>
+<li><p><strong><code>b</code></strong> : <em><code>&lt;class 'inspect._empty'&gt;</code></em></p>
+</li>
+<li><p><strong><code>angle_deg</code></strong> : <em><code>&lt;class 'inspect._empty'&gt;</code></em></p>
+</li>
+<li><p><strong><code>clip</code></strong> : <em><code>&lt;class 'bool'&gt;</code></em>, <em>optional</em></p>
+</li>
+<li><p><strong><code>width</code></strong> : <em><code>&lt;class 'int'&gt;</code></em>, <em>optional</em></p>
+</li>
+<li><p><strong><code>height</code></strong> : <em><code>&lt;class 'int'&gt;</code></em>, <em>optional</em> <p>cx, cy, a, b, angle</p></p>
+</li>
+</ul>
 
 </div>
 
