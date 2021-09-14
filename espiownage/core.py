@@ -51,13 +51,13 @@ def draw_ellipse(
     img,     # a cv2 image, not a PIL image?
     center, axes, angle,
     startAngle=0, endAngle=360, color=(0) ,
-    thickness=2, lineType=cv2.LINE_AA, shift=10, filled=False):
+    thickness=2, lineType=cv2.LINE_8, shift=10, filled=False):
     """"Draws an ellipse into image.
     startAngle & endAngle should are arc-angles. They should stay at 0 & 360 for full ellipses.
     """
     center = [int(round(x* 2**shift)) for x in center]
     axes = [int(round(x* 2**shift)) for x in axes]
-    if filled: lineType,thickness = cv2.FILLED, -1
+    if filled: lineType, thickness = cv2.FILLED, -1
     ellipse = cv2.ellipse(
         img, center, axes, -angle,   # -angle because the web interface is "upside down"
         startAngle, endAngle, color,
