@@ -6,6 +6,7 @@ import os
 import pandas as pd
 import numpy as np
 import cv2
+from PIL import Image
 from espiownage.core import *
 from functools import partial
 import multiprocessing as mp
@@ -48,7 +49,9 @@ def handle_one_file(meta_file_list, # list of all the csv files
             img = draw_ellipse(img, (cx,cy), (a,b), angle, color=color, filled=True)
 
     #all_colors = all_colors.union(set(np.array(img).flatten()))  # super sanity check but slow
-    cv2.imwrite(str(mask_path), img)
+    # cv2.imwrite(str(mask_path), img)  Don't write as cv2, write as PIL
+    pil_image = Image.fromarray(img)
+    pil_image = pil_image.save(str(mask_path))
     return img
 
 
@@ -71,7 +74,7 @@ def gen_masks(files:Param("Wildcard name for all CSV files to edit", str)='annot
     if not parallel:  # it's not that slow, really
         for i in range(len(meta_file_list)):
             handle_one_file(meta_file_list, maskdir, step, i)
-        print("all_colors = ",sorted(list(all_colors))) # Very handy 
+        print("all_colors = ",sorted(list(all_colors))) # Very handy
     else:
         # parallel processing
         wrapper = partial(handle_one_file, meta_file_list, maskdir, step)

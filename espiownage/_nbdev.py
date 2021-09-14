@@ -6,7 +6,8 @@ index = {"mkdir_if_needed": "00_core.ipynb",
          "meta_to_img_path": "00_core.ipynb",
          "meta_to_mask_path": "00_core.ipynb",
          "fix_abangle": "00_core.ipynb",
-         "draw_ellipse": "00_core.ipynb"}
+         "draw_ellipse": "00_core.ipynb",
+         "ellipse_to_bb": "00_core.ipynb"}
 
 modules = ["core.py"]
 
