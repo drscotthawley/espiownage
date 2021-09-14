@@ -19,7 +19,8 @@ def mkdir_if_needed(path):
             raise
 
 # Cell
-def meta_to_img_path(meta_file, # filename of .csv file with annotations
+def meta_to_img_path(
+    meta_file:str, # filename of .csv file with annotations
     img_bank='images/',         # alternate location of image files, if not in same dir as meta file
     ):
     '''Suggest the image file that corresponds with an annotation CSV file'''
@@ -30,7 +31,7 @@ def meta_to_img_path(meta_file, # filename of .csv file with annotations
 
 # Cell
 def meta_to_mask_path(
-    meta_file, # filename of .csv file with annotations
+    meta_file:str, # filename of .csv file with annotations
     mask_dir='masks/',  # output directory; assumed to exist
     ):
     "provides name for segmentation mask file"
