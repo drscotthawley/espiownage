@@ -226,17 +226,18 @@ nb_path: "nbs/00_core.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="fix_abangle" class="doc_header"><code>fix_abangle</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L42" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>fix_abangle</code>(<strong><code>a</code></strong>, <strong><code>b</code></strong>, <strong><code>angle</code></strong>)</p>
+<h4 id="fix_abangle" class="doc_header"><code>fix_abangle</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L42" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>fix_abangle</code>(<strong><code>a</code></strong>:<code>float</code>, <strong><code>b</code></strong>:<code>float</code>, <strong><code>angle</code></strong>:<code>float</code>)</p>
 </blockquote>
 <p>Makes sure semimajor axis &gt; semiminor axis, and angles are consistent</p>
 <p><strong>Parameters:</strong></p>
 <ul>
-<li><p><strong><code>a</code></strong> : <em><code>&lt;class 'inspect._empty'&gt;</code></em></p>
-</li>
-<li><p><strong><code>b</code></strong> : <em><code>&lt;class 'inspect._empty'&gt;</code></em></p>
-</li>
-<li><p><strong><code>angle</code></strong> : <em><code>&lt;class 'inspect._empty'&gt;</code></em></p>
-</li>
+<li><strong><code>a</code></strong> : <em><code>&lt;class 'float'&gt;</code></em>    <p>semimajor axis</p></li>
+</ul>
+<ul>
+<li><strong><code>b</code></strong> : <em><code>&lt;class 'float'&gt;</code></em>    <p>semiminor axis</p></li>
+</ul>
+<ul>
+<li><strong><code>angle</code></strong> : <em><code>&lt;class 'float'&gt;</code></em>    <p>orientation angle in degrees</p></li>
 </ul>
 
 </div>
@@ -300,7 +301,7 @@ nb_path: "nbs/00_core.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="draw_ellipse" class="doc_header"><code>draw_ellipse</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L51" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>draw_ellipse</code>(<strong><code>img</code></strong>, <strong><code>center</code></strong>:<code>tuple</code>, <strong><code>axes</code></strong>:<code>tuple</code>, <strong><code>angle</code></strong>, <strong><code>color</code></strong>=<em><code>0</code></em>, <strong><code>thickness</code></strong>=<em><code>2</code></em>, <strong><code>filled</code></strong>=<em><code>False</code></em>, <strong><code>lineType</code></strong>=<em><code>8</code></em>, <strong><code>startAngle</code></strong>=<em><code>0</code></em>, <strong><code>endAngle</code></strong>=<em><code>360</code></em>, <strong><code>shift</code></strong>=<em><code>0</code></em>)</p>
+<h4 id="draw_ellipse" class="doc_header"><code>draw_ellipse</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L55" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>draw_ellipse</code>(<strong><code>img</code></strong>, <strong><code>center</code></strong>:<code>tuple</code>, <strong><code>axes</code></strong>:<code>tuple</code>, <strong><code>angle</code></strong>:<code>float</code>, <strong><code>color</code></strong>=<em><code>0</code></em>, <strong><code>thickness</code></strong>=<em><code>2</code></em>, <strong><code>filled</code></strong>=<em><code>False</code></em>, <strong><code>lineType</code></strong>=<em><code>8</code></em>, <strong><code>startAngle</code></strong>=<em><code>0</code></em>, <strong><code>endAngle</code></strong>=<em><code>360</code></em>, <strong><code>shift</code></strong>=<em><code>0</code></em>)</p>
 </blockquote>
 <p>"Draws an ellipse into image.</p>
 <p><strong>Parameters:</strong></p>
@@ -314,7 +315,7 @@ nb_path: "nbs/00_core.ipynb"
 <li><strong><code>axes</code></strong> : <em><code>&lt;class 'tuple'&gt;</code></em> <p>(a,b) semimajor & minor axes</p></li>
 </ul>
 <ul>
-<li><strong><code>angle</code></strong> : <em><code>&lt;class 'inspect._empty'&gt;</code></em>   <p>orientation angle in degrees</p></li>
+<li><strong><code>angle</code></strong> : <em><code>&lt;class 'float'&gt;</code></em>    <p>orientation angle in degrees</p></li>
 </ul>
 <ul>
 <li><strong><code>color</code></strong> : <em><code>&lt;class 'int'&gt;</code></em>, <em>optional</em>  <p>color to draw. tuple or int</p></li>
@@ -515,26 +516,31 @@ nb_path: "nbs/00_core.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="ellipse_to_bbox" class="doc_header"><code>ellipse_to_bbox</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L74" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>ellipse_to_bbox</code>(<strong><code>x</code></strong>, <strong><code>y</code></strong>, <strong><code>a</code></strong>, <strong><code>b</code></strong>, <strong><code>angle_deg</code></strong>, <strong><code>clip</code></strong>=<em><code>True</code></em>, <strong><code>width</code></strong>=<em><code>512</code></em>, <strong><code>height</code></strong>=<em><code>384</code></em>)</p>
+<h4 id="ellipse_to_bbox" class="doc_header"><code>ellipse_to_bbox</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L78" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>ellipse_to_bbox</code>(<strong><code>x</code></strong>:<code>float</code>, <strong><code>y</code></strong>:<code>float</code>, <strong><code>a</code></strong>:<code>float</code>, <strong><code>b</code></strong>:<code>float</code>, <strong><code>angle_deg</code></strong>:<code>float</code>, <strong><code>clip</code></strong>=<em><code>True</code></em>, <strong><code>width</code></strong>=<em><code>512</code></em>, <strong><code>height</code></strong>=<em><code>384</code></em>)</p>
 </blockquote>
 <p>Get bounding box of ellipse, cf. <a href="https://gist.github.com/smidm/b398312a13f60c24449a2c7533877dc0">https://gist.github.com/smidm/b398312a13f60c24449a2c7533877dc0</a></p>
 <p><strong>Parameters:</strong></p>
 <ul>
-<li><p><strong><code>x</code></strong> : <em><code>&lt;class 'inspect._empty'&gt;</code></em></p>
-</li>
-<li><p><strong><code>y</code></strong> : <em><code>&lt;class 'inspect._empty'&gt;</code></em></p>
-</li>
-<li><p><strong><code>a</code></strong> : <em><code>&lt;class 'inspect._empty'&gt;</code></em></p>
-</li>
-<li><p><strong><code>b</code></strong> : <em><code>&lt;class 'inspect._empty'&gt;</code></em></p>
-</li>
-<li><p><strong><code>angle_deg</code></strong> : <em><code>&lt;class 'inspect._empty'&gt;</code></em></p>
-</li>
+<li><strong><code>x</code></strong> : <em><code>&lt;class 'float'&gt;</code></em>    <p>x-coordinate of center of ellipse</p></li>
+</ul>
+<ul>
+<li><strong><code>y</code></strong> : <em><code>&lt;class 'float'&gt;</code></em>    <p>y-coordinate of center of ellipse</p></li>
+</ul>
+<ul>
+<li><strong><code>a</code></strong> : <em><code>&lt;class 'float'&gt;</code></em>    <p>semimajor axis</p></li>
+</ul>
+<ul>
+<li><strong><code>b</code></strong> : <em><code>&lt;class 'float'&gt;</code></em>    <p>semiminor axis</p></li>
+</ul>
+<ul>
+<li><strong><code>angle_deg</code></strong> : <em><code>&lt;class 'float'&gt;</code></em>    <p>orientation angle in degrees</p></li>
+</ul>
+<ul>
 <li><p><strong><code>clip</code></strong> : <em><code>&lt;class 'bool'&gt;</code></em>, <em>optional</em></p>
 </li>
 <li><p><strong><code>width</code></strong> : <em><code>&lt;class 'int'&gt;</code></em>, <em>optional</em></p>
 </li>
-<li><p><strong><code>height</code></strong> : <em><code>&lt;class 'int'&gt;</code></em>, <em>optional</em> <p>cx, cy, a, b, angle</p></p>
+<li><p><strong><code>height</code></strong> : <em><code>&lt;class 'int'&gt;</code></em>, <em>optional</em></p>
 </li>
 </ul>
 

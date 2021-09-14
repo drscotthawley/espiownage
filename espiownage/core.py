@@ -39,7 +39,11 @@ def meta_to_mask_path(
     return Path(mask_dir + csv_path.stem+'_P.png')  # _P because that's what CAMVID dataset does
 
 # Cell
-def fix_abangle(a,b,angle):
+def fix_abangle(
+    a:float, # semimajor axis
+    b:float, # semiminor axis
+    angle:float,  # orientation angle in degrees
+    ):
     "Makes sure semimajor axis > semiminor axis, and angles are consistent"
     if b > a:
         a, b, angle = b, a, angle+90
@@ -52,7 +56,7 @@ def draw_ellipse(
     img,         # a cv2 image, *not* a PIL image (similar for grayscale but not RGB)
     center:tuple,      # (cx, cy) tuple
     axes:tuple,        # (a,b) semimajor & minor axes
-    angle,       # orientation angle in degrees
+    angle:float,       # orientation angle in degrees
     color=(0),   # color to draw. tuple or int
     thickness=2, # thickness ofthe lines we draw
     filled=False,  # whether to draw the ellipse as filled or not
@@ -71,8 +75,13 @@ def draw_ellipse(
     return ellipse
 
 # Cell
-def ellipse_to_bbox(x, y, a, b, angle_deg,
-    clip=True, width=512, height=384):  # cx, cy, a, b, angle
+def ellipse_to_bbox(
+    x:float, # x-coordinate of center of ellipse
+    y:float, # y-coordinate of center of ellipse
+    a:float, # semimajor axis
+    b:float, # semiminor axis
+    angle_deg:float,  # orientation angle in degrees
+    clip=True, width=512, height=384):
     "Get bounding box of ellipse, cf. https://gist.github.com/smidm/b398312a13f60c24449a2c7533877dc0"
     major, minor = 2*a, 2*b
     t = np.arctan(-minor / 2 * np.tan(np.radians(angle_deg)) / (major / 2))
