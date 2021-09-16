@@ -15,9 +15,6 @@ import multiprocessing as mp
     image masks from the annotations
 """
 
-def ring_float_to_mask_int(rings:float, step=0.1):
-    """Ring value rounded to mask value; rounded to nearest step size"""
-    return round(rings/step)
 
 all_colors = {0}
 
@@ -44,7 +41,7 @@ def handle_one_file(meta_file_list, # list of all the csv files
         rings = row['rings']
         a, b, angle = fix_abangle(a,b,angle)
         if (rings > 0):
-            color =ring_float_to_mask_int(rings, step=step)
+            color =ring_float_to_class_int(rings, step=step)
             all_colors = all_colors.union({color})
             img = draw_ellipse(img, (cx,cy), (a,b), angle, color=color, filled=True)
 

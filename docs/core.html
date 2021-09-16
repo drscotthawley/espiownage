@@ -47,7 +47,7 @@ nb_path: "nbs/00_core.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="mkdir_if_needed" class="doc_header"><code>mkdir_if_needed</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L13" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>mkdir_if_needed</code>(<strong><code>path</code></strong>:<code>str</code>)</p>
+<h4 id="mkdir_if_needed" class="doc_header"><code>mkdir_if_needed</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L14" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>mkdir_if_needed</code>(<strong><code>path</code></strong>:<code>str</code>)</p>
 </blockquote>
 <p><strong>Parameters:</strong></p>
 <ul>
@@ -82,7 +82,7 @@ nb_path: "nbs/00_core.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="meta_to_img_path" class="doc_header"><code>meta_to_img_path</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L22" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>meta_to_img_path</code>(<strong><code>meta_file</code></strong>:<code>str</code>, <strong><code>img_bank</code></strong>=<em><code>'images/'</code></em>)</p>
+<h4 id="meta_to_img_path" class="doc_header"><code>meta_to_img_path</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L23" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>meta_to_img_path</code>(<strong><code>meta_file</code></strong>:<code>str</code>, <strong><code>img_bank</code></strong>=<em><code>'images/'</code></em>)</p>
 </blockquote>
 <p>Suggest the image file that corresponds with an annotation CSV file</p>
 <p><strong>Parameters:</strong></p>
@@ -154,7 +154,7 @@ nb_path: "nbs/00_core.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="meta_to_mask_path" class="doc_header"><code>meta_to_mask_path</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L33" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>meta_to_mask_path</code>(<strong><code>meta_file</code></strong>:<code>str</code>, <strong><code>mask_dir</code></strong>=<em><code>'masks/'</code></em>)</p>
+<h4 id="meta_to_mask_path" class="doc_header"><code>meta_to_mask_path</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L34" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>meta_to_mask_path</code>(<strong><code>meta_file</code></strong>:<code>str</code>, <strong><code>mask_dir</code></strong>=<em><code>'masks/'</code></em>)</p>
 </blockquote>
 <p>provides name for segmentation mask file</p>
 <p><strong>Parameters:</strong></p>
@@ -226,7 +226,7 @@ nb_path: "nbs/00_core.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="fix_abangle" class="doc_header"><code>fix_abangle</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L42" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>fix_abangle</code>(<strong><code>a</code></strong>:<code>float</code>, <strong><code>b</code></strong>:<code>float</code>, <strong><code>angle</code></strong>:<code>float</code>)</p>
+<h4 id="fix_abangle" class="doc_header"><code>fix_abangle</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L43" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>fix_abangle</code>(<strong><code>a</code></strong>:<code>float</code>, <strong><code>b</code></strong>:<code>float</code>, <strong><code>angle</code></strong>:<code>float</code>)</p>
 </blockquote>
 <p>Makes sure semimajor axis &gt; semiminor axis, and angles are consistent</p>
 <p><strong>Parameters:</strong></p>
@@ -301,7 +301,43 @@ nb_path: "nbs/00_core.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="draw_ellipse" class="doc_header"><code>draw_ellipse</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L55" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>draw_ellipse</code>(<strong><code>img</code></strong>, <strong><code>center</code></strong>:<code>tuple</code>, <strong><code>axes</code></strong>:<code>tuple</code>, <strong><code>angle</code></strong>:<code>float</code>, <strong><code>color</code></strong>=<em><code>0</code></em>, <strong><code>thickness</code></strong>=<em><code>2</code></em>, <strong><code>filled</code></strong>=<em><code>False</code></em>, <strong><code>lineType</code></strong>=<em><code>8</code></em>, <strong><code>startAngle</code></strong>=<em><code>0</code></em>, <strong><code>endAngle</code></strong>=<em><code>360</code></em>, <strong><code>shift</code></strong>=<em><code>0</code></em>)</p>
+<h4 id="meta_to_df" class="doc_header"><code>meta_to_df</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L56" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>meta_to_df</code>(<strong><code>meta_file</code></strong>)</p>
+</blockquote>
+<p>Reads in an espiownage/SPNet CSV file of ellipse data and returns a Pandas DataFrame</p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><strong><code>meta_file</code></strong> : <em><code>&lt;class 'inspect._empty'&gt;</code></em>   <p>csv file of ellipse data for an image</p></li>
+</ul>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="draw_ellipse" class="doc_header"><code>draw_ellipse</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L70" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>draw_ellipse</code>(<strong><code>img</code></strong>, <strong><code>center</code></strong>:<code>tuple</code>, <strong><code>axes</code></strong>:<code>tuple</code>, <strong><code>angle</code></strong>:<code>float</code>, <strong><code>color</code></strong>=<em><code>0</code></em>, <strong><code>thickness</code></strong>=<em><code>2</code></em>, <strong><code>filled</code></strong>=<em><code>False</code></em>, <strong><code>lineType</code></strong>=<em><code>8</code></em>, <strong><code>startAngle</code></strong>=<em><code>0</code></em>, <strong><code>endAngle</code></strong>=<em><code>360</code></em>, <strong><code>shift</code></strong>=<em><code>0</code></em>)</p>
 </blockquote>
 <p>"Draws an ellipse into image.</p>
 <p><strong>Parameters:</strong></p>
@@ -363,7 +399,9 @@ nb_path: "nbs/00_core.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">height</span><span class="p">,</span> <span class="n">width</span> <span class="o">=</span> <span class="mi">512</span><span class="p">,</span><span class="mi">384</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">height</span><span class="p">,</span> <span class="n">width</span> <span class="o">=</span> <span class="mi">512</span><span class="p">,</span><span class="mi">384</span>
 <span class="n">cx</span><span class="p">,</span> <span class="n">cy</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">angle</span> <span class="o">=</span> <span class="mi">157</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">67</span><span class="p">,</span> <span class="mi">45</span>
 <span class="n">img</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>  <span class="c1"># numpy w/h is &quot;backwards&quot; to images</span>
 <span class="n">img</span> <span class="o">=</span> <span class="n">draw_ellipse</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="p">(</span><span class="n">cx</span><span class="p">,</span><span class="n">cy</span><span class="p">),</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">),</span> <span class="n">angle</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">filled</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
@@ -382,7 +420,7 @@ nb_path: "nbs/00_core.ipynb"
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;matplotlib.image.AxesImage at 0x7f202a1147c0&gt;</pre>
+<pre>&lt;matplotlib.image.AxesImage at 0x7f136d3c6be0&gt;</pre>
 </div>
 
 </div>
@@ -482,7 +520,7 @@ nb_path: "nbs/00_core.ipynb"
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;matplotlib.image.AxesImage at 0x7f202a23d7c0&gt;</pre>
+<pre>&lt;matplotlib.image.AxesImage at 0x7f136b2c99a0&gt;</pre>
 </div>
 
 </div>
@@ -516,7 +554,7 @@ nb_path: "nbs/00_core.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="ellipse_to_bbox" class="doc_header"><code>ellipse_to_bbox</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L78" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>ellipse_to_bbox</code>(<strong><code>x</code></strong>:<code>float</code>, <strong><code>y</code></strong>:<code>float</code>, <strong><code>a</code></strong>:<code>float</code>, <strong><code>b</code></strong>:<code>float</code>, <strong><code>angle_deg</code></strong>:<code>float</code>, <strong><code>clip</code></strong>=<em><code>True</code></em>, <strong><code>width</code></strong>=<em><code>512</code></em>, <strong><code>height</code></strong>=<em><code>384</code></em>)</p>
+<h4 id="ellipse_to_bbox" class="doc_header"><code>ellipse_to_bbox</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L93" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>ellipse_to_bbox</code>(<strong><code>x</code></strong>:<code>float</code>, <strong><code>y</code></strong>:<code>float</code>, <strong><code>a</code></strong>:<code>float</code>, <strong><code>b</code></strong>:<code>float</code>, <strong><code>angle_deg</code></strong>:<code>float</code>, <strong><code>coco</code></strong>=<em><code>False</code></em>, <strong><code>clip</code></strong>=<em><code>True</code></em>, <strong><code>width</code></strong>=<em><code>512</code></em>, <strong><code>height</code></strong>=<em><code>384</code></em>, <strong><code>tol</code></strong>=<em><code>1e-10</code></em>)</p>
 </blockquote>
 <p>Get bounding box of ellipse, cf. <a href="https://gist.github.com/smidm/b398312a13f60c24449a2c7533877dc0">https://gist.github.com/smidm/b398312a13f60c24449a2c7533877dc0</a></p>
 <p><strong>Parameters:</strong></p>
@@ -536,11 +574,17 @@ nb_path: "nbs/00_core.ipynb"
 <li><strong><code>angle_deg</code></strong> : <em><code>&lt;class 'float'&gt;</code></em>    <p>orientation angle in degrees</p></li>
 </ul>
 <ul>
-<li><p><strong><code>clip</code></strong> : <em><code>&lt;class 'bool'&gt;</code></em>, <em>optional</em></p>
-</li>
+<li><strong><code>coco</code></strong> : <em><code>&lt;class 'bool'&gt;</code></em>, <em>optional</em>  <p>COCO style bbox has last 2 nums as width & height of bbox</p></li>
+</ul>
+<ul>
+<li><strong><code>clip</code></strong> : <em><code>&lt;class 'bool'&gt;</code></em>, <em>optional</em>  <p>clip values at max values of image width & height</p></li>
+</ul>
+<ul>
 <li><p><strong><code>width</code></strong> : <em><code>&lt;class 'int'&gt;</code></em>, <em>optional</em></p>
 </li>
 <li><p><strong><code>height</code></strong> : <em><code>&lt;class 'int'&gt;</code></em>, <em>optional</em></p>
+</li>
+<li><p><strong><code>tol</code></strong> : <em><code>&lt;class 'float'&gt;</code></em>, <em>optional</em>  <p>numerical precision below which start rounding things</p></p>
 </li>
 </ul>
 
@@ -596,7 +640,7 @@ nb_path: "nbs/00_core.ipynb"
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;matplotlib.image.AxesImage at 0x7f202a14e7c0&gt;</pre>
+<pre>&lt;matplotlib.image.AxesImage at 0x7f136b1b9580&gt;</pre>
 </div>
 
 </div>
@@ -609,6 +653,144 @@ nb_path: "nbs/00_core.ipynb"
 <img src="data:image/png;base64,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
 "
 >
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ellipse_to_bbox</span><span class="p">(</span><span class="n">cx</span><span class="p">,</span> <span class="n">cy</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">angle</span><span class="p">,</span> <span class="n">coco</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[80.47, 136.47, 153.06, 153.06]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ellipse_to_bbox</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>  <span class="c1"># check for div by zero error</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>(0, 0, 0, 0)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="ring_float_to_class_int" class="doc_header"><code>ring_float_to_class_int</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L123" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>ring_float_to_class_int</code>(<strong><code>rings</code></strong>:<code>float</code>, <strong><code>step</code></strong>=<em><code>0.1</code></em>)</p>
+</blockquote>
+<p>Ring value rounded to classifier value; rounded to nearest step size</p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><p><strong><code>rings</code></strong> : <em><code>&lt;class 'float'&gt;</code></em></p>
+</li>
+<li><p><strong><code>step</code></strong> : <em><code>&lt;class 'float'&gt;</code></em>, <em>optional</em></p>
+</li>
+</ul>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ring_float_to_class_int</span><span class="p">(</span><span class="mf">10.5</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">),</span> <span class="n">ring_float_to_class_int</span><span class="p">(</span><span class="mf">10.5</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">),</span> <span class="n">ring_float_to_class_int</span><span class="p">(</span><span class="mf">10.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>(105, 52, 10)</pre>
 </div>
 
 </div>
