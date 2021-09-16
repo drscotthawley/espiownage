@@ -61,29 +61,42 @@ def gen_coco_json(meta_file_list, bboxdir, step, reg, maxrings=11):
     return
 
 
-def gen_long_csv(files_str, meta_file_list, bboxdir, step, reg, maxrings=11):
-    out_csv_filename = bboxdir+'/annotations.csv'
+def gen_long_csv(files_str, meta_file_list, bboxdir, step, reg, obpr=False, maxrings=11):
+    out_csv_filename = bboxdir+'/annotations_obpr.csv' if obpr else bboxdir+'/annotations.csv'
     print(f"Generating long CSV {out_csv_filename} ...")
 
     width, height = 512, 384  # image dims
     final_col_names = ['filename','width', 'height', 'label', 'xmin', 'ymin', 'xmax', 'ymax']
 
-    # Goal: make one big long DataFrame and then write it
+    # Goal: make one big long list, turn it into a DataFrame, and then write it
     ann_list = []
     for i, meta_file in enumerate(meta_file_list):
+        print("meta_file = ",meta_file)
         this_df = meta_to_df(meta_file)
         image_file = os.path.basename(str(meta_to_img_path(meta_file)))
         this_df['filename'] = image_file
 
         for index, row in this_df.iterrows(): #convert to bboxes
             [cx, cy, a, b, angle] = [x for x in [row['cx'], row['cy'], row['a'], row['b'], row['angle']]]
-            bbox = ellipse_to_bbox(cx, cy, a, b, angle, coco=False)
             rings = round(float(row['rings']),2)
             if rings > 0:
-                label = rings if reg else ring_float_to_class_int(rings, step=step)
-                line_list = [image_file, width, height, label, bbox[0], bbox[1], bbox[2], bbox[3]]
-                ann_list.append(line_list)
+                if not obpr:
+                    bbox = ellipse_to_bbox(cx, cy, a, b, angle, coco=False)
+                    label = rings if reg else  ring_float_to_class_int(rings, step=step)
+                    line_list = [image_file, width, height, label, bbox[0], bbox[1], bbox[2], bbox[3]]
+                    ann_list.append(line_list)
+                else:                           # one box per ring (rounded as integers)
+                    rings_int, label = round(int(rings)), 'ring'
+                    line_list = []
+                    for i in range(1,rings_int+1):
+                        _a, _b = (i/rings_int)*a, (i/rings_int)*b
+                        bbox = ellipse_to_bbox(cx, cy, _a, _b, angle, coco=False)
+                        line_list = ([image_file, width, height, label, bbox[0], bbox[1], bbox[2], bbox[3]])
+                        ann_list.append(line_list)
 
+
+
+    print("   Creating data frame")
     new_df = pd.DataFrame(ann_list, columns=final_col_names)
     new_df = new_df[final_col_names]  # just to force ordering
     new_df.to_csv(out_csv_filename, index=False)
@@ -93,6 +106,7 @@ def gen_long_csv(files_str, meta_file_list, bboxdir, step, reg, maxrings=11):
 @call_parse
 def gen_bboxes(
     reg:Param("Set this for regression model (1 class, no steps)", store_true),
+    obpr:Param("Set this for one box per ring", store_true),
     files:Param("Wildcard name for all (ellipse) CSV files to read", str)='annotations/*.csv',
     bboxdir:Param("Directory to write bboxes to",str)='bboxes',
     step:Param("For classification model: Step size / resolution / precision of ring count",float)=0.5,
@@ -103,7 +117,7 @@ def gen_bboxes(
     files = ''.join(files)  # convert to str
     meta_file_list = sorted(glob.glob(files)) # list of all annotation .csv files for ellipses
 
-    gen_long_csv(files, meta_file_list, bboxdir, step, reg)
+    gen_long_csv(files, meta_file_list, bboxdir, step, reg, obpr)
     gen_coco_json(meta_file_list, bboxdir, step, reg)
 
     return

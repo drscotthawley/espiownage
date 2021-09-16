@@ -10,6 +10,7 @@ from PIL import Image
 from espiownage.core import *
 from functools import partial
 import multiprocessing as mp
+import sys
 
 """ Note that (normally) we don't care about the actual images. we're just generating
     image masks from the annotations
@@ -38,9 +39,12 @@ def handle_one_file(meta_file_list, # list of all the csv files
     img = np.zeros((width, height), dtype=np.uint8)  # blank black image, dimensions are wonky
     for index, row in df.iterrows() :
         [cx, cy, a, b, angle] = [int(round(x)) for x in [row['cx'], row['cy'], row['a'], row['b'], row['angle']]]
-        rings = row['rings']
+        rings = round(float(row['rings']),2)
         a, b, angle = fix_abangle(a,b,angle)
         if (rings > 0):
+            if rings > 11:
+                print(f"{meta_file}: rings = {rings}")
+                sys.exit(1)
             color =ring_float_to_class_int(rings, step=step)
             all_colors = all_colors.union({color})
             img = draw_ellipse(img, (cx,cy), (a,b), angle, color=color, filled=True)
