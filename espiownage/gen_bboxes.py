@@ -49,6 +49,7 @@ def gen_coco_json(meta_file_list, bboxdir, step, reg, maxrings=11):
             [cx, cy, a, b, angle] = [x for x in [row['cx'], row['cy'], row['a'], row['b'], row['angle']]]
             bbox = ellipse_to_bbox(cx, cy, a, b, angle, coco=True)
             rings = round(float(row['rings']),2)
+            assert rings <= maxrings
             if rings > 0:
                 category_id = rings if reg else int(round(maxrings/step))
                 this_ann = {"image_id":image, "bbox": bbox, "category_id":category_id}
@@ -61,7 +62,15 @@ def gen_coco_json(meta_file_list, bboxdir, step, reg, maxrings=11):
     return
 
 
-def gen_long_csv(files_str, meta_file_list, bboxdir, step, reg, obpr=False, maxrings=11):
+def gen_long_csv(
+    files_str,          # original string specifying meta / CSV files
+    meta_file_list,     # list of those files, with paths
+    bboxdir,            # where we're writing to
+    step,               # quantize ring counts via this bin size
+    reg,                # regression model?
+    obpr=False,         # "one box per ring" mode. every thing is an object "ring"
+    maxrings=11,        # used for quantization.
+    ):
     out_csv_filename = bboxdir+'/annotations_obpr.csv' if obpr else bboxdir+'/annotations.csv'
     print(f"Generating long CSV {out_csv_filename} ...")
 
@@ -79,6 +88,7 @@ def gen_long_csv(files_str, meta_file_list, bboxdir, step, reg, obpr=False, maxr
         for index, row in this_df.iterrows(): #convert to bboxes
             [cx, cy, a, b, angle] = [x for x in [row['cx'], row['cy'], row['a'], row['b'], row['angle']]]
             rings = round(float(row['rings']),2)
+            assert rings <= maxrings
             if rings > 0:
                 if not obpr:
                     bbox = ellipse_to_bbox(cx, cy, a, b, angle, coco=False)
