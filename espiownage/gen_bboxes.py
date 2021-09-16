@@ -41,7 +41,7 @@ def gen_bboxes(
         print('Regression model: 1 class, called "rings"')
         coco_dict["categories"] = [{"id": 0, "name": "rings"}] # probably won't work
     else:
-        coco_dict["categories"] = [{"id": x, "name":str(x)} for x in range(int(round(maxrings/step)))]
+        coco_dict["categories"] = [{"id": x, "name":str((x+1)*step)} for x in range(int(round(maxrings/step)))]
 
 
     # images
@@ -58,7 +58,9 @@ def gen_bboxes(
             [cx, cy, a, b, angle] = [x for x in [row['cx'], row['cy'], row['a'], row['b'], row['angle']]]
             #print("    ",cx, cy, a, b, angle)
             bbox = ellipse_to_bbox(cx, cy, a, b, angle, coco=True)
-            rings = round(row['rings'],2)
+            #rings = row['rings']
+            #print(f"rings = [{rings}]")
+            rings = round(float(row['rings']),2)
             category_id = rings if reg else int(round(maxrings/step))
             this_ann = {"image_id":image, "bbox": bbox, "category_id":category_id}
             ann_list = ann_list + [this_ann]
