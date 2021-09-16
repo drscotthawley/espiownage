@@ -49,9 +49,10 @@ def gen_coco_json(meta_file_list, bboxdir, step, reg, maxrings=11):
             [cx, cy, a, b, angle] = [x for x in [row['cx'], row['cy'], row['a'], row['b'], row['angle']]]
             bbox = ellipse_to_bbox(cx, cy, a, b, angle, coco=True)
             rings = round(float(row['rings']),2)
-            category_id = rings if reg else int(round(maxrings/step))
-            this_ann = {"image_id":image, "bbox": bbox, "category_id":category_id}
-            ann_list = ann_list + [this_ann]
+            if rings > 0:
+                category_id = rings if reg else int(round(maxrings/step))
+                this_ann = {"image_id":image, "bbox": bbox, "category_id":category_id}
+                ann_list = ann_list + [this_ann]
     coco_dict["annotations"] = ann_list
 
     #print("coco_dict =\n",coco_dict)
@@ -78,9 +79,10 @@ def gen_long_csv(files_str, meta_file_list, bboxdir, step, reg, maxrings=11):
             [cx, cy, a, b, angle] = [x for x in [row['cx'], row['cy'], row['a'], row['b'], row['angle']]]
             bbox = ellipse_to_bbox(cx, cy, a, b, angle, coco=False)
             rings = round(float(row['rings']),2)
-            label = rings if reg else ring_float_to_class_int(rings)
-            line_list = [image_file, width, height, label, bbox[0], bbox[1], bbox[2], bbox[3]]
-            ann_list.append(line_list)
+            if rings > 0:
+                label = rings if reg else ring_float_to_class_int(rings, step=step)
+                line_list = [image_file, width, height, label, bbox[0], bbox[1], bbox[2], bbox[3]]
+                ann_list.append(line_list)
 
     new_df = pd.DataFrame(ann_list, columns=final_col_names)
     new_df = new_df[final_col_names]  # just to force ordering
