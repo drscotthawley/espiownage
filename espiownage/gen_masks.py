@@ -56,7 +56,7 @@ def handle_one_file(meta_file_list, # list of all the csv files
 @call_parse
 def gen_masks(files:Param("Wildcard name for all CSV files to edit", str)='annotations/*.csv',
     maskdir:Param("Directory to write segmentation masks to",str)='masks/',
-    step:Param("Step size / resolution / precision of ring count",float)=0.1,
+    step:Param("Step size / resolution / precision of ring count",float)=0.5,
     #imglinks:Param("Generate links to original images?", store_true)
     ):
     global all_colors

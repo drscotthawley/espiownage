@@ -93,7 +93,7 @@ def gen_bboxes(
     reg:Param("Set this for regression model (1 class, no steps)", store_true),
     files:Param("Wildcard name for all (ellipse) CSV files to read", str)='annotations/*.csv',
     bboxdir:Param("Directory to write bboxes to",str)='bboxes',
-    step:Param("For classification model: Step size / resolution / precision of ring count",float)=0.1,
+    step:Param("For classification model: Step size / resolution / precision of ring count",float)=0.5,
     ):
 
     mkdir_if_needed(bboxdir)
