@@ -420,7 +420,7 @@ nb_path: "nbs/00_core.ipynb"
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;matplotlib.image.AxesImage at 0x7f136d3c6be0&gt;</pre>
+<pre>&lt;matplotlib.image.AxesImage at 0x7f88d3909550&gt;</pre>
 </div>
 
 </div>
@@ -520,7 +520,7 @@ nb_path: "nbs/00_core.ipynb"
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;matplotlib.image.AxesImage at 0x7f136b2c99a0&gt;</pre>
+<pre>&lt;matplotlib.image.AxesImage at 0x7f88d38763d0&gt;</pre>
 </div>
 
 </div>
@@ -554,15 +554,15 @@ nb_path: "nbs/00_core.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="ellipse_to_bbox" class="doc_header"><code>ellipse_to_bbox</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L93" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>ellipse_to_bbox</code>(<strong><code>x</code></strong>:<code>float</code>, <strong><code>y</code></strong>:<code>float</code>, <strong><code>a</code></strong>:<code>float</code>, <strong><code>b</code></strong>:<code>float</code>, <strong><code>angle_deg</code></strong>:<code>float</code>, <strong><code>coco</code></strong>=<em><code>False</code></em>, <strong><code>clip</code></strong>=<em><code>True</code></em>, <strong><code>width</code></strong>=<em><code>512</code></em>, <strong><code>height</code></strong>=<em><code>384</code></em>, <strong><code>tol</code></strong>=<em><code>1e-10</code></em>)</p>
+<h4 id="ellipse_to_bbox" class="doc_header"><code>ellipse_to_bbox</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L93" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>ellipse_to_bbox</code>(<strong><code>cx</code></strong>:<code>float</code>, <strong><code>cy</code></strong>:<code>float</code>, <strong><code>a</code></strong>:<code>float</code>, <strong><code>b</code></strong>:<code>float</code>, <strong><code>angle_deg</code></strong>:<code>float</code>, <strong><code>coco</code></strong>=<em><code>False</code></em>, <strong><code>width</code></strong>=<em><code>512</code></em>, <strong><code>height</code></strong>=<em><code>384</code></em>, <strong><code>clip</code></strong>=<em><code>True</code></em>)</p>
 </blockquote>
-<p>Get bounding box of ellipse, cf. <a href="https://gist.github.com/smidm/b398312a13f60c24449a2c7533877dc0">https://gist.github.com/smidm/b398312a13f60c24449a2c7533877dc0</a></p>
+<p>converts ellipse to bounding box</p>
 <p><strong>Parameters:</strong></p>
 <ul>
-<li><strong><code>x</code></strong> : <em><code>&lt;class 'float'&gt;</code></em>    <p>x-coordinate of center of ellipse</p></li>
+<li><strong><code>cx</code></strong> : <em><code>&lt;class 'float'&gt;</code></em>   <p>x-coordinate of center of ellipse</p></li>
 </ul>
 <ul>
-<li><strong><code>y</code></strong> : <em><code>&lt;class 'float'&gt;</code></em>    <p>y-coordinate of center of ellipse</p></li>
+<li><strong><code>cy</code></strong> : <em><code>&lt;class 'float'&gt;</code></em>   <p>y-coordinate of center of ellipse</p></li>
 </ul>
 <ul>
 <li><strong><code>a</code></strong> : <em><code>&lt;class 'float'&gt;</code></em>    <p>semimajor axis</p></li>
@@ -577,15 +577,13 @@ nb_path: "nbs/00_core.ipynb"
 <li><strong><code>coco</code></strong> : <em><code>&lt;class 'bool'&gt;</code></em>, <em>optional</em>  <p>COCO style bbox has last 2 nums as width & height of bbox</p></li>
 </ul>
 <ul>
-<li><strong><code>clip</code></strong> : <em><code>&lt;class 'bool'&gt;</code></em>, <em>optional</em>  <p>clip values at max values of image width & height</p></li>
-</ul>
-<ul>
 <li><p><strong><code>width</code></strong> : <em><code>&lt;class 'int'&gt;</code></em>, <em>optional</em></p>
 </li>
-<li><p><strong><code>height</code></strong> : <em><code>&lt;class 'int'&gt;</code></em>, <em>optional</em></p>
+<li><p><strong><code>height</code></strong> : <em><code>&lt;class 'int'&gt;</code></em>, <em>optional</em> <p>image dimensions for clipping</p></p>
 </li>
-<li><p><strong><code>tol</code></strong> : <em><code>&lt;class 'float'&gt;</code></em>, <em>optional</em>  <p>numerical precision below which start rounding things</p></p>
-</li>
+</ul>
+<ul>
+<li><strong><code>clip</code></strong> : <em><code>&lt;class 'bool'&gt;</code></em>, <em>optional</em>  <p>clip values at max values of image width & height</p></li>
 </ul>
 
 </div>
@@ -640,7 +638,7 @@ nb_path: "nbs/00_core.ipynb"
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;matplotlib.image.AxesImage at 0x7f136b1b9580&gt;</pre>
+<pre>&lt;matplotlib.image.AxesImage at 0x7f88d375b190&gt;</pre>
 </div>
 
 </div>
@@ -740,7 +738,7 @@ nb_path: "nbs/00_core.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="ring_float_to_class_int" class="doc_header"><code>ring_float_to_class_int</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L123" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>ring_float_to_class_int</code>(<strong><code>rings</code></strong>:<code>float</code>, <strong><code>step</code></strong>=<em><code>0.1</code></em>)</p>
+<h4 id="ring_float_to_class_int" class="doc_header"><code>ring_float_to_class_int</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L121" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>ring_float_to_class_int</code>(<strong><code>rings</code></strong>:<code>float</code>, <strong><code>step</code></strong>=<em><code>0.1</code></em>)</p>
 </blockquote>
 <p>Ring value rounded to classifier value; rounded to nearest step size</p>
 <p><strong>Parameters:</strong></p>

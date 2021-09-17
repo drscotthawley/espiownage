@@ -91,33 +91,31 @@ def draw_ellipse(
 
 # Cell
 def ellipse_to_bbox(
-    x:float, # x-coordinate of center of ellipse
-    y:float, # y-coordinate of center of ellipse
-    a:float, # semimajor axis
-    b:float, # semiminor axis
+    cx:float, # x-coordinate of center of ellipse
+    cy:float, # y-coordinate of center of ellipse
+    a:float,  # semimajor axis
+    b:float,  # semiminor axis
     angle_deg:float,  # orientation angle in degrees
     coco=False, # COCO style bbox has last 2 nums as width & height of bbox
+    width=512, height=384, # image dimensions for clipping
     clip=True, # clip values at max values of image width & height
-    width=512, height=384,
-    tol=1e-10, # numerical precision below which start rounding things
     ):
-    "Get bounding box of ellipse, cf. https://gist.github.com/smidm/b398312a13f60c24449a2c7533877dc0"
-    major, minor = 2*a, 2*b
-    if 0==major: major = tol
-    if 0==angle_deg: angle_deg = tol    # slight fudge to avoid division by zero
-    t = np.arctan(-minor / 2 * np.tan(np.radians(angle_deg)) / (major / 2))
-    [max_x, min_x] = sorted([x + major / 2 * np.cos(t) * np.cos(np.radians(angle_deg)) -
-                      minor / 2 * np.sin(t) * np.sin(np.radians(angle_deg)) for t in (t, t + np.pi)],reverse=True)
-    t = np.arctan(minor / 2 * 1. / np.tan(np.radians(angle_deg)) / (major / 2))
-    [max_y, min_y] = sorted([y + minor / 2 * np.sin(t) * np.cos(np.radians(angle_deg)) +
-                      major / 2 * np.cos(t) * np.sin(np.radians(angle_deg)) for t in (t, t + np.pi)],reverse=True)
+    "converts ellipse to bounding box"
+    rad = np.radians(angle_deg)
+    delta_x = np.sqrt(a**2 * np.cos(rad)**2 + b**2 * np.sin(rad)**2 )
+    delta_y = np.sqrt(a**2 * np.sin(rad)**2 + b**2 * np.cos(rad)**2 )
+    xmin, ymin = cx - delta_x,  cy - delta_y
+    xmax, ymax = cx + delta_x,  cy + delta_y
+    # just a bit of error-correction code
+    if (xmin > xmax):
+        xmin, xmax = xmax, xmin   # swap
+    if (ymin > ymax):
+        ymin, ymax = ymax, ymin  # swap
     if clip:
-      min_x = np.clip(min_x, 0, width)
-      max_x = np.clip(max_x, 0, width)
-      min_y = np.clip(min_y, 0, height)
-      max_y = np.clip(max_y, 0, height)
-    if coco: return [round(x, 2) for x in [min_x, min_y, max_x-min_x, max_y-min_y]] # coco is a list, floats are ok
-    return int(min_x), int(min_y), int(max_x), int(max_y)
+        xmin, xmax = np.clip(xmin, 0, width),  np.clip(xmax, 0, width)
+        ymin, ymax = np.clip(ymin, 0, height), np.clip(ymax, 0, height)
+    if coco: return [round(x, 2) for x in [xmin, ymin, xmax-xmin, ymax-ymin]] # coco is a list, floats are ok
+    return int(xmin), int(ymin), int(xmax), int(ymax)
 
 # Cell
 def ring_float_to_class_int(rings:float, step=0.1):
