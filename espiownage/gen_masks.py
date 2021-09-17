@@ -73,8 +73,8 @@ def gen_masks(
     files = ''.join(files)
     meta_file_list = sorted(glob.glob(files))
 
-    parallel = False
-    if not parallel:  # it's not that slow, really
+    parallel = False  # can leave off. it's not that slow, really
+    if not parallel:
         for i in range(len(meta_file_list)):
             handle_one_file(meta_file_list, maskdir, step, allone, i)
         print("all_colors = ",sorted(list(all_colors))) # Very handy

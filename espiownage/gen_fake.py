@@ -18,6 +18,7 @@ import cv2
 import random
 import os
 import time
+from functools import partial
 import multiprocessing as mp
 from espiownage.core import *
 
@@ -43,7 +44,7 @@ blur_prob = 0.3    # probability that an image gets blurred
 
 min_line_width = 4  # number of pixels per each ring (dark-light pair)
 
-
+pad = "       "
 
 def bandpass_mixup(img_fake, path_real='/home/shawley/datasets/espiownage-data/images/'):
     '''
@@ -141,6 +142,7 @@ def draw_rings(img,center,axes,angle=45,num_rings=5):
         ellipse = draw_ellipse(img,center,thisring_axes,angle,color=color, thickness=thickness)
     return ellipse   # returns outermost ellipse
 
+
 def does_overlap( a, b):
     if (a[2] < b[0]): return False # a is left of b
     if (a[0] > b[2]): return False # a is right of b
@@ -158,7 +160,6 @@ def does_overlap_previous(box, boxes_arr):
         if (does_overlap( box, boxes_arr[i])):
             return True
     return False
-
 
 
 
@@ -226,6 +227,42 @@ def draw_antinodes(img,num_antinodes=1):
     return img, caption
 
 
+
+def handle_one_file(outdir, framenum):
+    print("framenum = ",framenum)
+
+    np_dims = (imHeight, imWidth, 1)     # for numpy, image dimensions are reversed
+    img = 128*np.ones(np_dims, np.uint8)
+    draw_waves(img)   # this is the main bottleneck, execution-time-wise
+
+    max_antinodes = 6
+    num_antinodes= random.randint(0,max_antinodes)
+    img, caption = draw_antinodes(img, num_antinodes=num_antinodes)
+
+    if (np.random.random() <= blur_prob): # blur image a bit
+        blur_ksize = random.choice([3,5])
+        img = blur_image(img, kernel_size=blur_ksize)
+
+    # post-blur noise
+    noise = cv2.randn(np.zeros(np_dims, np.uint8),40,40); # normal dist, mean 40 std 40
+    img = cv2.add(img, noise)
+
+
+    # further degrade image: drop some pixels
+    mask = np.random.choice([0,1],size=img.shape).astype(np.float32)
+    img = img*mask
+
+    # finally replace background using real data
+    img = bandpass_mixup(img)
+
+
+    prefix = 'steelpan_'+str(framenum).zfill(7)
+    cv2.imwrite(outdir+'/images/'+prefix+'.png',img)
+    with open(outdir+'/annotations/'+prefix+meta_extension, "w") as text_file:
+        text_file.write(caption)
+    return
+
+
 @call_parse
 def gen_fake(
     n:Param("Number of images to generate", int)=2000,
@@ -233,38 +270,21 @@ def gen_fake(
     ):
     "Generates fake ESPI-like images"
 
-    random.seed(1)
+    random.seed(1)   # for reproducibility
     np.random.seed(1)
 
     mkdir_if_needed(outdir)
+    mkdir_if_needed(outdir+'/images')
+    mkdir_if_needed(outdir+'/annotations')
 
-    for framenum in range(n):
-        np_dims = (imHeight, imWidth, 1)     # for numpy, image dimensions are reversed
-        img = 128*np.ones(np_dims, np.uint8)
-        draw_waves(img)   # this is the main bottleneck, execution-time-wise
-
-        max_antinodes = 6
-        num_antinodes= random.randint(0,max_antinodes)
-        img, caption = draw_antinodes(img, num_antinodes=num_antinodes)
-
-        if (np.random.random() <= blur_prob): # blur image a bit
-            blur_ksize = random.choice([3,5])
-            img = blur_image(img, kernel_size=blur_ksize)
-
-        # post-blur noise
-        noise = cv2.randn(np.zeros(np_dims, np.uint8),40,40); # normal dist, mean 40 std 40
-        img = cv2.add(img, noise)
-
-
-        # further degrade image: drop some pixels
-        mask = np.random.choice([0,1],size=img.shape).astype(np.float32)
-        img = img*mask
-
-        # finally replace background using real data
-        img = bandpass_mixup(img)
-
-        prefix = outdir+'/steelpan_'+str(framenum).zfill(7)
-        cv2.imwrite(prefix+'.png',img)
-        with open(prefix+meta_extension, "w") as text_file:
-            text_file.write(caption)
+    parallel = True  # want this on, this one's slow
+    if not parallel:
+        for framenum in range(n):
+            handle_one_file(outdir, framenum)
+    else:
+        wrapper = partial(handle_one_file, outdir)
+        pool = mp.Pool(mp.cpu_count())
+        results = pool.map(wrapper, range(n))
+        pool.close()
+        pool.join()
     return
