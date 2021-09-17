@@ -98,7 +98,7 @@ def gen_long_csv(
                 else:                           # one box per ring (rounded as integers)
                     rings_int, label = round(int(rings)), 'ring'
                     line_list = []
-                    for i in range(1,rings_int+1):
+                    for i in range(rings_int,0,-1):  # counts down to 1, 0 is not included per Python norms
                         _a, _b = (i/rings_int)*a, (i/rings_int)*b
                         bbox = ellipse_to_bbox(cx, cy, _a, _b, angle, coco=False)
                         line_list = ([image_file, width, height, label, bbox[0], bbox[1], bbox[2], bbox[3]])
@@ -116,7 +116,7 @@ def gen_long_csv(
 @call_parse
 def gen_bboxes(
     reg:Param("Set this for regression model (1 class, no steps)", store_true),
-    obpr:Param("Set this for one box per ring", store_true),
+    #obpr:Param("Set this for one box per ring", store_true),
     files:Param("Wildcard name for all (ellipse) CSV files to read", str)='annotations/*.csv',
     bboxdir:Param("Directory to write bboxes to",str)='bboxes',
     step:Param("For classification model: Step size / resolution / precision of ring count",float)=0.5,
@@ -127,7 +127,8 @@ def gen_bboxes(
     files = ''.join(files)  # convert to str
     meta_file_list = sorted(glob.glob(files)) # list of all annotation .csv files for ellipses
 
-    gen_long_csv(files, meta_file_list, bboxdir, step, reg, obpr)
+    for obpr in [False, True]:
+        gen_long_csv(files, meta_file_list, bboxdir, step, reg, obpr)
     gen_coco_json(meta_file_list, bboxdir, step, reg)
 
     return

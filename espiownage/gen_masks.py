@@ -23,6 +23,7 @@ def handle_one_file(meta_file_list, # list of all the csv files
     mask_dir,                # output directory, where to write mask files to
     step,                   # resolution of (float) rings, when converting to int
     #imglinks,               # boolean on whether or not to create links to original images
+    allone,                 # set all values to one for non-background
     i,                      # index of which meta file we'll read from
     height=512, width=384):  # image dimensions
     global all_colors
@@ -45,7 +46,7 @@ def handle_one_file(meta_file_list, # list of all the csv files
             if rings > 11:
                 print(f"{meta_file}: rings = {rings}")
                 sys.exit(1)
-            color =ring_float_to_class_int(rings, step=step)
+            color = 1 if allone else ring_float_to_class_int(rings, step=step)
             all_colors = all_colors.union({color})
             img = draw_ellipse(img, (cx,cy), (a,b), angle, color=color, filled=True)
 
@@ -58,10 +59,11 @@ def handle_one_file(meta_file_list, # list of all the csv files
 
 
 @call_parse
-def gen_masks(files:Param("Wildcard name for all CSV files to edit", str)='annotations/*.csv',
+def gen_masks(
+    allone:Param("All objects get assigned to class 1", store_true),
+    files:Param("Wildcard name for all CSV files to edit", str)='annotations/*.csv',
     maskdir:Param("Directory to write segmentation masks to",str)='masks/',
     step:Param("Step size / resolution / precision of ring count",float)=0.5,
-    #imglinks:Param("Generate links to original images?", store_true)
     ):
     global all_colors
 
@@ -74,11 +76,11 @@ def gen_masks(files:Param("Wildcard name for all CSV files to edit", str)='annot
     parallel = False
     if not parallel:  # it's not that slow, really
         for i in range(len(meta_file_list)):
-            handle_one_file(meta_file_list, maskdir, step, i)
+            handle_one_file(meta_file_list, maskdir, step, allone, i)
         print("all_colors = ",sorted(list(all_colors))) # Very handy
     else:
         # parallel processing
-        wrapper = partial(handle_one_file, meta_file_list, maskdir, step)
+        wrapper = partial(handle_one_file, meta_file_list, maskdir, step, allone)
         pool = mp.Pool(mp.cpu_count())
         results = pool.map(wrapper, range(len(meta_file_list)))
         pool.close()
