@@ -99,8 +99,7 @@ def blur_image(img, kernel_size=7):
     return new_img
 
 
-def draw_waves(img):
-    #pts = np.array([[10,5],[20,30],[70,20],[50,10]], np.int32)
+def draw_waves(img):  # TODO make intensity vary smoothly
     xs = np.arange(0, imWidth)
     ys = np.arange(0, imHeight)
 
@@ -127,7 +126,7 @@ def get_ellipse_box(center, axes, angle):  # converts ellipse to bounding box
     return ellipse_to_bbox( center[0], center[1], axes[0], axes[1], angle)
 
 
-def draw_rings(img,center,axes,angle=45,num_rings=5):
+def draw_rings(img,center,axes,angle=45,num_rings=5):  # TODO make intensity vary smoothly
     num_wbrings = 2*num_rings  # draw in white & black
     if (0==num_wbrings):
         num_wbrings = 1      # sorry, gotta avoid any & all errors because MP is a pain to debug
@@ -233,6 +232,7 @@ def handle_one_file(outdir, framenum):
 
     np_dims = (imHeight, imWidth, 1)     # for numpy, image dimensions are reversed
     img = 128*np.ones(np_dims, np.uint8)
+
     draw_waves(img)   # this is the main bottleneck, execution-time-wise
 
     max_antinodes = 6
@@ -255,7 +255,6 @@ def handle_one_file(outdir, framenum):
     # finally replace background using real data
     img = bandpass_mixup(img)
 
-
     prefix = 'steelpan_'+str(framenum).zfill(7)
     cv2.imwrite(outdir+'/images/'+prefix+'.png',img)
     with open(outdir+'/annotations/'+prefix+meta_extension, "w") as text_file:
@@ -266,7 +265,7 @@ def handle_one_file(outdir, framenum):
 @call_parse
 def gen_fake(
     n:Param("Number of images to generate", int)=2000,
-    outdir:Param("Directory to write to",str)='espiownage_fake',
+    outdir:Param("Directory to write to",str)='espiownage-fake',
     ):
     "Generates fake ESPI-like images"
 

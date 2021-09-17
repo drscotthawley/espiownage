@@ -106,10 +106,8 @@ def ellipse_to_bbox(
     delta_x, delta_y = np.sqrt(a2*cos2 + b2*sin2), np.sqrt(a2*sin2 + b2*cos2)
     xmin, xmax = cx - delta_x,  cx + delta_x
     ymin, ymax = cy - delta_y,  cy + delta_y
-    if (xmin > xmax):  # just a bit of error-correction code
-        xmin, xmax = xmax, xmin   # swap
-    if (ymin > ymax):
-        ymin, ymax = ymax, ymin  # swap
+    if (xmin > xmax): xmin, xmax = xmax, xmin  # error correction, swap
+    if (ymin > ymax): ymin, ymax = ymax, ymin  # swap
     if clip:
         xmin, xmax = np.clip(xmin, 0, width),  np.clip(xmax, 0, width)
         ymin, ymax = np.clip(ymin, 0, height), np.clip(ymax, 0, height)
