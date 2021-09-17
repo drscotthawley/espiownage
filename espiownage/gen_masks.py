@@ -65,11 +65,11 @@ def gen_masks(
     maskdir:Param("Directory to write segmentation masks to",str)='masks/',
     step:Param("Step size / resolution / precision of ring count",float)=0.5,
     ):
+    "Generate segmentation masks for all annotations"
     global all_colors
 
     mkdir_if_needed(maskdir)
 
-    "Generate segmentation masks for all annotations"
     files = ''.join(files)
     meta_file_list = sorted(glob.glob(files))
 

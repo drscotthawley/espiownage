@@ -13,6 +13,9 @@ entries:
       title: espiownage core
       url: core.html
     - output: web,pdf
+      title: segmentation "all one" - real data
+      url: seg_allone_real.html
+    - output: web,pdf
       title: segmentation classification - cyclegan
       url: seg_class_cyclegan.html
     - output: web,pdf
