@@ -12,48 +12,35 @@ from functools import partial
 import multiprocessing as mp
 import sys
 
-""" Note that (normally) we don't care about the actual images. we're just generating
-    image masks from the annotations
+""" Generates cropped images of individual antinodes using annotations
 """
-
-
-all_colors = {0}
 
 def handle_one_file(meta_file_list, # list of all the csv files
     outdir,                # output directory, where to write mask files to
-    step,                   # resolution of (float) rings, when converting to int
-    #imglinks,               # boolean on whether or not to create links to original images
-    allone,                 # set all values to one for non-background
     i,                      # index of which meta file we'll read from
     height=512, width=384):  # image dimensions
-    global all_colors
 
     meta_file = meta_file_list[i]
+    print(f"{i}/{len(meta_file_list)}: meta_file = {meta_file}",flush=True)
+
+    img_path = meta_to_img_path(meta_file)
+    img = Image.open(img_path)
+
+    # read meta csv file for all rings
     col_names = ['cx', 'cy', 'a', 'b', 'angle', 'rings']
     df = pd.read_csv(meta_file, header=None, names=col_names)
-
-    # progress message
-    out_path = #meta_to_mask_path(meta_file,mask_dir=mask_dir)
-    print(f"{i}/{len(meta_file_list)}: meta_file = {meta_file}",flush=True) 
     df.drop_duplicates(inplace=True)  # sometimes the data from Zooniverse has duplicate rows
-    img = np.zeros((width, height), dtype=np.uint8)  # blank black image, dimensions are wonky
     for index, row in df.iterrows() :
         [cx, cy, a, b, angle] = [int(round(x)) for x in [row['cx'], row['cy'], row['a'], row['b'], row['angle']]]
         rings = round(float(row['rings']),2)
         a, b, angle = fix_abangle(a,b,angle)
         if (rings > 0):
-            if rings > 11:
-                print(f"{meta_file}: rings = {rings}")
-                sys.exit(1)
-            color = 1 if allone else ring_float_to_class_int(rings, step=step)
-            all_colors = all_colors.union({color})
-            img = draw_ellipse(img, (cx,cy), (a,b), angle, color=color, filled=True)
-
-    #all_colors = all_colors.union(set(np.array(img).flatten()))  # super sanity check but slow
-    # cv2.imwrite(str(mask_path), img)  Don't write as cv2, write as PIL
-    pil_image = Image.fromarray(img)
-    pil_image = pil_image.save(str(mask_path))
-    return img
+            bb = ellipse_to_bbox(cx, cy, a, b, angle)
+            img_cropped = crop_to_bbox(img, bb)
+            out_file = outdir+'/'+str(Path(meta_file).stem)+f"_{bb[0]}_{bb[1]}_{bb[2]}_{bb[3]}.png"
+            #print(f"   {out_file}",flush=True)
+            img_cropped.save(out_file)
+    return
 
 
 
@@ -69,13 +56,13 @@ def gen_crops(
     files = ''.join(files)
     meta_file_list = sorted(glob.glob(files))
 
-    parallel = False  # can leave off. it's not that slow, really
+    parallel = True  # not too slow sequential but parallel=True is good
     if not parallel:
         for i in range(len(meta_file_list)):
-            handle_one_file(meta_file_list, maskdir, step, allone, i)
+            handle_one_file(meta_file_list, outdir, i)
     else:
         # parallel processing
-        wrapper = partial(handle_one_file, meta_file_list, maskdir, step, allone)
+        wrapper = partial(handle_one_file, meta_file_list, outdir)
         pool = mp.Pool(mp.cpu_count())
         results = pool.map(wrapper, range(len(meta_file_list)))
         pool.close()
