@@ -2,7 +2,7 @@
 from fastcore.script import *
 from pathlib import Path
 import glob
-import os
+import os, shutil
 import pandas as pd
 import numpy as np
 import cv2
@@ -17,6 +17,7 @@ import sys
 """
 
 
+imgbank, ann_img_dir = "images/", "annotated_images/"
 all_colors = {0}
 
 def handle_one_file(meta_file_list, # list of all the csv files
@@ -24,9 +25,10 @@ def handle_one_file(meta_file_list, # list of all the csv files
     step,                   # resolution of (float) rings, when converting to int
     #imglinks,               # boolean on whether or not to create links to original images
     allone,                 # set all values to one for non-background
+    cp_ann_imgs,            # hack to make directory of only images for which annotations exist
     i,                      # index of which meta file we'll read from
     height=512, width=384):  # image dimensions
-    global all_colors
+    global all_colors, ann_img_dir
 
     meta_file = meta_file_list[i]
     col_names = ['cx', 'cy', 'a', 'b', 'angle', 'rings']
@@ -54,6 +56,13 @@ def handle_one_file(meta_file_list, # list of all the csv files
     # cv2.imwrite(str(mask_path), img)  Don't write as cv2, write as PIL
     pil_image = Image.fromarray(img)
     pil_image = pil_image.save(str(mask_path))
+
+
+    if cp_ann_imgs:
+        src_img = meta_to_img_path(meta_file)
+        dest_img = ann_img_dir+os.path.basename(src_img)
+        shutil.copyfile(src_img, dest_img)
+
     return img
 
 
@@ -61,26 +70,28 @@ def handle_one_file(meta_file_list, # list of all the csv files
 @call_parse
 def gen_masks(
     allone:Param("All objects get assigned to class 1", store_true),
+    cp_ann_imgs:Param("make directory of only images for which annotations exist (to annotated_images/)", store_true),
     files:Param("Wildcard name for all CSV files to edit", str)='annotations/*.csv',
     maskdir:Param("Directory to write segmentation masks to",str)='masks/',
-    step:Param("Step size / resolution / precision of ring count",float)=0.5,
+    step:Param("Step size / resolution / precision of ring count",float)=1,
     ):
     "Generate segmentation masks for all annotations"
-    global all_colors
+    global all_colors, ann_img_dir
 
     mkdir_if_needed(maskdir)
+    if cp_ann_imgs: mkdir_if_needed(ann_img_dir)
 
     files = ''.join(files)
     meta_file_list = sorted(glob.glob(files))
 
-    parallel = False  # can leave off. it's not that slow, really
+    parallel = True  # could leave off. it's not that slow, really
     if not parallel:
         for i in range(len(meta_file_list)):
-            handle_one_file(meta_file_list, maskdir, step, allone, i)
+            handle_one_file(meta_file_list, maskdir, step, allone, cp_ann_imgs,i)
         print("all_colors = ",sorted(list(all_colors))) # Very handy
     else:
         # parallel processing
-        wrapper = partial(handle_one_file, meta_file_list, maskdir, step, allone)
+        wrapper = partial(handle_one_file, meta_file_list, maskdir, step, allone, cp_ann_imgs)
         pool = mp.Pool(mp.cpu_count())
         results = pool.map(wrapper, range(len(meta_file_list)))
         pool.close()

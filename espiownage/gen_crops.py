@@ -37,7 +37,7 @@ def handle_one_file(meta_file_list, # list of all the csv files
         if (rings > 0):
             bb = ellipse_to_bbox(cx, cy, a, b, angle)
             img_cropped = crop_to_bbox(img, bb)
-            out_file = outdir+'/'+str(Path(meta_file).stem)+f"_{bb[0]}_{bb[1]}_{bb[2]}_{bb[3]}.png"
+            out_file = outdir+'/'+str(Path(meta_file).stem)+f"_{bb[0]}_{bb[1]}_{bb[2]}_{bb[3]}_{rings}.png"
             #print(f"   {out_file}",flush=True)
             img_cropped.save(out_file)
     return
