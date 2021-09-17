@@ -102,12 +102,11 @@ def ellipse_to_bbox(
     ):
     "converts ellipse to bounding box"
     rad = np.radians(angle_deg)
-    delta_x = np.sqrt(a**2 * np.cos(rad)**2 + b**2 * np.sin(rad)**2 )
-    delta_y = np.sqrt(a**2 * np.sin(rad)**2 + b**2 * np.cos(rad)**2 )
-    xmin, ymin = cx - delta_x,  cy - delta_y
-    xmax, ymax = cx + delta_x,  cy + delta_y
-    # just a bit of error-correction code
-    if (xmin > xmax):
+    a2, b2, cos2, sin2 = [x**2 for x in [a, b, np.cos(rad), np.sin(rad)]]
+    delta_x, delta_y = np.sqrt(a2*cos2 + b2*sin2), np.sqrt(a2*sin2 + b2*cos2)
+    xmin, xmax = cx - delta_x,  cx + delta_x
+    ymin, ymax = cy - delta_y,  cy + delta_y
+    if (xmin > xmax):  # just a bit of error-correction code
         xmin, xmax = xmax, xmin   # swap
     if (ymin > ymax):
         ymin, ymax = ymax, ymin  # swap
