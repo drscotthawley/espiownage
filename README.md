@@ -59,6 +59,8 @@ and then we'll each edit our own copy just to avoid...confusion.
 ## Console Scripts:
 These can all be run from the command line / terminal:
 
+### ellipse_editor
+
 ```python
 !ellipse_editor -h
 ```
@@ -85,6 +87,8 @@ ellipse_editor --files=annotations_yourlastname/06241902*.csv
 ```
 or a range of annotations, as in `ellipse editor --files=annotations_yourlastname/06241902_proc_001*.csv`
 
+### gen_masks
+
 ```python
 !gen_masks -h
 ```
@@ -106,6 +110,8 @@ or a range of annotations, as in `ellipse editor --files=annotations_yourlastnam
                          1)
 
 
+### gen_bboxes
+
 ```python
 !gen_bboxes -h
 ```
@@ -123,7 +129,7 @@ or a range of annotations, as in `ellipse editor --files=annotations_yourlastnam
                          precision of ring count (default: 0.5)
 
 
-### generate cropped images of antinodes
+### gen_crops
 
 ```python
 !gen_crops -h
@@ -140,7 +146,7 @@ or a range of annotations, as in `ellipse editor --files=annotations_yourlastnam
       --outdir OUTDIR  Directory to write output cropped images to (default: crops/)
 
 
-### generate most recent(ly edited) annotations
+### grab_recent
 
 ```python
 !grab_recent -h
@@ -154,6 +160,8 @@ or a range of annotations, as in `ellipse editor --files=annotations_yourlastnam
       --dest DEST  Directory to write new annotations to (default:
                    recent_annotations)
 
+
+### gen_fake
 
 ```python
 !gen_fake -h
