@@ -33,7 +33,7 @@ And then you want/need to update `pip` in case it gave you an ancient version:
 python3 -m pip install pip --upgrade
 ```
 
-### Then to install this package all you do is...
+### Pip install
 
 ```bash
 pip install espiownage
