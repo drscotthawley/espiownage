@@ -13,6 +13,9 @@ entries:
       title: espiownage core
       url: core.html
     - output: web,pdf
+      title: Console Scripts
+      url: script_doc.html
+    - output: web,pdf
       title: IceVision Bboxes - Real Data
       url: IceVision-on-espiownage-cleaner.html
     - output: web,pdf
