@@ -6,6 +6,7 @@
     "IceVision Bboxes - Real Data": "IceVision-on-espiownage-cleaner.html",
     "IceVision Bboxes - OBPR - CycleGAN Data": "IceVision-on-espiownage-cyclegan-obpr.html",
     "IceVision Bboxes - CycleGAN Data": "IceVision-on-espiownage-cyclegan.html",
+    "IceVision Bboxes - Pre-Cleaned Real Data": "IceVision-on-espiownage-preclean.html",
     "Counting Rings in Cropped Images - CycleGAN Data": "count_in_crops_cyclegan.html",
     "Counting Rings in Cropped Images - Real Data": "count_in_crops_real.html",
     "segmentation \"all one\" - real data": "seg_allone_real.html",
