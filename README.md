@@ -56,8 +56,25 @@ cp -r annotations annotations_yourlastname
 and then we'll each edit our own copy just to avoid...confusion. 
 > *Note:If you don't have access to the real data,* you can still grab the [fake SPNet data](https://zenodo.org/record/4445434) and then, for each of those datasets: Move (or symlink) all the images to a directory called `images/`, and all the `.csv` files to a directory called `annotations/`, and proceed.
 
+## Console Scripts:
+
 ### ellipse editor
 
+```python
+!ellipse_editor -h
+```
+
+    usage: ellipse_editor [-h] [--files FILES] [--imgbank IMGBANK]
+    
+    optional arguments:
+      -h, --help         show this help message and exit
+      --files FILES      Wildcard name for all CSV files to edit (default:
+                         annotations/*.csv)
+      --imgbank IMGBANK  Directory where all the (unlabeled) images are (default:
+                         images/)
+
+
+**Examples:**
 ```bash
 ellipse_editor --files=annotations_yourlastname/*.csv
 ```
@@ -70,10 +87,94 @@ ellipse_editor --files=annotations_yourlastname/06241902*.csv
 or a range of annotations, as in `ellipse editor --files=annotations_yourlastname/06241902_proc_001*.csv`
 
 ### generate segmentation masks
-...from annotations:
-```bash
-gen_masks --files=annotations/*.csv
+
+```python
+!gen_masks -h
 ```
+
+    usage: gen_masks [-h] [--allone] [--cp_ann_imgs] [--files FILES]
+                     [--maskdir MASKDIR] [--step STEP]
+    
+    Generate segmentation masks for all annotations
+    
+    optional arguments:
+      -h, --help         show this help message and exit
+      --allone           All objects get assigned to class 1 (default: False)
+      --cp_ann_imgs      make directory of only images for which annotations exist
+                         (to annotated_images/) (default: False)
+      --files FILES      Wildcard name for all CSV files to edit (default:
+                         annotations/*.csv)
+      --maskdir MASKDIR  Directory to write segmentation masks to (default: masks/)
+      --step STEP        Step size / resolution / precision of ring count (default:
+                         1)
+
+
+### generate bounding boxes
+
+```python
+!gen_bboxes -h
+```
+
+    usage: gen_bboxes [-h] [--reg] [--files FILES] [--bboxdir BBOXDIR] [--step STEP]
+    
+    optional arguments:
+      -h, --help         show this help message and exit
+      --reg              Set this for regression model (1 class, no steps) (default:
+                         False)
+      --files FILES      Wildcard name for all (ellipse) CSV files to read (default:
+                         annotations/*.csv)
+      --bboxdir BBOXDIR  Directory to write bboxes to (default: bboxes)
+      --step STEP        For classification model: Step size / resolution /
+                         precision of ring count (default: 0.5)
+
+
+### generate cropped images of antinodes
+
+```python
+!gen_crops -h
+```
+
+    usage: gen_crops [-h] [--files FILES] [--outdir OUTDIR]
+    
+    Generate cropped images for all annotations
+    
+    optional arguments:
+      -h, --help       show this help message and exit
+      --files FILES    Wildcard name for all CSV files to edit (default:
+                       annotations/*.csv)
+      --outdir OUTDIR  Directory to write output cropped images to (default: crops/)
+
+
+### generate most recent(ly edited) annotations
+
+```python
+!grab_recent -h
+```
+
+    usage: grab_recent [-h] [--dirs DIRS] [--dest DEST]
+    
+    optional arguments:
+      -h, --help   show this help message and exit
+      --dirs DIRS  annotation directories check (default: annotations*)
+      --dest DEST  Directory to write new annotations to (default:
+                   recent_annotations)
+
+
+### generate fake data
+
+```python
+!gen_fake -h
+```
+
+    usage: gen_fake [-h] [--n N] [--outdir OUTDIR]
+    
+    Generates fake ESPI-like images
+    
+    optional arguments:
+      -h, --help       show this help message and exit
+      --n N            Number of images to generate (default: 2000)
+      --outdir OUTDIR  Directory to write to (default: espiownage-fake)
+
 
 ## Contributing / Development 
 

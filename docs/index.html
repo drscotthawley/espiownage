@@ -91,19 +91,285 @@ I like to put my environments in <code>~/envs</code>:</p>
 <p>and then we'll each edit our own copy just to avoid...confusion.</p>
 <blockquote><p><em>Note:If you don't have access to the real data,</em> you can still grab the <a href="https://zenodo.org/record/4445434">fake SPNet data</a> and then, for each of those datasets: Move (or symlink) all the images to a directory called <code>images/</code>, and all the <code>.csv</code> files to a directory called <code>annotations/</code>, and proceed.</p>
 </blockquote>
-<h3 id="ellipse-editor">ellipse editor<a class="anchor-link" href="#ellipse-editor"> </a></h3><div class="highlight"><pre><span></span>ellipse_editor --files<span class="o">=</span>annotations_yourlastname/*.csv
+<h2 id="Console-Scripts:">Console Scripts:<a class="anchor-link" href="#Console-Scripts:"> </a></h2><h3 id="ellipse-editor">ellipse editor<a class="anchor-link" href="#ellipse-editor"> </a></h3>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>ellipse_editor -h
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>usage: ellipse_editor [-h] [--files FILES] [--imgbank IMGBANK]
+
+optional arguments:
+  -h, --help         show this help message and exit
+  --files FILES      Wildcard name for all CSV files to edit (default:
+                     annotations/*.csv)
+  --imgbank IMGBANK  Directory where all the (unlabeled) images are (default:
+                     images/)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>Examples:</strong></p>
+<div class="highlight"><pre><span></span>ellipse_editor --files<span class="o">=</span>annotations_yourlastname/*.csv
 </pre></div>
 <p>See <code>ellipse_editor -h</code> for command-line options.   You can, for example, edit only one strike's worth of data by running</p>
 <div class="highlight"><pre><span></span>ellipse_editor --files<span class="o">=</span>annotations_yourlastname/06241902*.csv
 </pre></div>
 <p>or a range of annotations, as in <code>ellipse editor --files=annotations_yourlastname/06241902_proc_001*.csv</code></p>
-<h3 id="generate-segmentation-masks">generate segmentation masks<a class="anchor-link" href="#generate-segmentation-masks"> </a></h3><p>...from annotations:</p>
-<div class="highlight"><pre><span></span>gen_masks --files<span class="o">=</span>annotations/*.csv
+<h3 id="generate-segmentation-masks">generate segmentation masks<a class="anchor-link" href="#generate-segmentation-masks"> </a></h3>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>gen_masks -h
 </pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>usage: gen_masks [-h] [--allone] [--cp_ann_imgs] [--files FILES]
+                 [--maskdir MASKDIR] [--step STEP]
+
+Generate segmentation masks for all annotations
+
+optional arguments:
+  -h, --help         show this help message and exit
+  --allone           All objects get assigned to class 1 (default: False)
+  --cp_ann_imgs      make directory of only images for which annotations exist
+                     (to annotated_images/) (default: False)
+  --files FILES      Wildcard name for all CSV files to edit (default:
+                     annotations/*.csv)
+  --maskdir MASKDIR  Directory to write segmentation masks to (default: masks/)
+  --step STEP        Step size / resolution / precision of ring count (default:
+                     1)
+</pre>
+</div>
+</div>
 
 </div>
 </div>
+
 </div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="generate-bounding-boxes">generate bounding boxes<a class="anchor-link" href="#generate-bounding-boxes"> </a></h3>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>gen_bboxes -h
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>usage: gen_bboxes [-h] [--reg] [--files FILES] [--bboxdir BBOXDIR] [--step STEP]
+
+optional arguments:
+  -h, --help         show this help message and exit
+  --reg              Set this for regression model (1 class, no steps) (default:
+                     False)
+  --files FILES      Wildcard name for all (ellipse) CSV files to read (default:
+                     annotations/*.csv)
+  --bboxdir BBOXDIR  Directory to write bboxes to (default: bboxes)
+  --step STEP        For classification model: Step size / resolution /
+                     precision of ring count (default: 0.5)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="generate-cropped-images-of-antinodes">generate cropped images of antinodes<a class="anchor-link" href="#generate-cropped-images-of-antinodes"> </a></h3>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>gen_crops -h
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>usage: gen_crops [-h] [--files FILES] [--outdir OUTDIR]
+
+Generate cropped images for all annotations
+
+optional arguments:
+  -h, --help       show this help message and exit
+  --files FILES    Wildcard name for all CSV files to edit (default:
+                   annotations/*.csv)
+  --outdir OUTDIR  Directory to write output cropped images to (default: crops/)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="generate-most-recent(ly-edited)-annotations">generate most recent(ly edited) annotations<a class="anchor-link" href="#generate-most-recent(ly-edited)-annotations"> </a></h3>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>grab_recent -h
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>usage: grab_recent [-h] [--dirs DIRS] [--dest DEST]
+
+optional arguments:
+  -h, --help   show this help message and exit
+  --dirs DIRS  annotation directories check (default: annotations*)
+  --dest DEST  Directory to write new annotations to (default:
+               recent_annotations)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="generate-fake-data">generate fake data<a class="anchor-link" href="#generate-fake-data"> </a></h3>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>gen_fake -h
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>usage: gen_fake [-h] [--n N] [--outdir OUTDIR]
+
+Generates fake ESPI-like images
+
+optional arguments:
+  -h, --help       show this help message and exit
+  --n N            Number of images to generate (default: 2000)
+  --outdir OUTDIR  Directory to write to (default: espiownage-fake)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Contributing-/-Development">Contributing / Development<a class="anchor-link" href="#Contributing-/-Development"> </a></h2><p>You'll want to install more things:</p>
