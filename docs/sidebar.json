@@ -2,7 +2,9 @@
   "espiownage": {
     "Overview": "/",
     "espiownage core": "core.html",
-    "Counting Rings in Cropped Images": "count_in_crops.html",
+    "IceVision Bboxes - Real Data": "IceVision-on-espiownage-cleaner.html",
+    "# IceVision Bboxes - CycleGAN Data": "IceVision-on-espiownage-cyclegan.html",
+    "Counting Rings in Cropped Images - Real Data": "count_in_crops_real.html",
     "segmentation \"all one\" - real data": "seg_allone_real.html",
     "segmentation classification - cyclegan": "seg_class_cyclegan.html",
     "segmentation regression - camvid test": "seg_reg_camvid.html"
