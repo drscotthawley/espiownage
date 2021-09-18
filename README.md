@@ -57,8 +57,7 @@ and then we'll each edit our own copy just to avoid...confusion.
 > *Note:If you don't have access to the real data,* you can still grab the [fake SPNet data](https://zenodo.org/record/4445434) and then, for each of those datasets: Move (or symlink) all the images to a directory called `images/`, and all the `.csv` files to a directory called `annotations/`, and proceed.
 
 ## Console Scripts:
-
-### ellipse editor
+These can all be run from the command line / terminal:
 
 ```python
 !ellipse_editor -h
@@ -86,8 +85,6 @@ ellipse_editor --files=annotations_yourlastname/06241902*.csv
 ```
 or a range of annotations, as in `ellipse editor --files=annotations_yourlastname/06241902_proc_001*.csv`
 
-### generate segmentation masks
-
 ```python
 !gen_masks -h
 ```
@@ -108,8 +105,6 @@ or a range of annotations, as in `ellipse editor --files=annotations_yourlastnam
       --step STEP        Step size / resolution / precision of ring count (default:
                          1)
 
-
-### generate bounding boxes
 
 ```python
 !gen_bboxes -h
@@ -159,8 +154,6 @@ or a range of annotations, as in `ellipse editor --files=annotations_yourlastnam
       --dest DEST  Directory to write new annotations to (default:
                    recent_annotations)
 
-
-### generate fake data
 
 ```python
 !gen_fake -h
