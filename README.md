@@ -61,6 +61,22 @@ These can all be run from the command line / terminal:
 
 ### ellipse_editor
 
+
+<h4 id="ellipse_editor" class="doc_header"><code>ellipse_editor</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/ellipse_editor.py#L404" class="source_link" style="float:right">[source]</a></h4>
+
+> <code>ellipse_editor</code>(**`files`**:"Wildcard name for all CSV files to edit"=*`'annotations/*.csv'`*, **`imgbank`**:"Directory where all the (unlabeled) images are"=*`'images/'`*)
+
+
+
+**Parameters:**
+
+
+ - **`files`** : *`str <Wildcard name for all CSV files to edit>`*, *optional*
+
+ - **`imgbank`** : *`str <Directory where all the (unlabeled) images are>`*, *optional*
+
+
+
 ```python
 !ellipse_editor -h
 ```
@@ -89,6 +105,28 @@ or a range of annotations, as in `ellipse editor --files=annotations_yourlastnam
 
 ### gen_masks
 
+
+<h4 id="gen_masks" class="doc_header"><code>gen_masks</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/gen_masks.py#L70" class="source_link" style="float:right">[source]</a></h4>
+
+> <code>gen_masks</code>(**`allone`**:"All objects get assigned to class 1", **`cp_ann_imgs`**:"make directory of only images for which annotations exist (to annotated_images/)", **`files`**:"Wildcard name for all CSV files to edit"=*`'annotations/*.csv'`*, **`maskdir`**:"Directory to write segmentation masks to"=*`'masks/'`*, **`step`**:"Step size / resolution / precision of ring count"=*`1`*)
+
+Generate segmentation masks for all annotations
+
+**Parameters:**
+
+
+ - **`allone`** : *`<All objects get assigned to class 1>`*
+
+ - **`cp_ann_imgs`** : *`<make directory of only images for which annotations exist (to annotated_images/)>`*
+
+ - **`files`** : *`str <Wildcard name for all CSV files to edit>`*, *optional*
+
+ - **`maskdir`** : *`str <Directory to write segmentation masks to>`*, *optional*
+
+ - **`step`** : *`float <Step size / resolution / precision of ring count>`*, *optional*
+
+
+
 ```python
 !gen_masks -h
 ```
@@ -112,6 +150,27 @@ or a range of annotations, as in `ellipse editor --files=annotations_yourlastnam
 
 ### gen_bboxes
 
+
+<h4 id="gen_bboxes" class="doc_header"><code>gen_bboxes</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/gen_bboxes.py#L116" class="source_link" style="float:right">[source]</a></h4>
+
+> <code>gen_bboxes</code>(**`reg`**:"Set this for regression model (1 class, no steps)", **`files`**:"Wildcard name for all (ellipse) CSV files to read"=*`'annotations/*.csv'`*, **`bboxdir`**:"Directory to write bboxes to"=*`'bboxes'`*, **`step`**:"For classification model: Step size / resolution / precision of ring count"=*`0.5`*)
+
+
+
+**Parameters:**
+
+
+ - **`reg`** : *`<Set this for regression model (1 class, no steps)>`*
+
+ - **`files`** : *`str <Wildcard name for all (ellipse) CSV files to read>`*, *optional*	<p>obpr:Param("Set this for one box per ring", store_true),</p>
+
+
+ - **`bboxdir`** : *`str <Directory to write bboxes to>`*, *optional*
+
+ - **`step`** : *`float <For classification model: Step size / resolution / precision of ring count>`*, *optional*
+
+
+
 ```python
 !gen_bboxes -h
 ```
@@ -131,6 +190,22 @@ or a range of annotations, as in `ellipse editor --files=annotations_yourlastnam
 
 ### gen_crops
 
+
+<h4 id="gen_crops" class="doc_header"><code>gen_crops</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/gen_crops.py#L47" class="source_link" style="float:right">[source]</a></h4>
+
+> <code>gen_crops</code>(**`files`**:"Wildcard name for all CSV files to edit"=*`'annotations/*.csv'`*, **`outdir`**:"Directory to write output cropped images to"=*`'crops/'`*)
+
+Generate cropped images for all annotations
+
+**Parameters:**
+
+
+ - **`files`** : *`str <Wildcard name for all CSV files to edit>`*, *optional*
+
+ - **`outdir`** : *`str <Directory to write output cropped images to>`*, *optional*
+
+
+
 ```python
 !gen_crops -h
 ```
@@ -148,6 +223,22 @@ or a range of annotations, as in `ellipse editor --files=annotations_yourlastnam
 
 ### grab_recent
 
+
+<h4 id="grab_recent" class="doc_header"><code>grab_recent</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/grab_recent.py#L18" class="source_link" style="float:right">[source]</a></h4>
+
+> <code>grab_recent</code>(**`dirs`**:"annotation directories check"=*`'annotations*'`*, **`dest`**:"Directory to write new annotations to"=*`'recent_annotations'`*)
+
+
+
+**Parameters:**
+
+
+ - **`dirs`** : *`str <annotation directories check>`*, *optional*
+
+ - **`dest`** : *`str <Directory to write new annotations to>`*, *optional*
+
+
+
 ```python
 !grab_recent -h
 ```
@@ -162,6 +253,22 @@ or a range of annotations, as in `ellipse editor --files=annotations_yourlastnam
 
 
 ### gen_fake
+
+
+<h4 id="gen_fake" class="doc_header"><code>gen_fake</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/gen_fake.py#L265" class="source_link" style="float:right">[source]</a></h4>
+
+> <code>gen_fake</code>(**`n`**:"Number of images to generate"=*`2000`*, **`outdir`**:"Directory to write to"=*`'espiownage-fake'`*)
+
+Generates fake ESPI-like images
+
+**Parameters:**
+
+
+ - **`n`** : *`int <Number of images to generate>`*, *optional*
+
+ - **`outdir`** : *`str <Directory to write to>`*, *optional*
+
+
 
 ```python
 !gen_fake -h
