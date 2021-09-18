@@ -4,6 +4,7 @@
     "espiownage core": "core.html",
     "Console Scripts": "script_doc.html",
     "IceVision Bboxes - Real Data": "IceVision-on-espiownage-cleaner.html",
+    "IceVision Bboxes - OBPR - CycleGAN Data": "IceVision-on-espiownage-cyclegan-obpr.html",
     "IceVision Bboxes - CycleGAN Data": "IceVision-on-espiownage-cyclegan.html",
     "Counting Rings in Cropped Images - CycleGAN Data": "count_in_crops_cyclegan.html",
     "Counting Rings in Cropped Images - Real Data": "count_in_crops_real.html",
