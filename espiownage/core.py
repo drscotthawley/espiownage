@@ -136,4 +136,13 @@ def crop_to_bbox(
     if clip:
         xmin, xmax = np.clip(xmin, 0, width),  np.clip(xmax, 0, width)
         ymin, ymax = np.clip(ymin, 0, height), np.clip(ymax, 0, height)
-    return img.crop( (int(xmin), int(ymin), int(xmax), int(ymax)))  # .crop() is PIL Image.crop()
+    # check ordering
+    if (xmin > xmax): xmin, xmax = xmax, xmin  # error correction, swap
+    if (ymin > ymax): ymin, ymax = ymax, ymin  # swap
+    crop_bb = (int(xmin), int(ymin), int(xmax), int(ymax))
+
+    # Image.crop does not like zero-size dimensions but its error message is cryptic
+    if (xmax-xmin > 0) and (ymax-ymin > 0): return img.crop(crop_bb)
+    else:
+        print(f"crop_to_bbox: Error: zero-dim crop request, crop_bb = {crop_bb}. Returning None.")
+        return None
