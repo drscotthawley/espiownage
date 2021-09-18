@@ -16,8 +16,11 @@ entries:
       title: IceVision Bboxes - Real Data
       url: IceVision-on-espiownage-cleaner.html
     - output: web,pdf
-      title: '# IceVision Bboxes - CycleGAN Data'
+      title: IceVision Bboxes - CycleGAN Data
       url: IceVision-on-espiownage-cyclegan.html
+    - output: web,pdf
+      title: Counting Rings in Cropped Images - CycleGAN Data
+      url: count_in_crops_cyclegan.html
     - output: web,pdf
       title: Counting Rings in Cropped Images - Real Data
       url: count_in_crops_real.html
