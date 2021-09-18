@@ -13,7 +13,7 @@ index = {"mkdir_if_needed": "00_core.ipynb",
          "crop_to_bbox": "00_core.ipynb"}
 
 modules = ["core.py",
-           "None.py"]
+           "index.py"]
 
 doc_url = "https://drscotthawley.github.io/espiownage/"
 
