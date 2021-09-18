@@ -50,7 +50,7 @@ def gen_coco_json(meta_file_list, bboxdir, step, reg, maxrings=11):
             bbox = ellipse_to_bbox(cx, cy, a, b, angle, coco=True)
             rings = round(float(row['rings']),2)
             assert rings <= maxrings
-            if rings > 0:
+            if (rings > 0) and (bbox is not None):
                 category_id = rings if reg else int(round(maxrings/step))
                 this_ann = {"image_id":image, "bbox": bbox, "category_id":category_id}
                 ann_list = ann_list + [this_ann]
@@ -92,17 +92,19 @@ def gen_long_csv(
             if rings > 0:
                 if not obpr:
                     bbox = ellipse_to_bbox(cx, cy, a, b, angle, coco=False)
-                    label = rings if reg else  ring_float_to_class_int(rings, step=step)
-                    line_list = [image_file, width, height, label, bbox[0], bbox[1], bbox[2], bbox[3]]
-                    ann_list.append(line_list)
+                    if bbox is not None:
+                        label = rings if reg else  ring_float_to_class_int(rings, step=step)
+                        line_list = [image_file, width, height, label, bbox[0], bbox[1], bbox[2], bbox[3]]
+                        ann_list.append(line_list)
                 else:                           # one box per ring (rounded as integers)
                     rings_int, label = round(int(rings)), 'ring'
                     line_list = []
                     for i in range(rings_int,0,-1):  # counts down to 1, 0 is not included per Python norms
                         _a, _b = (i/rings_int)*a, (i/rings_int)*b
                         bbox = ellipse_to_bbox(cx, cy, _a, _b, angle, coco=False)
-                        line_list = ([image_file, width, height, label, bbox[0], bbox[1], bbox[2], bbox[3]])
-                        ann_list.append(line_list)
+                        if bbox is not None:
+                            line_list = ([image_file, width, height, label, bbox[0], bbox[1], bbox[2], bbox[3]])
+                            ann_list.append(line_list)
 
 
 
@@ -119,7 +121,7 @@ def gen_bboxes(
     #obpr:Param("Set this for one box per ring", store_true),
     files:Param("Wildcard name for all (ellipse) CSV files to read", str)='annotations/*.csv',
     bboxdir:Param("Directory to write bboxes to",str)='bboxes',
-    step:Param("For classification model: Step size / resolution / precision of ring count",float)=0.5,
+    step:Param("For classification model: Step size / resolution / precision of ring count",float)=1,
     ):
 
     mkdir_if_needed(bboxdir)

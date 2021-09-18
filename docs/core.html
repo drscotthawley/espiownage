@@ -554,7 +554,7 @@ nb_path: "nbs/00_core.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="ellipse_to_bbox" class="doc_header"><code>ellipse_to_bbox</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L94" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>ellipse_to_bbox</code>(<strong><code>cx</code></strong>:<code>float</code>, <strong><code>cy</code></strong>:<code>float</code>, <strong><code>a</code></strong>:<code>float</code>, <strong><code>b</code></strong>:<code>float</code>, <strong><code>angle_deg</code></strong>:<code>float</code>, <strong><code>coco</code></strong>=<em><code>False</code></em>, <strong><code>width</code></strong>=<em><code>512</code></em>, <strong><code>height</code></strong>=<em><code>384</code></em>, <strong><code>clip</code></strong>=<em><code>True</code></em>)</p>
+<h4 id="ellipse_to_bbox" class="doc_header"><code>ellipse_to_bbox</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L94" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>ellipse_to_bbox</code>(<strong><code>cx</code></strong>:<code>float</code>, <strong><code>cy</code></strong>:<code>float</code>, <strong><code>a</code></strong>:<code>float</code>, <strong><code>b</code></strong>:<code>float</code>, <strong><code>angle_deg</code></strong>:<code>float</code>, <strong><code>coco</code></strong>=<em><code>False</code></em>, <strong><code>width</code></strong>=<em><code>512</code></em>, <strong><code>height</code></strong>=<em><code>384</code></em>, <strong><code>clip</code></strong>=<em><code>True</code></em>, <strong><code>nozero</code></strong>=<em><code>True</code></em>)</p>
 </blockquote>
 <p>converts ellipse to bounding box</p>
 <p><strong>Parameters:</strong></p>
@@ -584,6 +584,9 @@ nb_path: "nbs/00_core.ipynb"
 </ul>
 <ul>
 <li><strong><code>clip</code></strong> : <em><code>&lt;class 'bool'&gt;</code></em>, <em>optional</em>  <p>clip values at max values of image width & height</p></li>
+</ul>
+<ul>
+<li><strong><code>nozero</code></strong> : <em><code>&lt;class 'bool'&gt;</code></em>, <em>optional</em>    <p>Lots of downstream apps hate zero-dimension bounding box. This returns None</p></li>
 </ul>
 
 </div>
@@ -638,7 +641,7 @@ nb_path: "nbs/00_core.ipynb"
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;matplotlib.image.AxesImage at 0x7feeb919bc10&gt;</pre>
+<pre>&lt;matplotlib.image.AxesImage at 0x7feeb921b5b0&gt;</pre>
 </div>
 
 </div>
@@ -701,7 +704,7 @@ nb_path: "nbs/00_core.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ellipse_to_bbox</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>  <span class="c1"># check for div by zero error</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ellipse_to_bbox</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>  <span class="c1"># check for (graceful handling of) errors</span>
 </pre></div>
 
     </div>
@@ -713,12 +716,10 @@ nb_path: "nbs/00_core.ipynb"
 
 <div class="output_area">
 
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>(0, 0, 0, 0)</pre>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>ellipse_to_bbox: Error: zero-dim bbox = (0, 0, 0, 0). Returning None.
+</pre>
 </div>
-
 </div>
 
 </div>
@@ -738,7 +739,7 @@ nb_path: "nbs/00_core.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="ring_float_to_class_int" class="doc_header"><code>ring_float_to_class_int</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L119" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>ring_float_to_class_int</code>(<strong><code>rings</code></strong>:<code>float</code>, <strong><code>step</code></strong>=<em><code>0.1</code></em>)</p>
+<h4 id="ring_float_to_class_int" class="doc_header"><code>ring_float_to_class_int</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L125" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>ring_float_to_class_int</code>(<strong><code>rings</code></strong>:<code>float</code>, <strong><code>step</code></strong>=<em><code>0.1</code></em>)</p>
 </blockquote>
 <p>Ring value rounded to classifier value; rounded to nearest step size</p>
 <p><strong>Parameters:</strong></p>
@@ -810,7 +811,7 @@ nb_path: "nbs/00_core.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="crop_to_bbox" class="doc_header"><code>crop_to_bbox</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L124" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>crop_to_bbox</code>(<strong><code>img</code></strong>, <strong><code>bbox</code></strong>, <strong><code>coco</code></strong>=<em><code>False</code></em>, <strong><code>width</code></strong>=<em><code>512</code></em>, <strong><code>height</code></strong>=<em><code>384</code></em>, <strong><code>clip</code></strong>=<em><code>True</code></em>)</p>
+<h4 id="crop_to_bbox" class="doc_header"><code>crop_to_bbox</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L130" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>crop_to_bbox</code>(<strong><code>img</code></strong>, <strong><code>bbox</code></strong>, <strong><code>coco</code></strong>=<em><code>False</code></em>, <strong><code>width</code></strong>=<em><code>512</code></em>, <strong><code>height</code></strong>=<em><code>384</code></em>, <strong><code>clip</code></strong>=<em><code>True</code></em>)</p>
 </blockquote>
 <p>Crops an image to bbox, returns cropped image</p>
 <p><strong>Parameters:</strong></p>
@@ -874,7 +875,7 @@ nb_path: "nbs/00_core.ipynb"
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;matplotlib.image.AxesImage at 0x7feeb918c430&gt;</pre>
+<pre>&lt;matplotlib.image.AxesImage at 0x7feeb92f4bb0&gt;</pre>
 </div>
 
 </div>

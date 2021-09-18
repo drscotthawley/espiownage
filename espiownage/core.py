@@ -100,6 +100,7 @@ def ellipse_to_bbox(
     coco=False, # COCO style bbox has last 2 nums as width & height of bbox
     width=512, height=384, # image dimensions for clipping
     clip=True, # clip values at max values of image width & height
+    nozero=True,  # Lots of downstream apps hate zero-dimension bounding box. This returns None
     ):
     "converts ellipse to bounding box"
     rad = np.radians(angle_deg)
@@ -113,7 +114,12 @@ def ellipse_to_bbox(
         xmin, xmax = np.clip(xmin, 0, width),  np.clip(xmax, 0, width)
         ymin, ymax = np.clip(ymin, 0, height), np.clip(ymax, 0, height)
     if coco: return [round(x, 2) for x in [xmin, ymin, xmax-xmin, ymax-ymin]] # coco is a list, floats are ok
-    return int(xmin), int(ymin), int(xmax), int(ymax)
+    bbox = int(xmin), int(ymin), int(xmax), int(ymax)
+    # Image.crop does not like zero-size dimensions but its error message is cryptic
+    if ((xmax-xmin > 0) and (ymax-ymin > 0)) or (not nozero): return bbox
+    else:
+        print(f"ellipse_to_bbox: Error: zero-dim bbox = {bbox}. Returning None.")
+        return None
 
 # Cell
 def ring_float_to_class_int(rings:float, step=0.1):

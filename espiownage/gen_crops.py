@@ -36,13 +36,11 @@ def handle_one_file(meta_file_list, # list of all the csv files
         a, b, angle = fix_abangle(a,b,angle)
         if (rings > 0):
             bb = ellipse_to_bbox(cx, cy, a, b, angle)
-            try:
+            if bb is not None:
                 img_cropped = crop_to_bbox(img, bb)
                 if img_cropped is not None:
                     out_file = outdir+'/'+str(Path(meta_file).stem)+f"_{bb[0]}_{bb[1]}_{bb[2]}_{bb[3]}_{rings}.png"
                     img_cropped.save(out_file)
-            except:
-                pass  # zero-length images don't get written
     return
 
 
