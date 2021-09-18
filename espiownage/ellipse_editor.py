@@ -60,6 +60,7 @@ from pathlib import Path
 from fastcore.script import *
 import re
 from espiownage.core import *
+from itertools import cycle
 
 
 
@@ -84,18 +85,16 @@ def poly_oval(cx, cy, a, b, angle=0, steps=100 ):
     """return an oval as coordinates suitable for create_polygon"""
 
     # angle is in degrees anti-clockwise, convert to radians
-    rotation = angle * math.pi / 180.0
+    rotation = angle * math.pi / 180.0  # overall angle of the ellipse
 
     point_list = []
 
     # create the oval as a list of points
     for i in range(steps):
 
-        # Calculate the angle for this step
-        # 360 degrees == 2 pi radians
-        theta = (math.pi * 2) * (float(i) / steps)
-        x1 = a * math.cos(theta)
-        y1 = b * math.sin(theta)
+        # Calculate the angle for this step: 360 degrees == 2 pi radians
+        theta = (math.pi * 2) * (float(i) / steps)  # theta is for points drawing the circumference of the ellipse
+        x1, y1 = a * math.cos(theta), b * math.sin(theta)
 
         # rotate x, y
         x = (x1 * math.cos(rotation)) + (y1 * math.sin(rotation))
@@ -107,12 +106,51 @@ def poly_oval(cx, cy, a, b, angle=0, steps=100 ):
     return point_list
 
 
+def interleave_lists(list1:list, list2:list):
+    "alternate between 1 and 2; if they're of different lengths, it keeps going with whatever's left in the longer one"
+    return [x for both in zip(cycle(list1), list2) for x in both]
+
+def dedup_list(li):
+    "remove duplicates while preserving order of first dup(non-dup?/orig?).  cf. https://stackoverflow.com/a/480227/4259243"
+    seen = set()
+    seen_add = seen.add
+    return [x for x in li if not (x in seen or seen_add(x))]
+
+
+def get_top_loss_list(
+    top_losses_dir,  # directory where top-losses info is stored
+    ):
+    "gets list of filenames with top losses for use with preferential ordering"
+    if (top_losses_dir==None) or (not os.path.exists(top_losses_dir)): return []
+    # slurp in any csv files we've got
+    # note they likely have different columns, and the loss values are not comparable
+    tldir_files_list = glob.glob(top_losses_dir+'/*.csv') # files in tl directory
+    top_loss_list = []
+    for tldir_file in tldir_files_list:
+        #print("top losses tldir_file = ",tldir_file)
+        df = pd.read_csv(tldir_file)
+        fnames = dedup_list(list(df["filename"]))
+        if [] == top_loss_list: top_loss_list = fnames
+        else: top_loss_list = interleave_lists(top_loss_list, fnames)
+    return dedup_list(top_loss_list)
+
 
 class EllipseEditor(tk.Frame):
     '''Edit ellipses for steelpan images'''
 
-    def __init__(self, parent, meta_file_list,img_bank='images/'):
+    def __init__(self, parent,  # tk class and parent window
+        meta_file_list,         # list of csv files to edi
+        img_bank='images/',     # where images are stored
+        top_losses=None,        # directory where top-losses info is stored
+        seq=True,               # ignore top losses and do sequential selection of frames (per existing annotations)
+        ):
         tk.Frame.__init__(self, parent)
+        self.meta_file_list = meta_file_list
+        self.img_bank = img_bank
+        self.top_loss_list = get_top_loss_list(top_losses)
+        if self.top_loss_list == []: seq = True
+        if not seq: self.meta_file_list = combine_file_and_tl_lists(self.meta_file_list, self.top_loss_list)
+        self.seq = seq
 
         # create a canvas
         self.width, self.height = 512, 384   # size of images
@@ -120,12 +158,10 @@ class EllipseEditor(tk.Frame):
         self.readout = 700                   # width for additional annotation text
         self.canvas = tk.Canvas(width=self.width + self.readout, height=20+2*self.height )
         self.canvas.pack(fill="both", expand=True)
-        self.file_index = 0
-        self.meta_file_list = meta_file_list
-        self.meta_file = meta_file_list[self.file_index]
-        self.img_bank = img_bank
-        self.img_file = str(meta_to_img_path(self.meta_file, img_bank=self.img_bank))
 
+        self.file_index = 0                 # TODO: change to grab from top losses
+        self.meta_file = meta_file_list[self.file_index]
+        self.img_file = str(meta_to_img_path(self.meta_file, img_bank=self.img_bank))
 
         self.color = "green"
 
@@ -199,7 +235,7 @@ class EllipseEditor(tk.Frame):
 
 
     def _create_token(self, coord, axes, angle, rings, color):
-        '''Create a token at the given coordinate in the given color'''
+        '''Create a tk token at the given coordinate in the given color'''
         self._numtokens += 1
         (x,y) = coord
         (a,b) = axes
@@ -233,8 +269,8 @@ class EllipseEditor(tk.Frame):
         print("Saving file ",self.meta_file)
         # TODO: add code to enforce a > b (and fix angle)
         self.df.to_csv(self.meta_file,index=False,header=None)
-    def on_rightarrow(self,event):
-        self.file_index += 1
+    def on_rightarrow(self,event):               # right arrow on keyboard
+        self.file_index += 1                     # TODO: grab from top_losses
         if (self.file_index >= len(self.meta_file_list)):
             self.file_index = 0
         self.load_new_files()
@@ -403,8 +439,10 @@ class EllipseEditor(tk.Frame):
 
 @call_parse
 def ellipse_editor(
+    seq:Param("Ignore top-loss ordering and do sequential ordering", store_true),
     files:Param("Wildcard name for all CSV files to edit", str)='annotations/*.csv',
     imgbank:Param("Directory where all the (unlabeled) images are",str)='images/',
+    tl:Param("Directory where 'top losses' info is stored'",str)='top_losses/',
     ):
     global img_bank
     # typical command-line calling sequence:
@@ -429,5 +467,5 @@ def ellipse_editor(
 
     root = tk.Tk()
     root.title('espiownage: ellipse_editor')
-    EllipseEditor(root, meta_file_list, img_bank=img_bank).pack(fill="both", expand=True)
+    EllipseEditor(root, meta_file_list, img_bank=img_bank, top_losses=tl, seq=seq).pack(fill="both", expand=True)
     root.mainloop()

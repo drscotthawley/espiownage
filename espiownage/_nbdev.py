@@ -5,6 +5,8 @@ __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 index = {"mkdir_if_needed": "00_core.ipynb",
          "meta_to_img_path": "00_core.ipynb",
          "meta_to_mask_path": "00_core.ipynb",
+         "meta_from_str": "00_core.ipynb",
+         "combine_file_and_tl_lists": "00_core.ipynb",
          "fix_abangle": "00_core.ipynb",
          "meta_to_df": "00_core.ipynb",
          "draw_ellipse": "00_core.ipynb",
