@@ -2,6 +2,7 @@
   "espiownage": {
     "Overview": "/",
     "espiownage core": "core.html",
+    "Counting Rings in Cropped Images": "count_in_crops.html",
     "segmentation \"all one\" - real data": "seg_allone_real.html",
     "segmentation classification - cyclegan": "seg_class_cyclegan.html",
     "segmentation regression - camvid test": "seg_reg_camvid.html"

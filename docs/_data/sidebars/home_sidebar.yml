@@ -13,6 +13,9 @@ entries:
       title: espiownage core
       url: core.html
     - output: web,pdf
+      title: Counting Rings in Cropped Images
+      url: count_in_crops.html
+    - output: web,pdf
       title: segmentation "all one" - real data
       url: seg_allone_real.html
     - output: web,pdf
