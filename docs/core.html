@@ -1054,11 +1054,6 @@ out =  [&#39;annotations_hawley/06240907_proc_01001.csv&#39;, &#39;annotations_h
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">bb_bad</span> <span class="o">=</span> <span class="n">crop_to_bbox</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="p">[</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">])</span>
-
-<span class="k">try</span><span class="p">:</span>
-    <span class="n">imshow</span><span class="p">(</span><span class="n">bb_bad</span><span class="p">)</span>
-<span class="k">except</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">The attempted plot just crashed but we&#39;re moving on anyway...&quot;</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -1072,22 +1067,8 @@ out =  [&#39;annotations_hawley/06240907_proc_01001.csv&#39;, &#39;annotations_h
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>crop_to_bbox: Error: zero-dim crop request, crop_bb = (0, 0, 0, 10). Returning None.
-
-The attempted plot just crashed but we&#39;re moving on anyway...
 </pre>
 </div>
-</div>
-
-<div class="output_area">
-
-
-
-<div class="output_png output_subarea ">
-<img src="data:image/png;base64,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
-"
->
-</div>
-
 </div>
 
 </div>
