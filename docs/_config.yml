@@ -3,7 +3,9 @@ output: web
 topnav_title: espiownage
 site_title: espiownage
 company_name: Scott H. Hawley
+twitter_username: drscotthawley
 description: Ownage of ESPI inference
+url: https://drscotthawley.github.io/espiownage
 # Set to false to disable KaTeX math
 use_math: true
 # Add Google analytics id if you have one and want to use it here
@@ -23,7 +25,7 @@ exclude:
   - .idea/
   - .gitignore
   - vendor
- 
+
 exclude: [vendor]
 
 highlighter: rouge
@@ -64,6 +66,6 @@ sidebars:
 
 plugins:
     - jekyll-remote-theme
-    
+
 remote_theme: fastai/nbdev-jekyll-theme
 baseurl: /espiownage/
