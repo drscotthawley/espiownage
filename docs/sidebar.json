@@ -5,18 +5,18 @@
     "Console Scripts": "script_doc.html"
    },
    "Ring Counts": {
-       "Counting Rings in Cropped Images - CycleGAN Data": "count_in_crops_cyclegan.html",
        "Counting Rings in Cropped Images - Real Data": "count_in_crops_real.html"
+       "Counting Rings in Cropped Images - CycleGAN Data": "count_in_crops_cyclegan.html",
    },
    "Segmentation": {
-       "Segmentation - CycleGAN Data (multiclass)": "seg_class_cyclegan.html",
        "Segmentation - Real Data (one class)": "seg_allone_real.html",
+       "Segmentation - CycleGAN Data (multiclass)": "seg_class_cyclegan.html",
        "Segmentation - Regression model - CAMVID test": "seg_reg_camvid.html"
    },
     "Bounding Boxes" : {
+        "Bounding Boxes - Real Data": "IceVision-on-espiownage-cleaner.html",
         "Bonding Boxes - CycleGAN Data -OBPR": "IceVision-on-espiownage-cyclegan-obpr.html",
         "Bonding Boxes - CycleGAN Data": "IceVision-on-espiownage-cyclegan.html",
-        "Bounding Boxes - Real Data": "IceVision-on-espiownage-cleaner.html",
         "Bounding Boxes - Pre-Cleaned Old Real Data": "IceVision-on-espiownage-preclean.html"
     }
 }
