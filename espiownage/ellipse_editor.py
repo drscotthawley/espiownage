@@ -241,7 +241,7 @@ class EllipseEditor(tk.Frame):
         for bbr in self.predringlist:
             cx, cy, ringstr = int((bbr[0]+bbr[2])/2), int((bbr[1]+bbr[3])/2), '{0:.1f}'.format(bbr[-1])
             #print("predicted ring counts: ",cx, cy, ringstr)
-            ringtext = self.canvas.create_text(cx, self.y0+cy-20, text=ringstr, anchor=tk.CENTER, font=tk.font.Font(size=15), fill="yellow")
+            ringtext = self.canvas.create_text(cx, self.y0+cy, text=ringstr, anchor=tk.CENTER, font=tk.font.Font(size=15), fill="yellow")
 
 
     def load_new_files(self):
