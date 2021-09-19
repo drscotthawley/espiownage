@@ -19,20 +19,20 @@ entries:
     title: espiownage
   - folderitems:
     - output: web,pdf
-      title: Counting Rings in Cropped Images - CycleGAN Data
-      url: count_in_crops_cyclegan.html
-    - output: web,pdf
       title: Counting Rings in Cropped Images - Real Data
       url: count_in_crops_real.html
+    - output: web,pdf
+      title: Counting Rings in Cropped Images - CycleGAN Data
+      url: count_in_crops_cyclegan.html
     output: web
     title: Ring Counts
   - folderitems:
     - output: web,pdf
-      title: Segmentation - CycleGAN Data (multiclass)
-      url: seg_class_cyclegan.html
-    - output: web,pdf
       title: Segmentation - Real Data (one class)
       url: seg_allone_real.html
+    - output: web,pdf
+      title: Segmentation - CycleGAN Data (one class)
+      url: seg_class_cyclegan.html
     - output: web,pdf
       title: Segmentation - Regression model - CAMVID test
       url: seg_reg_camvid.html
@@ -40,14 +40,14 @@ entries:
     title: Segmentation
   - folderitems:
     - output: web,pdf
+      title: Bounding Boxes - Real Data
+      url: IceVision-on-espiownage-cleaner.html
+    - output: web,pdf
       title: Bonding Boxes - CycleGAN Data -OBPR
       url: IceVision-on-espiownage-cyclegan-obpr.html
     - output: web,pdf
       title: Bonding Boxes - CycleGAN Data
       url: IceVision-on-espiownage-cyclegan.html
-    - output: web,pdf
-      title: Bounding Boxes - Real Data
-      url: IceVision-on-espiownage-cleaner.html
     - output: web,pdf
       title: Bounding Boxes - Pre-Cleaned Old Real Data
       url: IceVision-on-espiownage-preclean.html
