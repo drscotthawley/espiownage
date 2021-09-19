@@ -184,7 +184,7 @@ def crop_to_bbox(
 def acc_reg(inp, targ, bin_size=1):
     "Accuracy for regression: Are we within +/- bin_size?"
     inp,targ = flatten_check(inp,targ) # https://docs.fast.ai/metrics.html#flatten_check
-    where_correct = torch.abs(inp-targ) < bin_size
+    where_correct = (inp-targ).abs() < bin_size
     return where_correct.float().mean()
 
 # Cell
