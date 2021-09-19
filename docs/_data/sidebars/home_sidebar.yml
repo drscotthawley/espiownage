@@ -19,21 +19,6 @@ entries:
     title: espiownage
   - folderitems:
     - output: web,pdf
-      title: Bonding Boxes - CycleGAN Data -OBPR
-      url: IceVision-on-espiownage-cyclegan-obpr.html
-    - output: web,pdf
-      title: Bonding Boxes - CycleGAN Data
-      url: IceVision-on-espiownage-cyclegan.html
-    - output: web,pdf
-      title: Bounding Boxes - Real Data
-      url: IceVision-on-espiownage-cleaner.html
-    - output: web,pdf
-      title: Bounding Boxes - Pre-Cleaned Old Real Data
-      url: IceVision-on-espiownage-preclean.html
-    output: web
-    title: Bounding Boxes
-  - folderitems:
-    - output: web,pdf
       title: Counting Rings in Cropped Images - CycleGAN Data
       url: count_in_crops_cyclegan.html
     - output: web,pdf
@@ -53,5 +38,20 @@ entries:
       url: seg_reg_camvid.html
     output: web
     title: Segmentation
+  - folderitems:
+    - output: web,pdf
+      title: Bonding Boxes - CycleGAN Data -OBPR
+      url: IceVision-on-espiownage-cyclegan-obpr.html
+    - output: web,pdf
+      title: Bonding Boxes - CycleGAN Data
+      url: IceVision-on-espiownage-cyclegan.html
+    - output: web,pdf
+      title: Bounding Boxes - Real Data
+      url: IceVision-on-espiownage-cleaner.html
+    - output: web,pdf
+      title: Bounding Boxes - Pre-Cleaned Old Real Data
+      url: IceVision-on-espiownage-preclean.html
+    output: web
+    title: Bounding Boxes
   output: web
   title: Sidebar
