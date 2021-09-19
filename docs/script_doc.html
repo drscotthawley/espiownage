@@ -54,7 +54,7 @@ nb_path: "nbs/01_script_doc.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="ellipse_editor" class="doc_header"><code>ellipse_editor</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/ellipse_editor.py#L474" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>ellipse_editor</code>(<strong><code>seq</code></strong>:"Ignore top-loss ordering and do sequential ordering", <strong><code>files</code></strong>:"Wildcard name for all CSV files to edit"=<em>`'annotations/</em>.csv'<code>*, **</code>imgbank<code>**:"Directory where all the (unlabeled) images are"=*</code>'images/'<code>*, **</code>tl<code>**:"Directory where 'top losses' info is stored'"=*</code>'top_losses/'`*)</p>
+<h4 id="ellipse_editor" class="doc_header"><code>ellipse_editor</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/ellipse_editor.py#L514" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>ellipse_editor</code>(<strong><code>seq</code></strong>:"Ignore top-loss ordering and do sequential ordering", <strong><code>files</code></strong>:"Wildcard name for all CSV files to edit"=<em>`'annotations/</em>.csv'<code>*, **</code>imgbank<code>**:"Directory where all the (unlabeled) images are"=*</code>'images/'<code>*, **</code>tldir<code>**:"Directory where 'top losses' info is stored'"=*</code>'top_losses/'`*)</p>
 </blockquote>
 <p><strong>Parameters:</strong></p>
 <ul>
@@ -64,7 +64,7 @@ nb_path: "nbs/01_script_doc.ipynb"
 </li>
 <li><p><strong><code>imgbank</code></strong> : <em><code>str &lt;Directory where all the (unlabeled) images are&gt;</code></em>, <em>optional</em></p>
 </li>
-<li><p><strong><code>tl</code></strong> : <em><code>str &lt;Directory where 'top losses' info is stored'&gt;</code></em>, <em>optional</em></p>
+<li><p><strong><code>tldir</code></strong> : <em><code>str &lt;Directory where 'top losses' info is stored'&gt;</code></em>, <em>optional</em></p>
 </li>
 </ul>
 
@@ -80,7 +80,7 @@ nb_path: "nbs/01_script_doc.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>When available, the ellipse editor will show model predictions, such as segmentations masks (in purple):
+<p>When available, the ellipse editor will show model predictions ("top losses") such as segmentations masks (in purple) and ring counts (in yellow), to indicate differences between annotations and the model's predictions.  This can be used to guide the user's attention to annotations that may need revising, and/or as a gauge of the model's performaance.
 <img src="/espiownage/images/ellipse_editor_with_seg_masks.png" alt="ellipse editor with seg masks"></p>
 
 </div>
