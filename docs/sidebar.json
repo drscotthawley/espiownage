@@ -3,14 +3,20 @@
     "Overview": "/",
     "espiownage core": "core.html",
     "Console Scripts": "script_doc.html",
-    "IceVision Bboxes - Real Data": "IceVision-on-espiownage-cleaner.html",
-    "IceVision Bboxes - OBPR - CycleGAN Data": "IceVision-on-espiownage-cyclegan-obpr.html",
-    "IceVision Bboxes - CycleGAN Data": "IceVision-on-espiownage-cyclegan.html",
-    "IceVision Bboxes - Pre-Cleaned Real Data": "IceVision-on-espiownage-preclean.html",
-    "Counting Rings in Cropped Images - CycleGAN Data": "count_in_crops_cyclegan.html",
-    "Counting Rings in Cropped Images - Real Data": "count_in_crops_real.html",
-    "segmentation \"all one\" - real data": "seg_allone_real.html",
-    "segmentation classification - cyclegan": "seg_class_cyclegan.html",
-    "segmentation regression - camvid test": "seg_reg_camvid.html"
+    "Bounding Boxes" : {
+        "Bonding Boxes - CycleGAN Data -OBPR": "IceVision-on-espiownage-cyclegan-obpr.html",
+        "Bonding Boxes - CycleGAN Data": "IceVision-on-espiownage-cyclegan.html",
+        "Bounding Boxes - Real Data": "IceVision-on-espiownage-cleaner.html",
+        "Bounding Boxes - Pre-Cleaned Old Real Data": "IceVision-on-espiownage-preclean.html"
+    },
+    "Ring Counts": {
+        "Counting Rings in Cropped Images - CycleGAN Data": "count_in_crops_cyclegan.html",
+        "Counting Rings in Cropped Images - Real Data": "count_in_crops_real.html"
+    },
+    "Segmentation": {
+        "Segmentation - CycleGAN Data (multiclass)": "seg_class_cyclegan.html",
+        "Segmentation - Real Data (one class)": "seg_allone_real.html",
+        "Segmentation - Regression model - CAMVID test": "seg_reg_camvid.html"
+    }
   }
 }
