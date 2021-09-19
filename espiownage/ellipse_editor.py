@@ -50,7 +50,7 @@ from tkinter.simpledialog import askfloat
 import math
 import numpy as np
 import pandas as pd
-from PIL import Image, ImageTk
+from PIL import Image, ImageTk, ImageOps
 import tkinter.font
 import argparse
 import os
@@ -163,6 +163,10 @@ class EllipseEditor(tk.Frame):
         self.meta_file = meta_file_list[self.file_index]
         self.img_file = str(meta_to_img_path(self.meta_file, img_bank=self.img_bank))
 
+        self.mask_pred_file = ''
+        self.mask_img = None
+        self.showing_mask = True
+
         self.color = "green"
 
         # this data is used to keep track of an item being dragged
@@ -183,6 +187,8 @@ class EllipseEditor(tk.Frame):
         self.canvas.bind("<q>", self.on_qkey)
         self.canvas.bind("<S>", self.on_skey)
         self.canvas.bind("<s>", self.on_skey)
+        self.canvas.bind("<M>", self.on_mkey)
+        self.canvas.bind("<m>", self.on_mkey)
         self.canvas.bind("<Left>", self.on_leftarrow)
         self.canvas.bind("<Right>", self.on_rightarrow)
 
@@ -193,23 +199,43 @@ class EllipseEditor(tk.Frame):
 
         self.load_new_files()
 
+    def setup_pred_mask(self):
+        self.mask_img = None
+        self.mask_pred_file = 'top_losses/seg_images/'+str(Path(self.meta_file).stem)+'_pred.png'
+        if os.path.exists(self.mask_pred_file):
+            self.mask_img = Image.open(self.mask_pred_file)
+            self.mask_img = ImageOps.colorize(self.mask_img, black ="black", white =(150,0,150))
+        return
+
+    def merge_mask_image(self):
+        if not self.mask_img: return
+        if self.showing_mask:
+            self.image = Image.blend(self.image, self.mask_img, 0.5)
+            self.assign_image()
+
     def load_new_files(self):
         self.canvas.delete("all")  #destroy old tokens
         self.text = self.canvas.create_text(self.width+10, 10+self.y0, text=self.infostr,
             anchor=tk.NW, font=tk.font.Font(size=15,family='Consolas'))
-
         self.meta_file = self.meta_file_list[self.file_index]
         self.img_file = meta_to_img_path(self.meta_file, img_bank=self.img_bank)
+        self.setup_pred_mask()
         self.read_assign_image()
+        self.merge_mask_image()
         self.read_assign_csv()
         self.read_prev_next_imgs()
 
-    def read_assign_image(self):
-        self.image = Image.open(self.img_file)
+    def assign_image(self):
         self.tkimage = ImageTk.PhotoImage(image=self.image)
         self.label = tk.Label(image=self.tkimage)
         self.label.image = self.tkimage # keep a reference!
         self.canvas.create_image(self.width/2, self.y0 + self.height/2, image=self.tkimage)
+
+    def read_assign_image(self):
+        self.image = Image.open(self.img_file)
+        self.image = ImageOps.colorize(self.image, black ="black", white ="white")
+        self.backup = self.image
+        self.assign_image()
 
     def read_assign_csv(self):
         col_names = ['cx', 'cy', 'a', 'b', 'angle', 'rings']
@@ -269,6 +295,14 @@ class EllipseEditor(tk.Frame):
         print("Saving file ",self.meta_file)
         # TODO: add code to enforce a > b (and fix angle)
         self.df.to_csv(self.meta_file,index=False,header=None)
+    def on_mkey(self,event):
+        self.showing_mask = not self.showing_mask
+        if self.showing_mask and self.mask_img is not None:
+            self.merge_mask_image()
+            self.load_new_files()
+        if not self.showing_mask:
+            self.image = self.backup
+            self.load_new_files()
     def on_rightarrow(self,event):               # right arrow on keyboard
         self.file_index += 1                     # TODO: grab from top_losses
         if (self.file_index >= len(self.meta_file_list)):
@@ -462,6 +496,7 @@ def ellipse_editor(
     print("    - Right Arrow : Next file")
     print("    - Left Arrow  : Previous file")
     print("    - S           : Save metadata")
+    print("    - M           : Toggle display of predicted segmentation mask (if available)")
     print("    - Q           : Quit")
 
 
