@@ -169,11 +169,12 @@ class EllipseEditor(tk.Frame):
         self.showing_mask = True
 
         self.tl_ring_count_file, self.tl_ring_count_dict = '', {}
-        self.tl_ring_count_dict = defaultdict(lambda: [[]], self.tl_ring_count_dict) # map filenames to lists of rings info; defaults to empty list
+        self.tl_ring_count_dict = defaultdict(lambda: [], self.tl_ring_count_dict) # map filenames to lists of rings info; defaults to empty list
         tl_rc_files = glob.glob(tldir+'/*ring*.csv')
         if len(tl_rc_files) > 0:
             self.tl_ring_count_file = tl_rc_files[0] # not sure I'll keep the same name. something ring-related
             self.setup_tl_ring_count_dict()
+        self.showing_predrings, self.predringlist = True, []  # thing we actually use
 
         self.color = "green"
 
@@ -197,6 +198,8 @@ class EllipseEditor(tk.Frame):
         self.canvas.bind("<s>", self.on_skey)
         self.canvas.bind("<M>", self.on_mkey)
         self.canvas.bind("<m>", self.on_mkey)
+        self.canvas.bind("<R>", self.on_rkey)
+        self.canvas.bind("<r>", self.on_rkey)
         self.canvas.bind("<Left>", self.on_leftarrow)
         self.canvas.bind("<Right>", self.on_rightarrow)
 
@@ -211,19 +214,13 @@ class EllipseEditor(tk.Frame):
     def setup_tl_ring_count_dict(self):
         "this will store info about all the antinode ring counts for each file, as a list of lists for each file"
         df = pd.read_csv(self.tl_ring_count_file)
-        print(df.head())
+        #print(df.head())
         for i, row in df.iterrows(): # stop telling me stop using iterrows, it's clear coding ;-)
             meta, parts = meta_from_str(row['filename']), row['filename'].split('_')[-5:]
-            bbox, rings = [int(x) for x in parts[0:4]], float(parts[-1])
+            bbox, rings = [int(x) for x in parts[0:4]], float(row['prediction'])
             bb_rings = bbox + [rings]
-            if self.tl_ring_count_dict[meta] == [[]]:
-                self.tl_ring_count_dict[meta] = [bb_rings]
-                print(f"   {meta}: starting from scratch")
-            else:
-                self.tl_ring_count_dict[meta].append(bb_rings)
-                print(f"   {meta}: already got one")
-            if i > 3: break
-        return
+            if len(self.tl_ring_count_dict[meta]) == 0: self.tl_ring_count_dict[meta] = [bb_rings]
+            else: self.tl_ring_count_dict[meta].append(bb_rings)
 
     def setup_pred_mask(self):
         self.mask_img = None
@@ -239,18 +236,28 @@ class EllipseEditor(tk.Frame):
             self.image = Image.blend(self.image, self.mask_img, 0.5)
             self.assign_image()
 
+    def draw_pred_rings(self):
+        if (not self.showing_predrings) or (len(self.predringlist) == 0): return
+        for bbr in self.predringlist:
+            cx, cy, ringstr = int((bbr[0]+bbr[2])/2), int((bbr[1]+bbr[3])/2), '{0:.1f}'.format(bbr[-1])
+            #print("predicted ring counts: ",cx, cy, ringstr)
+            ringtext = self.canvas.create_text(cx, self.y0+cy-20, text=ringstr, anchor=tk.CENTER, font=tk.font.Font(size=15), fill="yellow")
+
+
     def load_new_files(self):
         self.canvas.delete("all")  #destroy old tokens
         self.text = self.canvas.create_text(self.width+10, 10+self.y0, text=self.infostr,
             anchor=tk.NW, font=tk.font.Font(size=15,family='Consolas'))
         self.meta_file = self.meta_file_list[self.file_index]
-        print(f"self.tl_ring_count_dict[{os.path.basename(self.meta_file)}] = ",self.tl_ring_count_dict[os.path.basename(self.meta_file)])
         self.img_file = meta_to_img_path(self.meta_file, img_bank=self.img_bank)
         self.setup_pred_mask()
         self.read_assign_image()
         self.merge_mask_image()
         self.read_assign_csv()
         self.read_prev_next_imgs()
+        self.predringlist = self.tl_ring_count_dict[os.path.basename(self.meta_file)]
+        self.draw_pred_rings()
+
 
     def assign_image(self):
         self.tkimage = ImageTk.PhotoImage(image=self.image)
@@ -305,7 +312,7 @@ class EllipseEditor(tk.Frame):
         h_b = self.canvas.create_oval(h_b_x-self.hr, self.y0+h_b_y-self.hr, h_b_x+self.hr, self.y0+h_b_y+self.hr, outline=color, fill="blue", width=3, tags=(thistag,"handle","axis_b"))
 
         ringstr = '{0:.1f}'.format(rings)
-        ringtext = self.canvas.create_text(x-5, self.y0+y-10, text=ringstr, anchor=tk.NW, font=tk.font.Font(size=18), fill=color, tags=(thistag,"ringtext"))
+        ringtext = self.canvas.create_text(x-5, self.y0+y-10, text=ringstr, anchor=tk.NW, font=tk.font.Font(size=16), fill=color, tags=(thistag,"ringtext"))
 
         self._token_data.append([oval,h_a,h_b,ringtext])
 
@@ -333,6 +340,9 @@ class EllipseEditor(tk.Frame):
         if not self.showing_mask:
             self.image = self.backup
             self.load_new_files()
+    def on_rkey(self,event):
+        self.showing_predrings = not self.showing_predrings
+        self.load_new_files()
     def on_rightarrow(self,event):               # right arrow on keyboard
         self.file_index += 1                     # TODO: grab from top_losses
         if (self.file_index >= len(self.meta_file_list)):
@@ -525,8 +535,9 @@ def ellipse_editor(
     print(" Key bindings:")
     print("    - Right Arrow : Next file")
     print("    - Left Arrow  : Previous file")
-    print("    - S           : Save metadata")
     print("    - M           : Toggle display of predicted segmentation mask (if available)")
+    print("    - R           : Toggle display of predicted ring counts (if available)")
+    print("    - S           : Save metadata")
     print("    - Q           : Quit")
 
 
