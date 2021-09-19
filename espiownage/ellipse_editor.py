@@ -61,6 +61,7 @@ from fastcore.script import *
 import re
 from espiownage.core import *
 from itertools import cycle
+from collections import defaultdict
 
 
 
@@ -141,13 +142,13 @@ class EllipseEditor(tk.Frame):
     def __init__(self, parent,  # tk class and parent window
         meta_file_list,         # list of csv files to edi
         img_bank='images/',     # where images are stored
-        top_losses=None,        # directory where top-losses info is stored
+        tldir=None,        # directory where top-losses info is stored
         seq=True,               # ignore top losses and do sequential selection of frames (per existing annotations)
         ):
         tk.Frame.__init__(self, parent)
         self.meta_file_list = meta_file_list
         self.img_bank = img_bank
-        self.top_loss_list = get_top_loss_list(top_losses)
+        self.top_loss_list = get_top_loss_list(tldir)
         if self.top_loss_list == []: seq = True
         if not seq: self.meta_file_list = combine_file_and_tl_lists(self.meta_file_list, self.top_loss_list)
         self.seq = seq
@@ -166,6 +167,13 @@ class EllipseEditor(tk.Frame):
         self.mask_pred_file = ''
         self.mask_img = None
         self.showing_mask = True
+
+        self.tl_ring_count_file, self.tl_ring_count_dict = '', {}
+        self.tl_ring_count_dict = defaultdict(lambda: [[]], self.tl_ring_count_dict) # map filenames to lists of rings info; defaults to empty list
+        tl_rc_files = glob.glob(tldir+'/*ring*.csv')
+        if len(tl_rc_files) > 0:
+            self.tl_ring_count_file = tl_rc_files[0] # not sure I'll keep the same name. something ring-related
+            self.setup_tl_ring_count_dict()
 
         self.color = "green"
 
@@ -199,6 +207,24 @@ class EllipseEditor(tk.Frame):
 
         self.load_new_files()
 
+
+    def setup_tl_ring_count_dict(self):
+        "this will store info about all the antinode ring counts for each file, as a list of lists for each file"
+        df = pd.read_csv(self.tl_ring_count_file)
+        print(df.head())
+        for i, row in df.iterrows(): # stop telling me stop using iterrows, it's clear coding ;-)
+            meta, parts = meta_from_str(row['filename']), row['filename'].split('_')[-5:]
+            bbox, rings = [int(x) for x in parts[0:4]], float(parts[-1])
+            bb_rings = bbox + [rings]
+            if self.tl_ring_count_dict[meta] == [[]]:
+                self.tl_ring_count_dict[meta] = [bb_rings]
+                print(f"   {meta}: starting from scratch")
+            else:
+                self.tl_ring_count_dict[meta].append(bb_rings)
+                print(f"   {meta}: already got one")
+            if i > 3: break
+        return
+
     def setup_pred_mask(self):
         self.mask_img = None
         self.mask_pred_file = 'top_losses/seg_images/'+str(Path(self.meta_file).stem)+'_pred.png'
@@ -218,6 +244,7 @@ class EllipseEditor(tk.Frame):
         self.text = self.canvas.create_text(self.width+10, 10+self.y0, text=self.infostr,
             anchor=tk.NW, font=tk.font.Font(size=15,family='Consolas'))
         self.meta_file = self.meta_file_list[self.file_index]
+        print(f"self.tl_ring_count_dict[{os.path.basename(self.meta_file)}] = ",self.tl_ring_count_dict[os.path.basename(self.meta_file)])
         self.img_file = meta_to_img_path(self.meta_file, img_bank=self.img_bank)
         self.setup_pred_mask()
         self.read_assign_image()
@@ -250,15 +277,18 @@ class EllipseEditor(tk.Frame):
         self.update_readout(None)
 
     def read_prev_next_imgs(self):
+        # prev image
         self.prev_img, name = get_next_img(self.meta_file, -1, img_bank=self.img_bank)
         if self.prev_img: self.canvas.create_image(self.width/2, self.y0 + self.height+20 + self.height/2, image=self.prev_img)
         imlabel = f"Previous Image: {name.split('/')[-1]}"
         self.canvas.create_text(10, self.y0+self.height, text=imlabel, anchor=tk.NW, font=tk.font.Font(size=12), fill='black')
+
+        # next image
         self.next_img, name = get_next_img(self.meta_file, 1, img_bank=self.img_bank)
         if self.next_img: self.canvas.create_image(self.width+20+self.width/2, self.y0 + self.height+20 + self.height/2, image=self.next_img)
         imlabel = f"Next Image: {name.split('/')[-1]}"
         self.canvas.create_text(self.width+30, self.y0+self.height, text=imlabel, anchor=tk.NW, font=tk.font.Font(size=12), fill='black')
-
+        return
 
     def _create_token(self, coord, axes, angle, rings, color):
         '''Create a tk token at the given coordinate in the given color'''
@@ -476,7 +506,7 @@ def ellipse_editor(
     seq:Param("Ignore top-loss ordering and do sequential ordering", store_true),
     files:Param("Wildcard name for all CSV files to edit", str)='annotations/*.csv',
     imgbank:Param("Directory where all the (unlabeled) images are",str)='images/',
-    tl:Param("Directory where 'top losses' info is stored'",str)='top_losses/',
+    tldir:Param("Directory where 'top losses' info is stored'",str)='top_losses/',
     ):
     global img_bank
     # typical command-line calling sequence:
@@ -502,5 +532,5 @@ def ellipse_editor(
 
     root = tk.Tk()
     root.title('espiownage: ellipse_editor')
-    EllipseEditor(root, meta_file_list, img_bank=img_bank, top_losses=tl, seq=seq).pack(fill="both", expand=True)
+    EllipseEditor(root, meta_file_list, img_bank=img_bank, tldir=tldir, seq=seq).pack(fill="both", expand=True)
     root.mainloop()
