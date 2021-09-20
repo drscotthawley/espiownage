@@ -6,7 +6,7 @@
    },
    "Ring Counts": {
        "Counting Rings in Cropped Images - Real Data": "count_in_crops_real.html",
-       "Counting Rings in Cropped Images - CycleGAN Data": "count_in_crops_cyclegan.html"
+       "Counting Rings in Cropped Images - CycleGAN Data": "count_in_crops_cyclegan.html",
        "Counting Rings in Cropped Images - (New)Fake Data": "count_in_crops_fake2.html"
    },
     "Bounding Boxes" : {

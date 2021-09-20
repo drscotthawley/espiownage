@@ -24,6 +24,9 @@ entries:
     - output: web,pdf
       title: Counting Rings in Cropped Images - CycleGAN Data
       url: count_in_crops_cyclegan.html
+    - output: web,pdf
+      title: Counting Rings in Cropped Images - (New)Fake Data
+      url: count_in_crops_fake2.html
     output: web
     title: Ring Counts
   - folderitems:
