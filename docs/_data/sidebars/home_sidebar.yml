@@ -43,7 +43,7 @@ entries:
       title: (New)Fake Data
       url: iv_bbox_fake2.html
     - output: web,pdf
-      title: Pre-Cleaned Old Real Data
+      title: Pre-cleaned '15 or more' Real Data
       url: IceVision-on-espiownage-preclean.html
     output: web
     title: Bounding Boxes
