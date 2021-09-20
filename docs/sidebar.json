@@ -10,7 +10,8 @@
    },
    "Segmentation": {
        "Segmentation - Real Data (one class)": "seg_allone_real.html",
-       "Segmentation - CycleGAN Data (one class)": "seg_class_cyclegan.html",
+       "Segmentation - CycleGAN Data (one class)": "seg_allone_cyclegan.html",
+       "Segmentation - CycleGAN Data (multiclass)": "seg_class_cyclegan.ipynb",
        "Segmentation - Regression model - CAMVID test": "seg_reg_camvid.html"
    },
     "Bounding Boxes" : {

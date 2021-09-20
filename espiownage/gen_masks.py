@@ -35,7 +35,7 @@ def handle_one_file(meta_file_list, # list of all the csv files
     df = pd.read_csv(meta_file, header=None, names=col_names)
 
     # progress message
-    mask_path = meta_to_mask_path(meta_file,mask_dir=mask_dir)
+    mask_path = meta_to_mask_path(meta_file, mask_dir=mask_dir+'/')
     print(f"{i}/{len(meta_file_list)}: meta_file = {meta_file}, mask_path = {mask_path} ",flush=True) #", df = \n",df.to_string(index=False))
 
     df.drop_duplicates(inplace=True)  # sometimes the data from Zooniverse has duplicate rows
