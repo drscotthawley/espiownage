@@ -50,7 +50,7 @@ entries:
       url: seg_allone_cyclegan.html
     - output: web,pdf
       title: Segmentation - CycleGAN Data (multiclass)
-      url: seg_multiclass_cyclegan.ipynb
+      url: seg_multiclass_cyclegan.html
     - output: web,pdf
       title: Segmentation - Regression model - CAMVID test
       url: seg_reg_camvid.html

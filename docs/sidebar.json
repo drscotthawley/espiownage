@@ -17,7 +17,7 @@
     "Segmentation": {
         "Segmentation - Real Data (one class)": "seg_allone_real.html",
         "Segmentation - CycleGAN Data (one class)": "seg_allone_cyclegan.html",
-        "Segmentation - CycleGAN Data (multiclass)": "seg_multiclass_cyclegan.ipynb",
+        "Segmentation - CycleGAN Data (multiclass)": "seg_multiclass_cyclegan.html",
         "Segmentation - Regression model - CAMVID test": "seg_reg_camvid.html"
     },
     "Workflows" : {
