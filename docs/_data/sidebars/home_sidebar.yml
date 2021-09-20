@@ -19,55 +19,55 @@ entries:
     title: espiownage
   - folderitems:
     - output: web,pdf
-      title: Counting Rings in Cropped Images - Real Data
+      title: Real Data
       url: count_in_crops_real.html
     - output: web,pdf
-      title: Counting Rings in Cropped Images - CycleGAN Data
+      title: CycleGAN Data
       url: count_in_crops_cyclegan.html
     - output: web,pdf
-      title: Counting Rings in Cropped Images - (New)Fake Data
+      title: (New)Fake Data
       url: count_in_crops_fake2.html
     output: web
     title: Ring Counts
   - folderitems:
     - output: web,pdf
-      title: Bounding Boxes - Real Data
+      title: Real Data
       url: iv_bbox_real.html
     - output: web,pdf
-      title: Bonding Boxes - CycleGAN Data
+      title: CycleGAN Data
       url: iv_bbox_cyclegan.html
     - output: web,pdf
-      title: Bounding Boxes - CycleGAN Data -OBPR
+      title: CycleGAN Data -OBPR
       url: IceVision-on-espiownage-cyclegan-obpr.html
     - output: web,pdf
-      title: Bounding Boxes - (New)Fake Data
+      title: (New)Fake Data
       url: iv_bbox_fake2.html
     - output: web,pdf
-      title: Bounding Boxes - Pre-Cleaned Old Real Data
+      title: Pre-Cleaned Old Real Data
       url: IceVision-on-espiownage-preclean.html
     output: web
     title: Bounding Boxes
   - folderitems:
     - output: web,pdf
-      title: Segmentation - Real Data (one class)
+      title: Real Data (one class)
       url: seg_allone_real.html
     - output: web,pdf
-      title: Segmentation - CycleGAN Data (one class)
+      title: CycleGAN Data (one class)
       url: seg_allone_cyclegan.html
     - output: web,pdf
-      title: Segmentation - CycleGAN Data (multiclass)
+      title: CycleGAN Data (multiclass)
       url: seg_multiclass_cyclegan.html
     - output: web,pdf
-      title: Segmentation - (New)Fake Data (one class)
+      title: (New)Fake Data (one class)
       url: seg_allone_fake2.html
     - output: web,pdf
-      title: Segmentation - Regression model - CAMVID test
+      title: Regression model - CAMVID test
       url: seg_reg_camvid.html
     output: web
     title: Segmentation
   - folderitems:
     - output: web,pdf
-      title: 'Inference Workflow '
+      title: Inference (BB->Rings)
       url: workflow_inf.html
     output: web
     title: Workflows
