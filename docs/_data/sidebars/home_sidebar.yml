@@ -41,13 +41,13 @@ entries:
   - folderitems:
     - output: web,pdf
       title: Bounding Boxes - Real Data
-      url: IceVision-on-espiownage-cleaner.html
+      url: iv_bbox_real.html
+    - output: web,pdf
+      title: Bonding Boxes - CycleGAN Data
+      url: iv_bbox_cyclegan.html
     - output: web,pdf
       title: Bonding Boxes - CycleGAN Data -OBPR
       url: IceVision-on-espiownage-cyclegan-obpr.html
-    - output: web,pdf
-      title: Bonding Boxes - CycleGAN Data
-      url: IceVision-on-espiownage-cyclegan.html
     - output: web,pdf
       title: Bounding Boxes - Pre-Cleaned Old Real Data
       url: IceVision-on-espiownage-preclean.html
