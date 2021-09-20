@@ -2,20 +2,28 @@
   "espiownage": {
     "Overview": "/",
     "espiownage core": "core.html",
-    "Console Scripts": "script_doc.html",
-    "IceVision Bboxes - OBPR - CycleGAN Data": "IceVision-on-espiownage-cyclegan-obpr.html",
-    "IceVision Bboxes - Pre-Cleaned Real Data": "IceVision-on-espiownage-preclean.html",
-    "Counting Rings in Cropped Images - CycleGAN Data": "count_in_crops_cyclegan.html",
-    "Counting Rings in Cropped Images - (New)Fake Data": "count_in_crops_fake2.html",
-    "Counting Rings in Cropped Images - Real Data": "count_in_crops_real.html",
-    "IceVision Bboxes - CycleGAN Data": "iv_bbox_cyclegan.html",
-    "IceVision BBoxes - (New)Fake Data": "iv_bbox_fake2.html",
-    "IceVision Bboxes - Real Data": "iv_bbox_real.html",
-    "Segmentation \"all one\" - CycleGAN data": "seg_allone_cyclegan.html",
-    "Segmentation \"all one\" - (New)Fake data": "seg_allone_fake2.html",
-    "segmentation \"all one\" - real data": "seg_allone_real.html",
-    "Segmentation \"multi class\" - CycleGAN data": "seg_multiclass_cyclegan.html",
-    "segmentation regression - camvid test": "seg_reg_camvid.html",
-    "Inference Workflow Overview": "workflow_inf.html"
-  }
+    "Console Scripts": "script_doc.html"
+   },
+   "Ring Counts": {
+       "Real Data": "count_in_crops_real.html",
+       "CycleGAN Data": "count_in_crops_cyclegan.html",
+       "(New)Fake Data": "count_in_crops_fake2.html"
+   },
+    "Bounding Boxes" : {
+        "Real Data": "iv_bbox_real.html",
+        "CycleGAN Data": "iv_bbox_cyclegan.html",
+        "CycleGAN Data -OBPR": "IceVision-on-espiownage-cyclegan-obpr.html",
+        "(New)Fake Data": "iv_bbox_fake2.html",
+        "Pre-Cleaned Old Real Data": "IceVision-on-espiownage-preclean.html"
+    },
+    "Segmentation": {
+        "Real Data (one class)": "seg_allone_real.html",
+        "CycleGAN Data (one class)": "seg_allone_cyclegan.html",
+        "CycleGAN Data (multiclass)": "seg_multiclass_cyclegan.html",
+        "(New)Fake Data (one class)": "seg_allone_fake2.html",
+        "Regression model - CAMVID test": "seg_reg_camvid.html"
+    },
+    "Workflows" : {
+      "Inference (BB->Rings)": "workflow_inf.html"
+    }
 }
