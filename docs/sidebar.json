@@ -14,9 +14,9 @@
        "Segmentation - Regression model - CAMVID test": "seg_reg_camvid.html"
    },
     "Bounding Boxes" : {
-        "Bounding Boxes - Real Data": "IceVision-on-espiownage-cleaner.html",
+        "Bounding Boxes - Real Data": "iv_bbox_real.html",
+        "Bonding Boxes - CycleGAN Data": "iv_bbox_cyclegan.html",
         "Bonding Boxes - CycleGAN Data -OBPR": "IceVision-on-espiownage-cyclegan-obpr.html",
-        "Bonding Boxes - CycleGAN Data": "IceVision-on-espiownage-cyclegan.html",
         "Bounding Boxes - Pre-Cleaned Old Real Data": "IceVision-on-espiownage-preclean.html"
     }
 }
