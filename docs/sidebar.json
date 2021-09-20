@@ -5,18 +5,20 @@
     "Console Scripts": "script_doc.html"
    },
    "BBoxes & Ring Counts" : {
-       "Ring Counts Alone": {
-           "Counting Rings in Cropped Images - Real Data": "count_in_crops_real.html",
-           "Counting Rings in Cropped Images - CycleGAN Data": "count_in_crops_cyclegan.html"
-       },
-        "Bounding Boxes Alone" : {
-            "Bounding Boxes - Real Data": "iv_bbox_real.html",
-            "Bonding Boxes - CycleGAN Data": "iv_bbox_cyclegan.html",
-            "Bonding Boxes - CycleGAN Data -OBPR": "IceVision-on-espiownage-cyclegan-obpr.html",
-            "Bounding Boxes - Pre-Cleaned Old Real Data": "IceVision-on-espiownage-preclean.html"
-        },
-        "Workflow" : {
-          "Inference Workflow ": "workflow_inf.html"
+       "": {
+           "Ring Counts Alone": {
+               "Counting Rings in Cropped Images - Real Data": "count_in_crops_real.html",
+               "Counting Rings in Cropped Images - CycleGAN Data": "count_in_crops_cyclegan.html"
+           },
+            "Bounding Boxes Alone" : {
+                "Bounding Boxes - Real Data": "iv_bbox_real.html",
+                "Bonding Boxes - CycleGAN Data": "iv_bbox_cyclegan.html",
+                "Bonding Boxes - CycleGAN Data -OBPR": "IceVision-on-espiownage-cyclegan-obpr.html",
+                "Bounding Boxes - Pre-Cleaned Old Real Data": "IceVision-on-espiownage-preclean.html"
+            },
+            "Workflow" : {
+              "Inference Workflow ": "workflow_inf.html"
+            }
         }
     },
     "Segmentation": {
