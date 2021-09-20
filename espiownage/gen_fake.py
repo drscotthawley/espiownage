@@ -46,7 +46,7 @@ min_line_width = 4  # number of pixels per each ring (dark-light pair)
 
 pad = "       "
 
-def bandpass_mixup(img_fake, path_real='/home/shawley/datasets/espiownage-data/images/'):
+def bandpass_mixup(img_fake, path_real=os.path.expanduser('~/datasets/espiownage-data/images/')):
     '''
     For more realistic-looking images (still not as good as StyleGAN),
     replace low & high frequency components ('background')
@@ -126,20 +126,19 @@ def get_ellipse_box(center, axes, angle):  # converts ellipse to bounding box
     return ellipse_to_bbox( center[0], center[1], axes[0], axes[1], angle)
 
 
-def draw_rings(img,center,axes,angle=45,num_rings=5):  # TODO make intensity vary smoothly
-    num_wbrings = 2*num_rings  # draw in white & black
-    if (0==num_wbrings):
-        num_wbrings = 1      # sorry, gotta avoid any & all errors because MP is a pain to debug
-    thickness = int(round( min(axes)/(num_wbrings) ))
-    rand_start = np.random.choice([0,1])  # have center as dark or light
-    for j in range(num_wbrings):
-        if (0 == (rand_start + j) % 2):
-            color = black
-        else:
-            color = grey + 10  # little bit brighter than the surroundings
-        thisring_axes = [axes[i] * (j+1)*1.0/(num_wbrings+1) for i in range(len(axes))]
+
+def draw_rings(img,center,axes,angle=45,num_rings=5.5):  # TODO make intensity vary smoothly
+    num_drawrings, thickness = max(axes), 1
+    if num_rings < 0.2: num_rings = 0.2+0.2*np.random.rand()
+    phase = 2*np.pi*np.random.rand()
+    minc, maxc = random.randint(0,60), random.randint(150,250)
+    for j in range(num_drawrings):
+        color = int(minc + (maxc-minc)*np.sin(2*np.pi*num_rings * j/num_drawrings + phase))
+        thisring_axes = [axes[i] * (j+1)*1.0/(num_drawrings+1) for i in range(len(axes))]
         ellipse = draw_ellipse(img,center,thisring_axes,angle,color=color, thickness=thickness)
     return ellipse   # returns outermost ellipse
+
+
 
 
 def does_overlap( a, b):
@@ -167,7 +166,6 @@ def draw_antinodes(img,num_antinodes=1):
     caption = ""
 
     if (num_antinodes==0):
-        #caption = "[{0}, {1}, {2}, {3}, {4}, {5}]".format( imWidth/2.0,  imHeight/2.0,    0,  imWidth/4.0,    imHeight/4.0,    90.0)
         caption = "{0},{1},{2},{3},{4},{5}".format( 0,  0,    0,  0,    0,   0.0)  # as per @achmorrison's format
 
     for an in range(num_antinodes): # draw a bunch of antinodes
@@ -178,11 +176,11 @@ def draw_antinodes(img,num_antinodes=1):
 
         # TODO: based on viewing real images: for small antinodes, number of rings should also be small
         max_rings = min(axes[1] // 8, 11)                  # '8' chosen from experience looking at the data
-        num_rings = random.randint(1, max_rings)            # well say that an antinode has at least 1 ring
+        num_rings = np.random.uniform(low=0.5,high=11.0)            # well say that an antinode has at least 1 ring
 
         # make sure line width isn't too small to be resolved
         if (axes[1]/num_rings < min_line_width):
-            num_rings = axes[1] // min_line_width
+            num_rings = axes[1] / min_line_width
 
         center = (random.randint(axes[0], imWidth-axes[0]),
             random.randint(axes[1], imHeight-axes[1]))
@@ -201,7 +199,7 @@ def draw_antinodes(img,num_antinodes=1):
             axes = sorted(axes, reverse=True)   # do descending order
             # make sure line width isn't too small to be resolved
             if (axes[1]/num_rings < min_line_width):
-                num_rings = axes[1] // min_line_width
+                num_rings = axes[1] / min_line_width
 
             center = (random.randint(axes[0], imWidth-axes[0]),
                 random.randint(axes[1], imHeight-axes[1]))
@@ -211,9 +209,8 @@ def draw_antinodes(img,num_antinodes=1):
         success = False
         if (trycount < maxtries):
             draw_rings(img, center, axes, angle=angle, num_rings=num_rings)
-            #this_caption = "[{0}, {1}, {2}, {3}, {4}, {5}]".format(center[0], center[1],axes[0], axes[1], angle, num_rings)
-            this_caption = "{0},{1},{2},{3},{4},{5}".format(center[0], center[1],axes[0], axes[1], angle, num_rings)
-            success = True
+            this_caption = "{0},{1},{2},{3},{4},{5}".format(center[0], center[1],axes[0], axes[1], angle, round(num_rings,1))
+            if '0,0,0,0' not in this_caption: success = True
         else:   # just skip this antinode
             print("\n\r",pad,":WARNING Can't fit an=",an,"\n",sep="",end="\r")
             this_caption = ""
@@ -236,7 +233,7 @@ def handle_one_file(outdir, framenum):
     draw_waves(img)   # this is the main bottleneck, execution-time-wise
 
     max_antinodes = 6
-    num_antinodes= random.randint(0,max_antinodes)
+    num_antinodes= random.randint(1,max_antinodes)
     img, caption = draw_antinodes(img, num_antinodes=num_antinodes)
 
     if (np.random.random() <= blur_prob): # blur image a bit
@@ -258,7 +255,7 @@ def handle_one_file(outdir, framenum):
     prefix = 'steelpan_'+str(framenum).zfill(7)
     cv2.imwrite(outdir+'/images/'+prefix+'.png',img)
     with open(outdir+'/annotations/'+prefix+meta_extension, "w") as text_file:
-        text_file.write(caption)
+        text_file.write(caption+'\n')
     return
 
 
