@@ -18,39 +18,29 @@ entries:
     output: web
     title: espiownage
   - folderitems:
-      subfolders:
-      - output: web
-        subfolderitems:
-        - output: web,pdf
-          title: Counting Rings in Cropped Images - Real Data
-          url: count_in_crops_real.html
-        - output: web,pdf
-          title: Counting Rings in Cropped Images - CycleGAN Data
-          url: count_in_crops_cyclegan.html
-        title: Ring Counts Alone
-      - output: web
-        subfolderitems:
-        - output: web,pdf
-          title: Bounding Boxes - Real Data
-          url: iv_bbox_real.html
-        - output: web,pdf
-          title: Bonding Boxes - CycleGAN Data
-          url: iv_bbox_cyclegan.html
-        - output: web,pdf
-          title: Bonding Boxes - CycleGAN Data -OBPR
-          url: IceVision-on-espiownage-cyclegan-obpr.html
-        - output: web,pdf
-          title: Bounding Boxes - Pre-Cleaned Old Real Data
-          url: IceVision-on-espiownage-preclean.html
-        title: Bounding Boxes Alone
-      - output: web
-        subfolderitems:
-        - output: web,pdf
-          title: 'Inference Workflow '
-          url: workflow_inf.html
-        title: Workflow
+    - output: web,pdf
+      title: Counting Rings in Cropped Images - Real Data
+      url: count_in_crops_real.html
+    - output: web,pdf
+      title: Counting Rings in Cropped Images - CycleGAN Data
+      url: count_in_crops_cyclegan.html
     output: web
-    title: BBoxes & Ring Counts
+    title: Ring Counts
+  - folderitems:
+    - output: web,pdf
+      title: Bounding Boxes - Real Data
+      url: iv_bbox_real.html
+    - output: web,pdf
+      title: Bonding Boxes - CycleGAN Data
+      url: iv_bbox_cyclegan.html
+    - output: web,pdf
+      title: Bonding Boxes - CycleGAN Data -OBPR
+      url: IceVision-on-espiownage-cyclegan-obpr.html
+    - output: web,pdf
+      title: Bounding Boxes - Pre-Cleaned Old Real Data
+      url: IceVision-on-espiownage-preclean.html
+    output: web
+    title: Bounding Boxes
   - folderitems:
     - output: web,pdf
       title: Segmentation - Real Data (one class)
@@ -66,5 +56,11 @@ entries:
       url: seg_reg_camvid.html
     output: web
     title: Segmentation
+  - folderitems:
+    - output: web,pdf
+      title: 'Inference Workflow '
+      url: workflow_inf.html
+    output: web
+    title: Workflows
   output: web
   title: Sidebar
