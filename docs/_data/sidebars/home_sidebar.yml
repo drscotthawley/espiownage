@@ -15,61 +15,49 @@ entries:
     - output: web,pdf
       title: Console Scripts
       url: script_doc.html
-    output: web
-    title: espiownage
-  - folderitems:
     - output: web,pdf
-      title: Real Data
-      url: count_in_crops_real.html
-    - output: web,pdf
-      title: CycleGAN Data
-      url: count_in_crops_cyclegan.html
-    - output: web,pdf
-      title: (New)Fake Data
-      url: count_in_crops_fake2.html
-    output: web
-    title: Ring Counts
-  - folderitems:
-    - output: web,pdf
-      title: Real Data
-      url: iv_bbox_real.html
-    - output: web,pdf
-      title: CycleGAN Data
-      url: iv_bbox_cyclegan.html
-    - output: web,pdf
-      title: CycleGAN Data -OBPR
+      title: IceVision Bboxes - OBPR - CycleGAN Data
       url: IceVision-on-espiownage-cyclegan-obpr.html
     - output: web,pdf
-      title: (New)Fake Data
+      title: IceVision Bboxes - Pre-Cleaned Real Data
+      url: IceVision-on-espiownage-preclean.html
+    - output: web,pdf
+      title: Counting Rings in Cropped Images - CycleGAN Data
+      url: count_in_crops_cyclegan.html
+    - output: web,pdf
+      title: Counting Rings in Cropped Images - (New)Fake Data
+      url: count_in_crops_fake2.html
+    - output: web,pdf
+      title: Counting Rings in Cropped Images - Real Data
+      url: count_in_crops_real.html
+    - output: web,pdf
+      title: IceVision Bboxes - CycleGAN Data
+      url: iv_bbox_cyclegan.html
+    - output: web,pdf
+      title: IceVision BBoxes - (New)Fake Data
       url: iv_bbox_fake2.html
     - output: web,pdf
-      title: Pre-Cleaned Old Real Data
-      url: IceVision-on-espiownage-preclean.html
-    output: web
-    title: Bounding Boxes
-  - folderitems:
+      title: IceVision Bboxes - Real Data
+      url: iv_bbox_real.html
     - output: web,pdf
-      title: Real Data (one class)
-      url: seg_allone_real.html
-    - output: web,pdf
-      title: CycleGAN Data (one class)
+      title: Segmentation "all one" - CycleGAN data
       url: seg_allone_cyclegan.html
     - output: web,pdf
-      title: CycleGAN Data (multiclass)
-      url: seg_multiclass_cyclegan.html
-    - output: web,pdf
-      title: (New)Fake Data (one class)
+      title: Segmentation "all one" - (New)Fake data
       url: seg_allone_fake2.html
     - output: web,pdf
-      title: Regression model - CAMVID test
-      url: seg_reg_camvid.html
-    output: web
-    title: Segmentation
-  - folderitems:
+      title: segmentation "all one" - real data
+      url: seg_allone_real.html
     - output: web,pdf
-      title: Inference (BB->Rings)
+      title: Segmentation "multi class" - CycleGAN data
+      url: seg_multiclass_cyclegan.html
+    - output: web,pdf
+      title: segmentation regression - camvid test
+      url: seg_reg_camvid.html
+    - output: web,pdf
+      title: Inference Workflow Overview
       url: workflow_inf.html
     output: web
-    title: Workflows
+    title: espiownage
   output: web
   title: Sidebar
