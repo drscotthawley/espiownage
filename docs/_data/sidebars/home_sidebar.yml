@@ -37,8 +37,11 @@ entries:
       title: Bonding Boxes - CycleGAN Data
       url: iv_bbox_cyclegan.html
     - output: web,pdf
-      title: Bonding Boxes - CycleGAN Data -OBPR
+      title: Bounding Boxes - CycleGAN Data -OBPR
       url: IceVision-on-espiownage-cyclegan-obpr.html
+    - output: web,pdf
+      title: Bounding Boxes - (New)Fake Data
+      url: iv_bbox_fake2.html
     - output: web,pdf
       title: Bounding Boxes - Pre-Cleaned Old Real Data
       url: IceVision-on-espiownage-preclean.html
@@ -54,6 +57,9 @@ entries:
     - output: web,pdf
       title: Segmentation - CycleGAN Data (multiclass)
       url: seg_multiclass_cyclegan.html
+    - output: web,pdf
+      title: Segmentation - (New)Fake Data (one class)
+      url: seg_allone_fake2.html
     - output: web,pdf
       title: Segmentation - Regression model - CAMVID test
       url: seg_reg_camvid.html
