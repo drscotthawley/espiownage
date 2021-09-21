@@ -50,7 +50,7 @@ entries:
       url: IceVision-on-espiownage-preclean.html
     - output: web,pdf
       title: Old SPNet Real Data
-      url: iv_bbox_real.html
+      url: iv_bbox_spnet.html
     output: web
     title: Bounding Boxes
   - folderitems:
