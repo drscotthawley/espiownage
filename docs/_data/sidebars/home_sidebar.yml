@@ -70,7 +70,10 @@ entries:
       title: (New)Fake Data (one class)
       url: seg_allone_fake2.html
     - output: web,pdf
-      title: Regression model - CAMVID test
+      title: Regression - Real Data
+      url: seg_reg_real.html
+    - output: web,pdf
+      title: Regression - CAMVID test
       url: seg_reg_camvid.html
     output: web
     title: Segmentation

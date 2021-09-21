@@ -24,7 +24,8 @@
         "CycleGAN Data (one class)": "seg_allone_cyclegan.html",
         "CycleGAN Data (multiclass)": "seg_multiclass_cyclegan.html",
         "(New)Fake Data (one class)": "seg_allone_fake2.html",
-        "Regression model - CAMVID test": "seg_reg_camvid.html"
+        "Regression - Real Data": "seg_reg_real.html",
+        "Regression - CAMVID test": "seg_reg_camvid.html"
     },
     "Workflows" : {
       "Inference (BB->Rings)": "workflow_inf.html"
