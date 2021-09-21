@@ -7,7 +7,8 @@
    "Ring Counts": {
        "Real Data": "count_in_crops_real.html",
        "CycleGAN Data": "count_in_crops_cyclegan.html",
-       "(New)Fake Data": "count_in_crops_fake2.html"
+       "(New)Fake Data": "count_in_crops_fake2.html",
+       "Old SPNet Real Data": "count_in_crops_spnet.html"
    },
     "Bounding Boxes" : {
         "Real Data": "iv_bbox_real.html",
