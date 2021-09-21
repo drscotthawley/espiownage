@@ -26,6 +26,7 @@ def handle_one_file(meta_file_list, # list of all the csv files
     #imglinks,               # boolean on whether or not to create links to original images
     allone,                 # set all values to one for non-background
     cp_ann_imgs,            # hack to make directory of only images for which annotations exist
+    quiet,                   # don't print many status messages
     i,                      # index of which meta file we'll read from
     height=512, width=384):  # image dimensions
     global all_colors, ann_img_dir
@@ -36,7 +37,8 @@ def handle_one_file(meta_file_list, # list of all the csv files
 
     # progress message
     mask_path = meta_to_mask_path(meta_file, mask_dir=mask_dir+'/')
-    print(f"{i}/{len(meta_file_list)}: meta_file = {meta_file}, mask_path = {mask_path} ",flush=True) #", df = \n",df.to_string(index=False))
+    if not quiet:
+        print(f"{i}/{len(meta_file_list)}: meta_file = {meta_file}, mask_path = {mask_path} ",flush=True)
 
     df.drop_duplicates(inplace=True)  # sometimes the data from Zooniverse has duplicate rows
     img = np.zeros((width, height), dtype=np.uint8)  # blank black image, dimensions are wonky
@@ -45,8 +47,8 @@ def handle_one_file(meta_file_list, # list of all the csv files
         rings = round(float(row['rings']),2)
         a, b, angle = fix_abangle(a,b,angle)
         if (rings > 0):
-            if rings > 11:
-                print(f"{meta_file}: rings = {rings}")
+            if rings > 11: # saw an error once
+                print(f"Sever warning for file {meta_file}: rings = {rings}.  Aborting")
                 sys.exit(1)
             color = 1 if allone else ring_float_to_class_int(rings, step=step)
             all_colors = all_colors.union({color})
@@ -70,6 +72,7 @@ def handle_one_file(meta_file_list, # list of all the csv files
 @call_parse
 def gen_masks(
     allone:Param("All objects get assigned to class 1", store_true),
+    quiet:Param("Suppress output log", store_true),
     cp_ann_imgs:Param("make directory of only images for which annotations exist (to annotated_images/)", store_true),
     files:Param("Wildcard name for all CSV files to edit", str)='annotations/*.csv',
     maskdir:Param("Directory to write segmentation masks to",str)='masks/',
@@ -87,11 +90,11 @@ def gen_masks(
     parallel = True  # could leave off. it's not that slow, really
     if not parallel:
         for i in range(len(meta_file_list)):
-            handle_one_file(meta_file_list, maskdir, step, allone, cp_ann_imgs,i)
+            handle_one_file(meta_file_list, maskdir, step, allone, cp_ann_imgs, quiet, i)
         print("all_colors = ",sorted(list(all_colors))) # Very handy
     else:
         # parallel processing
-        wrapper = partial(handle_one_file, meta_file_list, maskdir, step, allone, cp_ann_imgs)
+        wrapper = partial(handle_one_file, meta_file_list, maskdir, step, allone, cp_ann_imgs, quiet)
         pool = mp.Pool(mp.cpu_count())
         results = pool.map(wrapper, range(len(meta_file_list)))
         pool.close()
