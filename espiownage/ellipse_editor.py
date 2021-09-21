@@ -227,6 +227,8 @@ class EllipseEditor(tk.Frame):
         self.mask_pred_file = 'top_losses/seg_images/'+str(Path(self.meta_file).stem)+'_pred.png'
         if os.path.exists(self.mask_pred_file):
             self.mask_img = Image.open(self.mask_pred_file)
+            if self.mask_img.size != (self.width, self.height): # to allow for half-size masks
+                self.mask_img.size = self.mask_img.size.resize((self.width, self.height))
             self.mask_img = ImageOps.colorize(self.mask_img, black ="black", white =(150,0,150))
         return
 
