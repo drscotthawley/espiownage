@@ -28,6 +28,9 @@ entries:
       title: (New)Fake Data
       url: count_in_crops_fake2.html
     - output: web,pdf
+      title: Pre-cleaned '15 or more' Real Data
+      url: count_in_crops_preclean.html
+    - output: web,pdf
       title: Old SPNet Real Data
       url: count_in_crops_spnet.html
     output: web

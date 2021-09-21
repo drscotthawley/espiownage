@@ -8,6 +8,7 @@
        "Real Data": "count_in_crops_real.html",
        "CycleGAN Data": "count_in_crops_cyclegan.html",
        "(New)Fake Data": "count_in_crops_fake2.html",
+       "Pre-cleaned '15 or more' Real Data": "count_in_crops_preclean.html",
        "Old SPNet Real Data": "count_in_crops_spnet.html"
    },
     "Bounding Boxes" : {
