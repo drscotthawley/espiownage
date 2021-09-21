@@ -48,6 +48,9 @@ entries:
     - output: web,pdf
       title: Pre-cleaned '15 or more' Real Data
       url: IceVision-on-espiownage-preclean.html
+    - output: web,pdf
+      title: Old SPNet Real Data
+      url: iv_bbox_real.html
     output: web
     title: Bounding Boxes
   - folderitems:

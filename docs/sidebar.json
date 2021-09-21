@@ -15,7 +15,8 @@
         "CycleGAN Data": "iv_bbox_cyclegan.html",
         "CycleGAN Data -OBPR": "IceVision-on-espiownage-cyclegan-obpr.html",
         "(New)Fake Data": "iv_bbox_fake2.html",
-        "Pre-cleaned '15 or more' Real Data": "IceVision-on-espiownage-preclean.html"
+        "Pre-cleaned '15 or more' Real Data": "IceVision-on-espiownage-preclean.html",
+        "Old SPNet Real Data": "iv_bbox_real.html"
     },
     "Segmentation": {
         "Real Data (one class)": "seg_allone_real.html",
