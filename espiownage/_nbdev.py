@@ -2,7 +2,8 @@
 
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
-index = {"mkdir_if_needed": "00_core.ipynb",
+index = {"sysinfo": "00_core.ipynb",
+         "mkdir_if_needed": "00_core.ipynb",
          "meta_to_img_path": "00_core.ipynb",
          "meta_to_mask_path": "00_core.ipynb",
          "meta_from_str": "00_core.ipynb",
@@ -17,7 +18,8 @@ index = {"mkdir_if_needed": "00_core.ipynb",
          "acc_reg05": "00_core.ipynb",
          "acc_reg1": "00_core.ipynb",
          "acc_reg15": "00_core.ipynb",
-         "acc_reg2": "00_core.ipynb"}
+         "acc_reg2": "00_core.ipynb",
+         "kfold_split": "00_core.ipynb"}
 
 modules = ["core.py",
            "scripts.py"]
