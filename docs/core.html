@@ -53,7 +53,7 @@ nb_path: "nbs/00_core.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="sysinfo" class="doc_header"><code>sysinfo</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L21" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>sysinfo</code>()</p>
+<h4 id="sysinfo" class="doc_header"><code>sysinfo</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L23" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>sysinfo</code>()</p>
 </blockquote>
 <p>Prints out versions of PyTorch, CUDA, name of GPU and host machine (for logging)</p>
 
@@ -125,7 +125,7 @@ hostname: oryxpro
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="mkdir_if_needed" class="doc_header"><code>mkdir_if_needed</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L34" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>mkdir_if_needed</code>(<strong><code>path</code></strong>:<code>str</code>)</p>
+<h4 id="mkdir_if_needed" class="doc_header"><code>mkdir_if_needed</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L38" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>mkdir_if_needed</code>(<strong><code>path</code></strong>:<code>str</code>)</p>
 </blockquote>
 <p><strong>Parameters:</strong></p>
 <ul>
@@ -160,7 +160,7 @@ hostname: oryxpro
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="meta_to_img_path" class="doc_header"><code>meta_to_img_path</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L43" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>meta_to_img_path</code>(<strong><code>meta_file</code></strong>:<code>str</code>, <strong><code>img_bank</code></strong>=<em><code>'images/'</code></em>)</p>
+<h4 id="meta_to_img_path" class="doc_header"><code>meta_to_img_path</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L47" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>meta_to_img_path</code>(<strong><code>meta_file</code></strong>:<code>str</code>, <strong><code>img_bank</code></strong>=<em><code>'images/'</code></em>)</p>
 </blockquote>
 <p>Suggest the image file that corresponds with an annotation CSV file</p>
 <p><strong>Parameters:</strong></p>
@@ -232,7 +232,7 @@ hostname: oryxpro
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="meta_to_mask_path" class="doc_header"><code>meta_to_mask_path</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L54" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>meta_to_mask_path</code>(<strong><code>meta_file</code></strong>:<code>str</code>, <strong><code>mask_dir</code></strong>=<em><code>'masks/'</code></em>)</p>
+<h4 id="meta_to_mask_path" class="doc_header"><code>meta_to_mask_path</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L58" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>meta_to_mask_path</code>(<strong><code>meta_file</code></strong>:<code>str</code>, <strong><code>mask_dir</code></strong>=<em><code>'masks/'</code></em>)</p>
 </blockquote>
 <p>provides name for segmentation mask file</p>
 <p><strong>Parameters:</strong></p>
@@ -304,7 +304,7 @@ hostname: oryxpro
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="meta_from_str" class="doc_header"><code>meta_from_str</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L63" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>meta_from_str</code>(<strong><code>s</code></strong>)</p>
+<h4 id="meta_from_str" class="doc_header"><code>meta_from_str</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L67" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>meta_from_str</code>(<strong><code>s</code></strong>)</p>
 </blockquote>
 <p>e.g., 06241902_proc_00510_0_45_88_236_1.0 -&gt; 06241902_proc_00510.csv</p>
 <p><strong>Parameters:</strong></p>
@@ -359,7 +359,7 @@ hostname: oryxpro
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="combine_file_and_tl_lists" class="doc_header"><code>combine_file_and_tl_lists</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L71" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>combine_file_and_tl_lists</code>(<strong><code>file_list</code></strong>, <strong><code>top_loss_list</code></strong>)</p>
+<h4 id="combine_file_and_tl_lists" class="doc_header"><code>combine_file_and_tl_lists</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L75" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>combine_file_and_tl_lists</code>(<strong><code>file_list</code></strong>, <strong><code>top_loss_list</code></strong>)</p>
 </blockquote>
 <p>for ellipse editor, but adding here:
 Go through tl list, and if elem e is not in file list, don't copy
@@ -440,7 +440,7 @@ out =  [&#39;annotations_hawley/06240907_proc_01001.csv&#39;, &#39;annotations_h
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="meta_to_df" class="doc_header"><code>meta_to_df</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L87" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>meta_to_df</code>(<strong><code>meta_file</code></strong>)</p>
+<h4 id="meta_to_df" class="doc_header"><code>meta_to_df</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L91" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>meta_to_df</code>(<strong><code>meta_file</code></strong>)</p>
 </blockquote>
 <p>Reads in an espiownage/SPNet CSV file of ellipse data and returns a Pandas DataFrame</p>
 <p><strong>Parameters:</strong></p>
@@ -482,7 +482,7 @@ out =  [&#39;annotations_hawley/06240907_proc_01001.csv&#39;, &#39;annotations_h
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="fix_abangle" class="doc_header"><code>fix_abangle</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L101" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>fix_abangle</code>(<strong><code>a</code></strong>:<code>float</code>, <strong><code>b</code></strong>:<code>float</code>, <strong><code>angle</code></strong>:<code>float</code>)</p>
+<h4 id="fix_abangle" class="doc_header"><code>fix_abangle</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L105" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>fix_abangle</code>(<strong><code>a</code></strong>:<code>float</code>, <strong><code>b</code></strong>:<code>float</code>, <strong><code>angle</code></strong>:<code>float</code>)</p>
 </blockquote>
 <p>Makes sure semimajor axis &gt; semiminor axis, and angles are consistent</p>
 <p><strong>Parameters:</strong></p>
@@ -557,7 +557,7 @@ out =  [&#39;annotations_hawley/06240907_proc_01001.csv&#39;, &#39;annotations_h
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="draw_ellipse" class="doc_header"><code>draw_ellipse</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L114" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>draw_ellipse</code>(<strong><code>img</code></strong>, <strong><code>center</code></strong>:<code>tuple</code>, <strong><code>axes</code></strong>:<code>tuple</code>, <strong><code>angle</code></strong>:<code>float</code>, <strong><code>color</code></strong>=<em><code>0</code></em>, <strong><code>thickness</code></strong>=<em><code>2</code></em>, <strong><code>filled</code></strong>=<em><code>False</code></em>, <strong><code>lineType</code></strong>=<em><code>8</code></em>, <strong><code>startAngle</code></strong>=<em><code>0</code></em>, <strong><code>endAngle</code></strong>=<em><code>360</code></em>, <strong><code>shift</code></strong>=<em><code>0</code></em>)</p>
+<h4 id="draw_ellipse" class="doc_header"><code>draw_ellipse</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L118" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>draw_ellipse</code>(<strong><code>img</code></strong>, <strong><code>center</code></strong>:<code>tuple</code>, <strong><code>axes</code></strong>:<code>tuple</code>, <strong><code>angle</code></strong>:<code>float</code>, <strong><code>color</code></strong>=<em><code>0</code></em>, <strong><code>thickness</code></strong>=<em><code>2</code></em>, <strong><code>filled</code></strong>=<em><code>False</code></em>, <strong><code>lineType</code></strong>=<em><code>8</code></em>, <strong><code>startAngle</code></strong>=<em><code>0</code></em>, <strong><code>endAngle</code></strong>=<em><code>360</code></em>, <strong><code>shift</code></strong>=<em><code>0</code></em>)</p>
 </blockquote>
 <p>"Draws an ellipse into image.</p>
 <p><strong>Parameters:</strong></p>
@@ -774,7 +774,7 @@ out =  [&#39;annotations_hawley/06240907_proc_01001.csv&#39;, &#39;annotations_h
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="ellipse_to_bbox" class="doc_header"><code>ellipse_to_bbox</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L137" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>ellipse_to_bbox</code>(<strong><code>cx</code></strong>:<code>float</code>, <strong><code>cy</code></strong>:<code>float</code>, <strong><code>a</code></strong>:<code>float</code>, <strong><code>b</code></strong>:<code>float</code>, <strong><code>angle_deg</code></strong>:<code>float</code>, <strong><code>coco</code></strong>=<em><code>False</code></em>, <strong><code>width</code></strong>=<em><code>512</code></em>, <strong><code>height</code></strong>=<em><code>384</code></em>, <strong><code>clip</code></strong>=<em><code>True</code></em>, <strong><code>nozero</code></strong>=<em><code>True</code></em>)</p>
+<h4 id="ellipse_to_bbox" class="doc_header"><code>ellipse_to_bbox</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L141" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>ellipse_to_bbox</code>(<strong><code>cx</code></strong>:<code>float</code>, <strong><code>cy</code></strong>:<code>float</code>, <strong><code>a</code></strong>:<code>float</code>, <strong><code>b</code></strong>:<code>float</code>, <strong><code>angle_deg</code></strong>:<code>float</code>, <strong><code>coco</code></strong>=<em><code>False</code></em>, <strong><code>width</code></strong>=<em><code>512</code></em>, <strong><code>height</code></strong>=<em><code>384</code></em>, <strong><code>clip</code></strong>=<em><code>True</code></em>, <strong><code>nozero</code></strong>=<em><code>True</code></em>)</p>
 </blockquote>
 <p>converts ellipse to bounding box</p>
 <p><strong>Parameters:</strong></p>
@@ -959,7 +959,7 @@ out =  [&#39;annotations_hawley/06240907_proc_01001.csv&#39;, &#39;annotations_h
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="ring_float_to_class_int" class="doc_header"><code>ring_float_to_class_int</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L168" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>ring_float_to_class_int</code>(<strong><code>rings</code></strong>:<code>float</code>, <strong><code>step</code></strong>=<em><code>0.1</code></em>)</p>
+<h4 id="ring_float_to_class_int" class="doc_header"><code>ring_float_to_class_int</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L172" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>ring_float_to_class_int</code>(<strong><code>rings</code></strong>:<code>float</code>, <strong><code>step</code></strong>=<em><code>0.1</code></em>)</p>
 </blockquote>
 <p>Ring value rounded to classifier value; rounded to nearest step size</p>
 <p><strong>Parameters:</strong></p>
@@ -1031,7 +1031,7 @@ out =  [&#39;annotations_hawley/06240907_proc_01001.csv&#39;, &#39;annotations_h
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="crop_to_bbox" class="doc_header"><code>crop_to_bbox</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L173" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>crop_to_bbox</code>(<strong><code>img</code></strong>, <strong><code>bbox</code></strong>, <strong><code>coco</code></strong>=<em><code>False</code></em>, <strong><code>width</code></strong>=<em><code>512</code></em>, <strong><code>height</code></strong>=<em><code>384</code></em>, <strong><code>clip</code></strong>=<em><code>True</code></em>)</p>
+<h4 id="crop_to_bbox" class="doc_header"><code>crop_to_bbox</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L177" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>crop_to_bbox</code>(<strong><code>img</code></strong>, <strong><code>bbox</code></strong>, <strong><code>coco</code></strong>=<em><code>False</code></em>, <strong><code>width</code></strong>=<em><code>512</code></em>, <strong><code>height</code></strong>=<em><code>384</code></em>, <strong><code>clip</code></strong>=<em><code>True</code></em>)</p>
 </blockquote>
 <p>Crops an image to bbox, returns cropped image</p>
 <p><strong>Parameters:</strong></p>
@@ -1166,7 +1166,7 @@ out =  [&#39;annotations_hawley/06240907_proc_01001.csv&#39;, &#39;annotations_h
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="acc_reg" class="doc_header"><code>acc_reg</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L200" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>acc_reg</code>(<strong><code>inp</code></strong>, <strong><code>targ</code></strong>, <strong><code>bin_size</code></strong>=<em><code>1</code></em>)</p>
+<h4 id="acc_reg" class="doc_header"><code>acc_reg</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L204" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>acc_reg</code>(<strong><code>inp</code></strong>, <strong><code>targ</code></strong>, <strong><code>bin_size</code></strong>=<em><code>1</code></em>)</p>
 </blockquote>
 <p>Accuracy for regression: Are we within +/- bin_size?</p>
 <p><strong>Parameters:</strong></p>
@@ -1263,7 +1263,7 @@ TensorBase(1.)
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="acc_reg05" class="doc_header"><code>acc_reg05</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L207" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>acc_reg05</code>(<strong><code>inp</code></strong>, <strong><code>targ</code></strong>)</p>
+<h4 id="acc_reg05" class="doc_header"><code>acc_reg05</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L211" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>acc_reg05</code>(<strong><code>inp</code></strong>, <strong><code>targ</code></strong>)</p>
 </blockquote>
 <p><strong>Parameters:</strong></p>
 <ul>
@@ -1301,7 +1301,7 @@ TensorBase(1.)
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="acc_reg1" class="doc_header"><code>acc_reg1</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L210" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>acc_reg1</code>(<strong><code>inp</code></strong>, <strong><code>targ</code></strong>)</p>
+<h4 id="acc_reg1" class="doc_header"><code>acc_reg1</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L214" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>acc_reg1</code>(<strong><code>inp</code></strong>, <strong><code>targ</code></strong>)</p>
 </blockquote>
 <p><strong>Parameters:</strong></p>
 <ul>
@@ -1339,7 +1339,7 @@ TensorBase(1.)
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="acc_reg15" class="doc_header"><code>acc_reg15</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L213" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>acc_reg15</code>(<strong><code>inp</code></strong>, <strong><code>targ</code></strong>)</p>
+<h4 id="acc_reg15" class="doc_header"><code>acc_reg15</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L217" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>acc_reg15</code>(<strong><code>inp</code></strong>, <strong><code>targ</code></strong>)</p>
 </blockquote>
 <p><strong>Parameters:</strong></p>
 <ul>
@@ -1377,7 +1377,7 @@ TensorBase(1.)
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="acc_reg2" class="doc_header"><code>acc_reg2</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L216" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>acc_reg2</code>(<strong><code>inp</code></strong>, <strong><code>targ</code></strong>)</p>
+<h4 id="acc_reg2" class="doc_header"><code>acc_reg2</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L220" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>acc_reg2</code>(<strong><code>inp</code></strong>, <strong><code>targ</code></strong>)</p>
 </blockquote>
 <p><strong>Parameters:</strong></p>
 <ul>
@@ -1421,7 +1421,7 @@ TensorBase(1.)
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="kfold_split" class="doc_header"><code>kfold_split</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L219" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>kfold_split</code>(<strong><code>data</code></strong>, <strong><code>k</code></strong>, <strong><code>nk</code></strong>=<em><code>5</code></em>)</p>
+<h4 id="kfold_split" class="doc_header"><code>kfold_split</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L223" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>kfold_split</code>(<strong><code>data</code></strong>, <strong><code>k</code></strong>, <strong><code>nk</code></strong>=<em><code>5</code></em>)</p>
 </blockquote>
 <p>Breaks one list into train &amp; val as per k-fold cross-validation. For use with fastai IndexSplitter (throw out train_list) or IceVision's FixedSplitter</p>
 <p><strong>Parameters:</strong></p>

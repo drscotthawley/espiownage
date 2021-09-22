@@ -12,22 +12,26 @@ import numpy as np
 from pathlib import Path
 import os
 import pandas as pd
-import torch
 from fastai.torch_core import flatten_check
 import re
 import math
+import torch
+
 
 # Cell
+#slow
 def sysinfo():
     "Prints out versions of PyTorch, CUDA, name of GPU and host machine (for logging)"
-    tv, cv = torch.__version__, torch.version.cuda
-    tv = re.sub('\+cu.*','',tv)
-    TORCH_VERSION = 'torch'+tv[0:-1]+'0'
-    CUDA_VERSION = 'cu'+cv.replace('.','')
-
-    print(f"TORCH_VERSION={TORCH_VERSION}; CUDA_VERSION={CUDA_VERSION}")
-    print(f"CUDA available = {torch.cuda.is_available()}, Device count = {torch.cuda.device_count()}, Current device = {torch.cuda.current_device()}")
-    print(f"Device name = {torch.cuda.get_device_name()}")
+    try:
+        tv, cv = torch.__version__, torch.version.cuda
+        tv = re.sub('\+cu.*','',tv)
+        TORCH_VERSION = 'torch'+tv[0:-1]+'0'
+        CUDA_VERSION = 'cu'+cv.replace('.','')
+        print(f"TORCH_VERSION={TORCH_VERSION}; CUDA_VERSION={CUDA_VERSION}")
+        print(f"CUDA available = {torch.cuda.is_available()}, Device count = {torch.cuda.device_count()}, Current device = {torch.cuda.current_device()}")
+        print(f"Device name = {torch.cuda.get_device_name()}")
+    except:
+        print("No CUDA info available!  (That's bad)")
     print("hostname:",os.uname()[1])
 
 # Cell
