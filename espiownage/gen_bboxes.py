@@ -18,7 +18,7 @@ from espiownage.core import *
         https://colab.research.google.com/drive/1bi8PYLFexoEcNKRClul0X3U6JRLKaH7M?usp=sharing
 """
 
-def gen_coco_json(meta_file_list, bboxdir, step, reg, maxrings=11):
+def gen_coco_json(meta_file_list, bboxdir, step, reg, maxrings=11, allone=True):
     """ sample file format is a dict like...
     sample_coco_dict = {
         "categories": [{"id": 62, "name": "chair"}, {"id": 63, "name": "couch"}, {"id": 72, "name": "tv"}, {"id": 75, "name": "remote"}, {"id": 84, "name": "book"}, {"id": 86, "name": "vase"}],
@@ -30,7 +30,10 @@ def gen_coco_json(meta_file_list, bboxdir, step, reg, maxrings=11):
     coco_dict = {}
 
     # categories
-    if reg:
+    if allone:
+        print("allone=True: Treating all objects as same class")
+        coco_dict["categories"] = [{"id": 0, "name": "AN"}]
+    elif reg:
         print('Regression model: 1 class, called "rings"')
         coco_dict["categories"] = [{"id": 0, "name": "rings"}] # probably won't work
     else:
@@ -51,7 +54,12 @@ def gen_coco_json(meta_file_list, bboxdir, step, reg, maxrings=11):
             rings = round(float(row['rings']),2)
             assert rings <= maxrings
             if (rings > 0) and (bbox is not None):
-                category_id = rings if reg else int(round(maxrings/step))
+                if allone:
+                    category_id = 0
+                elif reg:
+                    category_id = rings
+                else:
+                    int(round(maxrings/step))
                 this_ann = {"image_id":image, "bbox": bbox, "category_id":category_id}
                 ann_list = ann_list + [this_ann]
     coco_dict["annotations"] = ann_list
@@ -69,9 +77,12 @@ def gen_long_csv(
     step,               # quantize ring counts via this bin size
     reg,                # regression model?
     obpr=False,         # "one box per ring" mode. every thing is an object "ring"
+    allone=True,        # all antinodes get marked as the same class: "AN" for antinode
     maxrings=11,        # used for quantization.
+    quiet=True,        # don't list every name created
     ):
     out_csv_filename = bboxdir+'/annotations_obpr.csv' if obpr else bboxdir+'/annotations.csv'
+    if allone: print("allone=True: Treating all objects as same class")
     print(f"Generating long CSV {out_csv_filename} ...")
 
     width, height = 512, 384  # image dims
@@ -80,7 +91,7 @@ def gen_long_csv(
     # Goal: make one big long list, turn it into a DataFrame, and then write it
     ann_list = []
     for i, meta_file in enumerate(meta_file_list):
-        print("meta_file = ",meta_file)
+        if (not quiet): print("meta_file = ",meta_file, ", quiet = ",quiet)
         this_df = meta_to_df(meta_file)
         image_file = os.path.basename(str(meta_to_img_path(meta_file)))
         this_df['filename'] = image_file
@@ -93,7 +104,9 @@ def gen_long_csv(
                 if not obpr:
                     bbox = ellipse_to_bbox(cx, cy, a, b, angle, coco=False)
                     if bbox is not None:
-                        label = rings if reg else  ring_float_to_class_int(rings, step=step)
+                        if allone: label = 'AN'
+                        elif reg: label = rings
+                        else: label = ring_float_to_class_int(rings, step=step)
                         line_list = [image_file, width, height, label, bbox[0], bbox[1], bbox[2], bbox[3]]
                         ann_list.append(line_list)
                 else:                           # one box per ring (rounded as integers)
@@ -118,7 +131,9 @@ def gen_long_csv(
 @call_parse
 def gen_bboxes(
     reg:Param("Set this for regression model (1 class, no steps)", store_true),
-    #obpr:Param("Set this for one box per ring", store_true),
+    notallone:Param("All objects DON'T get assigned to same class: 'AN' for antinode", store_true),
+    obpr:Param("Set this for one box per ring", store_true),
+    notquiet:Param("Don't list every filename created", store_true),
     files:Param("Wildcard name for all (ellipse) CSV files to read", str)='annotations/*.csv',
     bboxdir:Param("Directory to write bboxes to",str)='bboxes',
     step:Param("For classification model: Step size / resolution / precision of ring count",float)=1,
@@ -129,8 +144,8 @@ def gen_bboxes(
     files = ''.join(files)  # convert to str
     meta_file_list = sorted(glob.glob(files)) # list of all annotation .csv files for ellipses
 
-    for obpr in [False, True]:
-        gen_long_csv(files, meta_file_list, bboxdir, step, reg, obpr)
-    gen_coco_json(meta_file_list, bboxdir, step, reg)
+
+    gen_long_csv(files, meta_file_list, bboxdir, step, reg, obpr=obpr, allone=(not notallone), quiet=(not notquiet))
+    gen_coco_json(meta_file_list, bboxdir, step, reg, allone=(not notallone))
 
     return
