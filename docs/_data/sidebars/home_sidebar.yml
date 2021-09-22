@@ -81,6 +81,9 @@ entries:
     - output: web,pdf
       title: Inference (BB->Rings)
       url: workflow_inf.html
+    - output: web,pdf
+      title: BB K-fold Prediction
+      url: iv_bboxes_real_kfold.html
     output: web
     title: Workflows
   output: web

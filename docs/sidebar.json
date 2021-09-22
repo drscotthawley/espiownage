@@ -28,6 +28,8 @@
         "Regression - CAMVID test": "seg_reg_camvid.html"
     },
     "Workflows" : {
-      "Inference (BB->Rings)": "workflow_inf.html"
+      "Inference (BB->Rings)": "workflow_inf.html",
+      "BB K-fold Prediction": "iv_bboxes_real_kfold.html"
+
     }
 }
