@@ -219,7 +219,7 @@ espiownage version 0.0.41
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">kfold</span> <span class="o">=</span> <span class="kc">True</span>
-<span class="n">k</span> <span class="o">=</span> <span class="mi">1</span>   <span class="c1"># set k = 0 to 4  &amp; re-run everything from here down</span>
+<span class="n">k</span> <span class="o">=</span> <span class="mi">0</span>   <span class="c1"># set k = 0 to 4  &amp; re-run everything from here down</span>
 <span class="n">nk</span> <span class="o">=</span> <span class="mi">5</span>
 <span class="n">nv</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">fnames</span><span class="p">)</span><span class="o">/</span><span class="n">nk</span><span class="p">)</span> <span class="c1"># size of val set</span>
 <span class="n">bgn</span> <span class="o">=</span> <span class="n">k</span><span class="o">*</span><span class="n">nv</span>                   <span class="c1"># ind to start val set</span>
@@ -235,7 +235,7 @@ espiownage version 0.0.41
 
 <span class="n">dls</span> <span class="o">=</span> <span class="n">croppedrings</span><span class="o">.</span><span class="n">dataloaders</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">bs</span><span class="o">=</span><span class="mi">32</span><span class="p">)</span>
 
-<span class="c1">#dls.show_batch(max_n=9)</span>
+<span class="k">def</span> <span class="nf">acc_reg07</span><span class="p">(</span><span class="n">inp</span><span class="p">,</span> <span class="n">targ</span><span class="p">):</span> <span class="k">return</span> <span class="n">acc_reg</span><span class="p">(</span><span class="n">inp</span><span class="p">,</span> <span class="n">targ</span><span class="p">,</span> <span class="n">bin_size</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span> <span class="c1"># add one more</span>
 
 <span class="n">opt</span> <span class="o">=</span> <span class="n">ranger</span>
 
@@ -259,14 +259,14 @@ espiownage version 0.0.41
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">wandb</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">project</span><span class="o">=</span><span class="s1">&#39;ringcounts_kfold&#39;</span><span class="p">)</span>
 
 <span class="n">learn</span> <span class="o">=</span> <span class="n">cnn_learner</span><span class="p">(</span><span class="n">dls</span><span class="p">,</span> <span class="n">resnet34</span><span class="p">,</span> <span class="n">n_out</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">y_range</span><span class="o">=</span><span class="n">y_range</span><span class="p">,</span> 
-                    <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="n">mae</span><span class="p">,</span> <span class="n">acc_reg05</span><span class="p">,</span><span class="n">acc_reg1</span><span class="p">,</span><span class="n">acc_reg15</span><span class="p">,</span><span class="n">acc_reg2</span><span class="p">],</span> <span class="n">loss_func</span><span class="o">=</span><span class="n">MSELossFlat</span><span class="p">(),</span> 
+                    <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="n">mae</span><span class="p">,</span> <span class="n">acc_reg05</span><span class="p">,</span><span class="n">acc_reg07</span><span class="p">,</span> <span class="n">acc_reg1</span><span class="p">,</span><span class="n">acc_reg15</span><span class="p">,</span><span class="n">acc_reg2</span><span class="p">],</span> <span class="n">loss_func</span><span class="o">=</span><span class="n">MSELossFlat</span><span class="p">(),</span> 
                     <span class="n">opt_func</span><span class="o">=</span><span class="n">opt</span><span class="p">,</span> <span class="n">cbs</span><span class="o">=</span><span class="n">WandbCallback</span><span class="p">())</span>
 
 <span class="c1">#learn.lr_find()</span>
 
 <span class="c1">#learn.fine_tune(10, 1e-2)</span>
 <span class="n">lr</span> <span class="o">=</span> <span class="mf">5e-3</span>
-<span class="n">epochs</span> <span class="o">=</span> <span class="mi">10</span> <span class="k">if</span> <span class="n">kfold</span> <span class="k">else</span> <span class="mi">30</span>
+<span class="n">epochs</span> <span class="o">=</span> <span class="mi">30</span>
 <span class="n">freeze_epochs</span> <span class="o">=</span> <span class="mi">2</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Training for </span><span class="si">{</span><span class="n">epochs</span><span class="si">}</span><span class="s2"> epochs, with </span><span class="si">{</span><span class="n">freeze_epochs</span><span class="si">}</span><span class="s2"> frozen epochs first&quot;</span><span class="p">)</span>
 <span class="n">learn</span><span class="o">.</span><span class="n">fine_tune</span><span class="p">(</span><span class="n">epochs</span><span class="p">,</span> <span class="n">lr</span><span class="p">,</span> <span class="n">freeze_epochs</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
@@ -287,10 +287,10 @@ espiownage version 0.0.41
 <div class="output_html rendered_html output_subarea ">
 
                 Tracking run with wandb version 0.12.2<br/>
-                Syncing run <strong style="color:#cdcd00">glad-dew-5</strong> to <a href="https://wandb.ai" target="_blank">Weights & Biases</a> <a href="https://docs.wandb.com/integrations/jupyter.html" target="_blank">(Documentation)</a>.<br/>
+                Syncing run <strong style="color:#cdcd00">daily-night-9</strong> to <a href="https://wandb.ai" target="_blank">Weights & Biases</a> <a href="https://docs.wandb.com/integrations/jupyter.html" target="_blank">(Documentation)</a>.<br/>
                 Project page: <a href="https://wandb.ai/drscotthawley/ringcounts_kfold" target="_blank">https://wandb.ai/drscotthawley/ringcounts_kfold</a><br/>
-                Run page: <a href="https://wandb.ai/drscotthawley/ringcounts_kfold/runs/idulzj2b" target="_blank">https://wandb.ai/drscotthawley/ringcounts_kfold/runs/idulzj2b</a><br/>
-                Run data is saved locally in <code>/home/shawley/espi-work/wandb/run-20210923_145626-idulzj2b</code><br/><br/>
+                Run page: <a href="https://wandb.ai/drscotthawley/ringcounts_kfold/runs/1i5razbe" target="_blank">https://wandb.ai/drscotthawley/ringcounts_kfold/runs/1i5razbe</a><br/>
+                Run data is saved locally in <code>/home/shawley/espi-work/wandb/run-20210923_153144-1i5razbe</code><br/><br/>
             
 </div>
 
@@ -299,57 +299,10 @@ espiownage version 0.0.41
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Training for 10 epochs, with 2 frozen epochs first
+<pre>Training for 30 epochs, with 2 frozen epochs first
 WandbCallback requires use of &#34;SaveModelCallback&#34; to log best model
 </pre>
 </div>
-</div>
-
-<div class="output_area">
-
-
-<div class="output_html rendered_html output_subarea ">
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: left;">
-      <th>epoch</th>
-      <th>train_loss</th>
-      <th>valid_loss</th>
-      <th>mae</th>
-      <th>acc_reg05</th>
-      <th>acc_reg1</th>
-      <th>acc_reg15</th>
-      <th>acc_reg2</th>
-      <th>time</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>0</td>
-      <td>11.556036</td>
-      <td>10.552256</td>
-      <td>2.462625</td>
-      <td>0.161876</td>
-      <td>0.308623</td>
-      <td>0.389561</td>
-      <td>0.572617</td>
-      <td>00:18</td>
-    </tr>
-    <tr>
-      <td>1</td>
-      <td>7.987082</td>
-      <td>4.531872</td>
-      <td>1.483795</td>
-      <td>0.259455</td>
-      <td>0.491679</td>
-      <td>0.652799</td>
-      <td>0.771558</td>
-      <td>00:18</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
 </div>
 
 <div class="output_area">
@@ -370,8 +323,8 @@ WandbCallback requires use of &#34;SaveModelCallback&#34; to log best model
                 background: #F44336;
             }
         </style>
-      <progress value='7' class='' max='10' style='width:300px; height:20px; vertical-align: middle;'></progress>
-      70.00% [7/10 03:17<01:24]
+      <progress value='0' class='' max='2' style='width:300px; height:20px; vertical-align: middle;'></progress>
+      0.00% [0/2 00:00<00:00]
     </div>
     
 <table border="1" class="dataframe">
@@ -382,6 +335,7 @@ WandbCallback requires use of &#34;SaveModelCallback&#34; to log best model
       <th>valid_loss</th>
       <th>mae</th>
       <th>acc_reg05</th>
+      <th>acc_reg07</th>
       <th>acc_reg1</th>
       <th>acc_reg15</th>
       <th>acc_reg2</th>
@@ -389,83 +343,6 @@ WandbCallback requires use of &#34;SaveModelCallback&#34; to log best model
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <td>0</td>
-      <td>5.261014</td>
-      <td>3.500814</td>
-      <td>1.277863</td>
-      <td>0.321483</td>
-      <td>0.535552</td>
-      <td>0.721634</td>
-      <td>0.819970</td>
-      <td>00:22</td>
-    </tr>
-    <tr>
-      <td>1</td>
-      <td>3.863857</td>
-      <td>2.848370</td>
-      <td>1.141685</td>
-      <td>0.354766</td>
-      <td>0.622542</td>
-      <td>0.760968</td>
-      <td>0.843419</td>
-      <td>00:22</td>
-    </tr>
-    <tr>
-      <td>2</td>
-      <td>3.039279</td>
-      <td>1.987259</td>
-      <td>0.944911</td>
-      <td>0.409985</td>
-      <td>0.689107</td>
-      <td>0.802572</td>
-      <td>0.871407</td>
-      <td>00:22</td>
-    </tr>
-    <tr>
-      <td>3</td>
-      <td>2.569396</td>
-      <td>2.052628</td>
-      <td>0.882453</td>
-      <td>0.496974</td>
-      <td>0.742814</td>
-      <td>0.822995</td>
-      <td>0.881241</td>
-      <td>00:22</td>
-    </tr>
-    <tr>
-      <td>4</td>
-      <td>2.149253</td>
-      <td>1.984576</td>
-      <td>0.845200</td>
-      <td>0.511346</td>
-      <td>0.763238</td>
-      <td>0.846445</td>
-      <td>0.894856</td>
-      <td>00:22</td>
-    </tr>
-    <tr>
-      <td>5</td>
-      <td>2.107880</td>
-      <td>1.978123</td>
-      <td>0.902700</td>
-      <td>0.457640</td>
-      <td>0.722390</td>
-      <td>0.829047</td>
-      <td>0.882753</td>
-      <td>00:22</td>
-    </tr>
-    <tr>
-      <td>6</td>
-      <td>1.933119</td>
-      <td>1.407153</td>
-      <td>0.844804</td>
-      <td>0.406203</td>
-      <td>0.712557</td>
-      <td>0.847201</td>
-      <td>0.924357</td>
-      <td>00:22</td>
-    </tr>
   </tbody>
 </table><p>
 
@@ -482,8 +359,8 @@ WandbCallback requires use of &#34;SaveModelCallback&#34; to log best model
                 background: #F44336;
             }
         </style>
-      <progress value='51' class='' max='165' style='width:300px; height:20px; vertical-align: middle;'></progress>
-      30.91% [51/165 00:06<00:15 1.9099]
+      <progress value='36' class='' max='165' style='width:300px; height:20px; vertical-align: middle;'></progress>
+      21.82% [36/165 00:03<00:13 25.0681]
     </div>
     
 </div>
