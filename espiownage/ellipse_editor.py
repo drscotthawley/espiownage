@@ -263,6 +263,9 @@ class EllipseEditor(tk.Frame):
     def draw_pred_bboxes(self):
         if (not self.showing_bboxes) or len(self.bbox_list)==0: return
         for bb in self.bbox_list[0]:
+            # icevision shrank our images and then ebedded them in 384,384, we need to undo that?
+            bb = [int(x*512/384) for x in bb]  # unshrink everything
+            bb[1], bb[3] = bb[1]-(512-384)//2, bb[3]-(512-384)//2
             box = self.canvas.create_rectangle(bb[0],bb[1],bb[2],bb[3], outline="cyan", width=2)
 
     def load_new_files(self):
