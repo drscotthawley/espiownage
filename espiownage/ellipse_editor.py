@@ -107,6 +107,13 @@ def poly_oval(cx, cy, a, b, angle=0, steps=100 ):
     return point_list
 
 
+def clean_pandas_list(list_):
+    list_ = list_.replace(', ', '","')
+    list_ = list_.replace('[', '["')
+    list_ = list_.replace(']', '"]')
+    return list_
+
+
 def interleave_lists(list1:list, list2:list):
     "alternate between 1 and 2; if they're of different lengths, it keeps going with whatever's left in the longer one"
     return [x for both in zip(cycle(list1), list2) for x in both]
@@ -168,6 +175,12 @@ class EllipseEditor(tk.Frame):
         self.mask_img = None
         self.showing_mask = True
 
+        self.bbox_pred_file = 'top_losses/bboxes_top_losses_real.csv' # TODO: this is fragile
+        self.showing_bboxes = True
+        self.bbox_df = pd.read_csv(self.bbox_pred_file, converters={'bblist': eval})
+        self.bbox_list = []
+        self.bbox_df.apply(clean_pandas_list)
+
         self.tl_ring_count_file, self.tl_ring_count_dict = '', {}
         self.tl_ring_count_dict = defaultdict(lambda: [], self.tl_ring_count_dict) # map filenames to lists of rings info; defaults to empty list
         tl_rc_files = glob.glob(tldir+'/*ring*.csv')
@@ -200,6 +213,8 @@ class EllipseEditor(tk.Frame):
         self.canvas.bind("<m>", self.on_mkey)
         self.canvas.bind("<R>", self.on_rkey)
         self.canvas.bind("<r>", self.on_rkey)
+        self.canvas.bind("<B>", self.on_bkey)
+        self.canvas.bind("<b>", self.on_bkey)
         self.canvas.bind("<Left>", self.on_leftarrow)
         self.canvas.bind("<Right>", self.on_rightarrow)
 
@@ -245,6 +260,10 @@ class EllipseEditor(tk.Frame):
             #print("predicted ring counts: ",cx, cy, ringstr)
             ringtext = self.canvas.create_text(cx, self.y0+cy-15, text=ringstr, anchor=tk.CENTER, font=tk.font.Font(size=15), fill="yellow")
 
+    def draw_pred_bboxes(self):
+        if (not self.showing_bboxes) or len(self.bbox_list)==0: return
+        for bb in self.bbox_list[0]:
+            box = self.canvas.create_rectangle(bb[0],bb[1],bb[2],bb[3], outline="cyan", width=2)
 
     def load_new_files(self):
         self.canvas.delete("all")  #destroy old tokens
@@ -255,10 +274,13 @@ class EllipseEditor(tk.Frame):
         self.setup_pred_mask()
         self.read_assign_image()
         self.merge_mask_image()
-        self.read_assign_csv()
+
         self.read_prev_next_imgs()
+        self.bbox_list = self.bbox_df[self.bbox_df['filename'] == os.path.basename(self.meta_file)]['bblist'].tolist() # nice, huh? ;-)
+        self.draw_pred_bboxes()
         self.predringlist = self.tl_ring_count_dict[os.path.basename(self.meta_file)]
         self.draw_pred_rings()
+        self.read_assign_csv()
 
 
     def assign_image(self):
@@ -344,6 +366,9 @@ class EllipseEditor(tk.Frame):
             self.load_new_files()
     def on_rkey(self,event):
         self.showing_predrings = not self.showing_predrings
+        self.load_new_files()
+    def on_bkey(self,event):
+        self.showing_bboxes = not self.showing_bboxes
         self.load_new_files()
     def on_rightarrow(self,event):               # right arrow on keyboard
         self.file_index += 1                     # TODO: grab from top_losses
@@ -539,6 +564,7 @@ def ellipse_editor(
     print("    - Left Arrow  : Previous file")
     print("    - M           : Toggle display of predicted segmentation mask (if available)")
     print("    - R           : Toggle display of predicted ring counts (if available)")
+    print("    - B           : Toggle display of predicted bounding boxes (if available)")
     print("    - S           : Save metadata")
     print("    - Q           : Quit")
 
