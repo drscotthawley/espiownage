@@ -217,6 +217,7 @@ class EllipseEditor(tk.Frame):
         self.canvas.bind("<b>", self.on_bkey)
         self.canvas.bind("<Left>", self.on_leftarrow)
         self.canvas.bind("<Right>", self.on_rightarrow)
+        self.canvas.bind('<Motion>', self.mouse_move)
 
         self.infostr = ""
         self.text = self.canvas.create_text(self.width+10, 10+self.height, text=self.infostr,
@@ -383,7 +384,11 @@ class EllipseEditor(tk.Frame):
         if (self.file_index < 0):
             self.file_index = len(self.meta_file_list)-1
         self.load_new_files()
-
+    def mouse_move(self,event):
+        x, y = event.x, event.y
+        tx, ty = 2*self.width+40, 2*self.height-40
+        box = self.canvas.create_rectangle(tx-5,ty, tx+110,ty+25, fill="white", outline="white")
+        self.canvas.create_text(tx, ty, text=f'({x},{y})', anchor=tk.NW, font=tk.font.Font(size=12), fill='black')
 
     def on_main_press(self, event):
         '''Begining drag of an object'''
