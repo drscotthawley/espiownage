@@ -27,9 +27,12 @@
         "Regression - Real Data": "seg_reg_real.html",
         "Regression - CAMVID test": "seg_reg_camvid.html"
     },
-    "Workflows" : {
+    "K-Fold Testing" : {
       "Ring Count K-Fold" : "kfold_count_in_crops_real.html",
       "Segmentation Regression K-Fold" : "kfold_seg_reg_real.html",
+      "BB K-fold Prediction": "iv_bboxes_real_kfold.html"
+    },
+    "Inference" : {
       "Inference (BB->Rings)": "workflow_inf.html",
       "BB K-fold Prediction": "iv_bboxes_real_kfold.html",
       "Segmentation Regression Bulk Prediction": "pred_segreg_bulk.html"

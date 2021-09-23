@@ -85,6 +85,12 @@ entries:
       title: Segmentation Regression K-Fold
       url: kfold_seg_reg_real.html
     - output: web,pdf
+      title: BB K-fold Prediction
+      url: iv_bboxes_real_kfold.html
+    output: web
+    title: K-Fold Testing
+  - folderitems:
+    - output: web,pdf
       title: Inference (BB->Rings)
       url: workflow_inf.html
     - output: web,pdf
@@ -94,6 +100,6 @@ entries:
       title: Segmentation Regression Bulk Prediction
       url: pred_segreg_bulk.html
     output: web
-    title: Workflows
+    title: Inference
   output: web
   title: Sidebar
