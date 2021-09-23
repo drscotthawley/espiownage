@@ -79,6 +79,9 @@ entries:
     title: Segmentation
   - folderitems:
     - output: web,pdf
+      title: Ring Count K-Fold
+      url: kfold_count_in_crops_real.html
+    - output: web,pdf
       title: Inference (BB->Rings)
       url: workflow_inf.html
     - output: web,pdf
