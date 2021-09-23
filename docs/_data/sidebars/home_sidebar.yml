@@ -82,13 +82,16 @@ entries:
       title: Ring Count K-Fold
       url: kfold_count_in_crops_real.html
     - output: web,pdf
+      title: Segmentation Regression
+      url: kfold_seg_reg_real.html
+    - output: web,pdf
       title: Inference (BB->Rings)
       url: workflow_inf.html
     - output: web,pdf
       title: BB K-fold Prediction
       url: iv_bboxes_real_kfold.html
     - output: web,pdf
-      title: Segmentation Regression
+      title: Segmentation Regression Bulk Prediction
       url: pred_segreg_bulk.html
     output: web
     title: Workflows
