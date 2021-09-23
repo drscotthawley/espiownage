@@ -84,6 +84,9 @@ entries:
     - output: web,pdf
       title: BB K-fold Prediction
       url: iv_bboxes_real_kfold.html
+    - output: web,pdf
+      title: Segmentation Regression
+      url: pred_segreg_bulk.html
     output: web
     title: Workflows
   output: web
