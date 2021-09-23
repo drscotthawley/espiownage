@@ -82,7 +82,7 @@ entries:
       title: Ring Count K-Fold
       url: kfold_count_in_crops_real.html
     - output: web,pdf
-      title: Segmentation Regression
+      title: Segmentation Regression K-Fold
       url: kfold_seg_reg_real.html
     - output: web,pdf
       title: Inference (BB->Rings)
