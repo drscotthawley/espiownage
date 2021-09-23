@@ -54,7 +54,7 @@ nb_path: "nbs/01_script_doc.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="ellipse_editor" class="doc_header"><code>ellipse_editor</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/ellipse_editor.py#L514" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>ellipse_editor</code>(<strong><code>seq</code></strong>:"Ignore top-loss ordering and do sequential ordering", <strong><code>files</code></strong>:"Wildcard name for all CSV files to edit"=<em>`'annotations/</em>.csv'<code>*, **</code>imgbank<code>**:"Directory where all the (unlabeled) images are"=*</code>'images/'<code>*, **</code>tldir<code>**:"Directory where 'top losses' info is stored'"=*</code>'top_losses/'`*)</p>
+<h4 id="ellipse_editor" class="doc_header"><code>ellipse_editor</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/ellipse_editor.py#L544" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>ellipse_editor</code>(<strong><code>seq</code></strong>:"Ignore top-loss ordering and do sequential ordering", <strong><code>files</code></strong>:"Wildcard name for all CSV files to edit"=<em>`'annotations/</em>.csv'<code>*, **</code>imgbank<code>**:"Directory where all the (unlabeled) images are"=*</code>'images/'<code>*, **</code>tldir<code>**:"Directory where 'top losses' info is stored'"=*</code>'top_losses/'`*)</p>
 </blockquote>
 <p><strong>Parameters:</strong></p>
 <ul>
@@ -81,7 +81,7 @@ nb_path: "nbs/01_script_doc.ipynb"
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>When available, the ellipse editor will show model predictions ("top losses") such as segmentations masks (in purple) and ring counts (in yellow), to indicate differences between annotations and the model's predictions.  This can be used to guide the user's attention to annotations that may need revising, and/or as a gauge of the model's performance.
-<img src="/espiownage/images/ellipse_editor_with_seg_masks.png" alt="ellipse editor with seg masks"></p>
+<img src="/espiownage/images/ellipse_editor_screenshot.png" alt="ellipse editor screenshot"></p>
 
 </div>
 </div>
@@ -153,12 +153,14 @@ optional arguments:
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="gen_masks" class="doc_header"><code>gen_masks</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/gen_masks.py#L70" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>gen_masks</code>(<strong><code>allone</code></strong>:"All objects get assigned to class 1", <strong><code>cp_ann_imgs</code></strong>:"make directory of only images for which annotations exist (to annotated_images/)", <strong><code>files</code></strong>:"Wildcard name for all CSV files to edit"=<em>`'annotations/</em>.csv'<code>*, **</code>maskdir<code>**:"Directory to write segmentation masks to"=*</code>'masks/'<code>*, **</code>step<code>**:"Step size / resolution / precision of ring count"=*</code>1`*)</p>
+<h4 id="gen_masks" class="doc_header"><code>gen_masks</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/gen_masks.py#L72" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>gen_masks</code>(<strong><code>allone</code></strong>:"All objects get assigned to class 1", <strong><code>quiet</code></strong>:"Suppress output log", <strong><code>cp_ann_imgs</code></strong>:"make directory of only images for which annotations exist (to annotated_images/)", <strong><code>files</code></strong>:"Wildcard name for all CSV files to edit"=<em>`'annotations/</em>.csv'<code>*, **</code>maskdir<code>**:"Directory to write segmentation masks to"=*</code>'masks/'<code>*, **</code>step<code>**:"Step size / resolution / precision of ring count"=*</code>1`*)</p>
 </blockquote>
 <p>Generate segmentation masks for all annotations</p>
 <p><strong>Parameters:</strong></p>
 <ul>
 <li><p><strong><code>allone</code></strong> : <em><code>&lt;All objects get assigned to class 1&gt;</code></em></p>
+</li>
+<li><p><strong><code>quiet</code></strong> : <em><code>&lt;Suppress output log&gt;</code></em></p>
 </li>
 <li><p><strong><code>cp_ann_imgs</code></strong> : <em><code>&lt;make directory of only images for which annotations exist (to annotated_images/)&gt;</code></em></p>
 </li>
@@ -236,16 +238,20 @@ optional arguments:
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="gen_bboxes" class="doc_header"><code>gen_bboxes</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/gen_bboxes.py#L118" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>gen_bboxes</code>(<strong><code>reg</code></strong>:"Set this for regression model (1 class, no steps)", <strong><code>files</code></strong>:"Wildcard name for all (ellipse) CSV files to read"=<em>`'annotations/</em>.csv'<code>*, **</code>bboxdir<code>**:"Directory to write bboxes to"=*</code>'bboxes'<code>*, **</code>step<code>**:"For classification model: Step size / resolution / precision of ring count"=*</code>1`*)</p>
+<h4 id="gen_bboxes" class="doc_header"><code>gen_bboxes</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/gen_bboxes.py#L131" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>gen_bboxes</code>(<strong><code>reg</code></strong>:"Set this for regression model (1 class, no steps)", <strong><code>notallone</code></strong>:"All objects DON'T get assigned to same class: 'AN' for antinode", <strong><code>obpr</code></strong>:"Set this for one box per ring", <strong><code>notquiet</code></strong>:"Don't list every filename created", <strong><code>files</code></strong>:"Wildcard name for all (ellipse) CSV files to read"=<em>`'annotations/</em>.csv'<code>*, **</code>bboxdir<code>**:"Directory to write bboxes to"=*</code>'bboxes'<code>*, **</code>step<code>**:"For classification model: Step size / resolution / precision of ring count"=*</code>1`*)</p>
 </blockquote>
 <p><strong>Parameters:</strong></p>
 <ul>
 <li><p><strong><code>reg</code></strong> : <em><code>&lt;Set this for regression model (1 class, no steps)&gt;</code></em></p>
 </li>
-<li><p><strong><code>files</code></strong> : <em><code>str &lt;Wildcard name for all (ellipse) CSV files to read&gt;</code></em>, <em>optional</em>    <p>obpr:Param("Set this for one box per ring", store_true),</p></p>
+<li><p><strong><code>notallone</code></strong> : <em><code>&lt;All objects DON'T get assigned to same class: 'AN' for antinode&gt;</code></em></p>
 </li>
-</ul>
-<ul>
+<li><p><strong><code>obpr</code></strong> : <em><code>&lt;Set this for one box per ring&gt;</code></em></p>
+</li>
+<li><p><strong><code>notquiet</code></strong> : <em><code>&lt;Don't list every filename created&gt;</code></em></p>
+</li>
+<li><p><strong><code>files</code></strong> : <em><code>str &lt;Wildcard name for all (ellipse) CSV files to read&gt;</code></em>, <em>optional</em></p>
+</li>
 <li><p><strong><code>bboxdir</code></strong> : <em><code>str &lt;Directory to write bboxes to&gt;</code></em>, <em>optional</em></p>
 </li>
 <li><p><strong><code>step</code></strong> : <em><code>float &lt;For classification model: Step size / resolution / precision of ring count&gt;</code></em>, <em>optional</em></p>
