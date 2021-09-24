@@ -83,7 +83,7 @@ entries:
       url: kfold_count_in_crops_real.html
     - output: web,pdf
       title: BB K-Fold
-      url: iv_bboxes_real_kfold_train.ipynb
+      url: iv_bboxes_real_kfold_train.html
     - output: web,pdf
       title: Segmentation Regression K-Fold
       url: kfold_seg_reg_real.html
