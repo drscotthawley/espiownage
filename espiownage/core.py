@@ -182,7 +182,7 @@ def crop_to_bbox(
     clip=True,  # clip values at max values of image width & height
     ):
     "Crops an image to bbox, returns cropped image"
-    if isinstance(img,np.ndarray): img = Image.fromarray(img)  # convert cv2 image to PIL
+    if isinstance(img,np.ndarray): img = Image.fromarray(img.copy())  # convert cv2 image to PIL
     xmin, ymin = bbox[0], bbox[1]
     if coco: xmax, ymax = bbox[0]+bbox[2], bbox[1]+bbox[3]
     else:    xmax, ymax = bbox[2], bbox[3]
