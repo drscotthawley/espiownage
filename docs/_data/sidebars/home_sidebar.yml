@@ -94,7 +94,7 @@ entries:
       title: Bounding Boxes
       url: inference_iv_bb.html
     - output: web,pdf
-      title: Rings (given) BBs
+      title: Rings from BBoxes
       url: infer_rings_in_crops.html
     - output: web,pdf
       title: Segmentation Regression
