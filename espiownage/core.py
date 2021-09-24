@@ -2,8 +2,8 @@
 
 __all__ = ['sysinfo', 'mkdir_if_needed', 'meta_to_img_path', 'meta_to_mask_path', 'meta_from_str',
            'combine_file_and_tl_lists', 'meta_to_df', 'fix_abangle', 'draw_ellipse', 'ellipse_to_bbox',
-           'ring_float_to_class_int', 'crop_to_bbox', 'acc_reg', 'acc_reg05', 'acc_reg07', 'acc_reg1', 'acc_reg15',
-           'acc_reg2', 'kfold_split']
+           'ring_float_to_class_int', 'crop_to_bbox', 'is_in_box', 'acc_reg', 'acc_reg05', 'acc_reg07', 'acc_reg1',
+           'acc_reg15', 'acc_reg2', 'kfold_split']
 
 # Cell
 import cv2
@@ -199,6 +199,15 @@ def crop_to_bbox(
     else:
         print(f"crop_to_bbox: Error: zero-dim crop request, crop_bb = {crop_bb}. Returning None.")
         return None
+
+# Cell
+def is_in_box(
+    p,     # a point as a (x,y) coordinate pair
+    bb,    # a bounding box of the form [xmin,ymin,xmax,ymax]
+    ):
+    "Is this point within that bounding box?"
+    x, y = p
+    return (x>=bb[0]) and (x<=bb[2]) and (y>=bb[1]) and (y<=bb[3])
 
 # Cell
 def acc_reg(inp, targ, bin_size=1):

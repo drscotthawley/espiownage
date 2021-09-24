@@ -1149,6 +1149,63 @@ out =  [&#39;annotations_hawley/06240907_proc_01001.csv&#39;, &#39;annotations_h
 </div>
     {% endraw %}
 
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="is_in_box" class="doc_header"><code>is_in_box</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L204" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>is_in_box</code>(<strong><code>p</code></strong>, <strong><code>bb</code></strong>)</p>
+</blockquote>
+<p>Is this point within that bounding box?</p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><strong><code>p</code></strong> : <em><code>&lt;class 'inspect._empty'&gt;</code></em>   <p>a point as a (x,y) coordinate pair</p></li>
+</ul>
+<ul>
+<li><strong><code>bb</code></strong> : <em><code>&lt;class 'inspect._empty'&gt;</code></em>  <p>a bounding box of the form [xmin,ymin,xmax,ymax]</p></li>
+</ul>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">assert</span> <span class="n">is_in_box</span><span class="p">((</span><span class="mi">100</span><span class="p">,</span><span class="mi">100</span><span class="p">),(</span><span class="mi">10</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span><span class="mi">180</span><span class="p">,</span><span class="mi">50</span><span class="p">))</span> <span class="o">==</span> <span class="kc">False</span>
+<span class="k">assert</span> <span class="n">is_in_box</span><span class="p">((</span><span class="mi">100</span><span class="p">,</span><span class="mi">100</span><span class="p">),(</span><span class="mi">10</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span><span class="mi">180</span><span class="p">,</span><span class="mi">150</span><span class="p">))</span> <span class="o">==</span> <span class="kc">True</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="&quot;Regression-accuracy&quot;-metric(s)">"Regression accuracy" metric(s)<a class="anchor-link" href="#&quot;Regression-accuracy&quot;-metric(s)"> </a></h2>
@@ -1166,7 +1223,7 @@ out =  [&#39;annotations_hawley/06240907_proc_01001.csv&#39;, &#39;annotations_h
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="acc_reg" class="doc_header"><code>acc_reg</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L204" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>acc_reg</code>(<strong><code>inp</code></strong>, <strong><code>targ</code></strong>, <strong><code>bin_size</code></strong>=<em><code>1</code></em>)</p>
+<h4 id="acc_reg" class="doc_header"><code>acc_reg</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L213" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>acc_reg</code>(<strong><code>inp</code></strong>, <strong><code>targ</code></strong>, <strong><code>bin_size</code></strong>=<em><code>1</code></em>)</p>
 </blockquote>
 <p>Accuracy for regression: Are we within +/- bin_size?</p>
 <p><strong>Parameters:</strong></p>
@@ -1263,7 +1320,7 @@ TensorBase(1.)
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="acc_reg05" class="doc_header"><code>acc_reg05</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L211" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>acc_reg05</code>(<strong><code>inp</code></strong>, <strong><code>targ</code></strong>)</p>
+<h4 id="acc_reg05" class="doc_header"><code>acc_reg05</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L220" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>acc_reg05</code>(<strong><code>inp</code></strong>, <strong><code>targ</code></strong>)</p>
 </blockquote>
 <p><strong>Parameters:</strong></p>
 <ul>
@@ -1301,7 +1358,7 @@ TensorBase(1.)
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="acc_reg07" class="doc_header"><code>acc_reg07</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L214" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>acc_reg07</code>(<strong><code>inp</code></strong>, <strong><code>targ</code></strong>)</p>
+<h4 id="acc_reg07" class="doc_header"><code>acc_reg07</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L223" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>acc_reg07</code>(<strong><code>inp</code></strong>, <strong><code>targ</code></strong>)</p>
 </blockquote>
 <p><strong>Parameters:</strong></p>
 <ul>
@@ -1339,7 +1396,7 @@ TensorBase(1.)
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="acc_reg1" class="doc_header"><code>acc_reg1</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L217" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>acc_reg1</code>(<strong><code>inp</code></strong>, <strong><code>targ</code></strong>)</p>
+<h4 id="acc_reg1" class="doc_header"><code>acc_reg1</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L226" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>acc_reg1</code>(<strong><code>inp</code></strong>, <strong><code>targ</code></strong>)</p>
 </blockquote>
 <p><strong>Parameters:</strong></p>
 <ul>
@@ -1377,7 +1434,7 @@ TensorBase(1.)
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="acc_reg15" class="doc_header"><code>acc_reg15</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L220" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>acc_reg15</code>(<strong><code>inp</code></strong>, <strong><code>targ</code></strong>)</p>
+<h4 id="acc_reg15" class="doc_header"><code>acc_reg15</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L229" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>acc_reg15</code>(<strong><code>inp</code></strong>, <strong><code>targ</code></strong>)</p>
 </blockquote>
 <p><strong>Parameters:</strong></p>
 <ul>
@@ -1415,7 +1472,7 @@ TensorBase(1.)
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="acc_reg2" class="doc_header"><code>acc_reg2</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L223" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>acc_reg2</code>(<strong><code>inp</code></strong>, <strong><code>targ</code></strong>)</p>
+<h4 id="acc_reg2" class="doc_header"><code>acc_reg2</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L232" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>acc_reg2</code>(<strong><code>inp</code></strong>, <strong><code>targ</code></strong>)</p>
 </blockquote>
 <p><strong>Parameters:</strong></p>
 <ul>
@@ -1459,7 +1516,7 @@ TensorBase(1.)
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="kfold_split" class="doc_header"><code>kfold_split</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L226" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>kfold_split</code>(<strong><code>data</code></strong>, <strong><code>k</code></strong>, <strong><code>nk</code></strong>=<em><code>5</code></em>)</p>
+<h4 id="kfold_split" class="doc_header"><code>kfold_split</code><a href="https://github.com/drscotthawley/espiownage/tree/master/espiownage/core.py#L235" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>kfold_split</code>(<strong><code>data</code></strong>, <strong><code>k</code></strong>, <strong><code>nk</code></strong>=<em><code>5</code></em>)</p>
 </blockquote>
 <p>Breaks one list into train &amp; val as per k-fold cross-validation. For use with fastai IndexSplitter (throw out train_list) or IceVision's FixedSplitter</p>
 <p><strong>Parameters:</strong></p>
