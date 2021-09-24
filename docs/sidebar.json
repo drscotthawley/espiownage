@@ -34,7 +34,7 @@
     },
     "Inference" : {
       "Bounding Boxes": "inference_iv_bb.html",
-      "Rings (given) BBs": "workflow_inf.html",
+      "Rings (given) BBs": "infer_rings_in_crops.html",
       "Segmentation Regression": "pred_segreg_bulk.html"
     }
 }

@@ -95,7 +95,7 @@ entries:
       url: inference_iv_bb.html
     - output: web,pdf
       title: Rings (given) BBs
-      url: workflow_inf.html
+      url: infer_rings_in_crops.html
     - output: web,pdf
       title: Segmentation Regression
       url: pred_segreg_bulk.html
