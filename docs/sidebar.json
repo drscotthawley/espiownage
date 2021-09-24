@@ -29,12 +29,12 @@
     },
     "K-Fold Testing" : {
       "Ring Count K-Fold" : "kfold_count_in_crops_real.html",
-      "BB K-Fold": "iv_bboxes_real_kfold_train.ipynb"
+      "BB K-Fold": "iv_bboxes_real_kfold_train.ipynb",
       "Segmentation Regression K-Fold" : "kfold_seg_reg_real.html"
     },
     "Inference" : {
-      "Inference (BB->Rings)": "workflow_inf.html",
-      "BB K-fold Prediction": "iv_bboxes_real_kfold.html",
-      "Segmentation Regression Bulk Prediction": "pred_segreg_bulk.html"
+      "Bounding Boxes": "inference_iv_bb.html",
+      "Rings (given) BBs": "workflow_inf.html",
+      "Segmentation Regression": "pred_segreg_bulk.html"
     }
 }

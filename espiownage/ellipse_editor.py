@@ -261,12 +261,13 @@ class EllipseEditor(tk.Frame):
             #print("predicted ring counts: ",cx, cy, ringstr)
             ringtext = self.canvas.create_text(cx, self.y0+cy-15, text=ringstr, anchor=tk.CENTER, font=tk.font.Font(size=15), fill="yellow")
 
-    def draw_pred_bboxes(self):
+    def draw_pred_bboxes(self, please_fix=True):
         if (not self.showing_bboxes) or len(self.bbox_list)==0: return
         for bb in self.bbox_list[0]:
-            # icevision shrank our images and then ebedded them in 384,384, we need to undo that?
-            bb = [int(x*512/384) for x in bb]  # unshrink everything
-            bb[1], bb[3] = bb[1]-(512-384)//2, bb[3]-(512-384)//2
+            if please_fix:
+                # icevision shrank our images and then ebedded them in 384,384, we need to undo that?
+                bb = [int(x*512/384) for x in bb]  # unshrink everything
+                bb[1], bb[3] = bb[1]-(512-384)//2, bb[3]-(512-384)//2
             box = self.canvas.create_rectangle(bb[0],bb[1],bb[2],bb[3], outline="cyan", width=2)
 
     def load_new_files(self):
