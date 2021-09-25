@@ -52,9 +52,9 @@ def get_data(dataset_name='cleaner', force_download=False, dest_root='~/.espiown
     urls['cyclegan'] = 'https://www.dropbox.com/sh/24eqya4frqg5i7c/AABf0H1J4ama2s3WGGFHv3MFa/data/espiownage-cyclegan.tgz'
     urls['fake']     = 'https://www.dropbox.com/sh/24eqya4frqg5i7c/AAAQK6S36pMWkxd-XrXqcf0ma/data/espiownage-fake.tgz'
     data_dir = f'espiownage-{dataset_name}'
-    dest_root = os.path.expanduser(dest_root)
+    dest_root = os.path.expanduser(dest_root)+'/'
     mkdir_if_needed(dest_root)
-    dest = dest_root +'/'+data_dir
+    dest = dest_root+data_dir
     if (not os.path.exists(dest)) or (force_download):
         cmd = f"curl -L -o {dest+'.tgz'} {urls[dataset_name]}; tar xfz {dest+'.tgz'} -C {dest_root}"
         print(cmd)
