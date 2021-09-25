@@ -51,6 +51,48 @@ nb_path: "nbs/count_in_crops_real.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>pip install espiownage --upgrade -q
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre><span class="ansi-red-fg">  ERROR: Command errored out with exit status 128:
+   command: git clone -q https://github.com/drscotthawley/espiownage /tmp/pip-req-build-alctg2io
+       cwd: None
+  Complete output (5 lines):
+  error: RPC failed; curl 56 GnuTLS recv error (-54): Error in the pull function.
+  error: 59 bytes of body are still expected
+  fetch-pack: unexpected disconnect while reading sideband packet
+  fatal: early EOF
+  fatal: index-pack failed
+  ----------------------------------------</span>
+<span class="ansi-yellow-fg">WARNING: Discarding git+https://github.com/drscotthawley/espiownage. Command errored out with exit status 128: git clone -q https://github.com/drscotthawley/espiownage /tmp/pip-req-build-alctg2io Check the logs for full command output.</span>
+<span class="ansi-red-fg">ERROR: Command errored out with exit status 128: git clone -q https://github.com/drscotthawley/espiownage /tmp/pip-req-build-alctg2io Check the logs for full command output.</span>
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">espiownage</span>
 <span class="kn">from</span> <span class="nn">espiownage.core</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="n">sysinfo</span><span class="p">()</span>
