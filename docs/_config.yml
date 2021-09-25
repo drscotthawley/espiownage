@@ -63,7 +63,7 @@ defaults:
 
 sidebars:
 - home_sidebar
-baseurl: /espiownage/
+baseurl: /
 
 plugins:
     - jekyll-remote-theme
