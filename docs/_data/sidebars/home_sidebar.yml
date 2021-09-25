@@ -82,7 +82,10 @@ entries:
       title: Ring Count K-Fold
       url: kfold_count_in_crops_real.html
     - output: web,pdf
-      title: BB K-Fold
+      title: Boundig Box K-Fold
+      url: kfold_bboxes.html
+    - output: web,pdf
+      title: BB K-Fold (old)
       url: iv_bboxes_real_kfold_train.html
     - output: web,pdf
       title: Segmentation Regression K-Fold

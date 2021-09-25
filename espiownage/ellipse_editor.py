@@ -177,8 +177,8 @@ class EllipseEditor(tk.Frame):
 
         self.bbox_pred_file = 'top_losses/bboxes_top_losses_real.csv' # TODO: this is fragile
         self.showing_bboxes = True
-        self.bbox_df = pd.read_csv(self.bbox_pred_file, converters={'bblist': eval})
         self.bbox_list = []
+        self.bbox_df = pd.read_csv(self.bbox_pred_file, converters={'bblist': eval})
         self.bbox_df.apply(clean_pandas_list)
 
         self.tl_ring_count_file, self.tl_ring_count_dict = '', {}
