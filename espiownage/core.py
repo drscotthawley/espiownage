@@ -43,7 +43,11 @@ def mkdir_if_needed(path:str):
             raise
 
 # Cell
-def get_data(dataset_name='cleaner', force_download=False, dest_root='~/.espiownage/data'):
+def get_data(dataset_name='cleaner',    # 'cleaner','preclean','spnet','cyclegan','fake'
+             force_download=False,      # re-downloads even if you've already got one
+             dest_root='~/.espiownage/data', # where the data gets saved
+            ):
+    "We 'anonymized' our URLs for double-blind review. But this screwed up fastai's downloader so we wrote one"
     assert dataset_name in ['cleaner','preclean','spnet','cyclegan','fake']
     urls = {}
     urls['cleaner']  = 'https://www.dropbox.com/sh/24eqya4frqg5i7c/AAAVEsRhmc06J_rnFUcId8-ga/data/espiownage-cleaner.tgz'

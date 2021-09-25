@@ -58,31 +58,6 @@ nb_path: "nbs/count_in_crops_real.ipynb"
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre><span class="ansi-red-fg">  ERROR: Command errored out with exit status 128:
-   command: git clone -q https://github.com/drscotthawley/espiownage /tmp/pip-req-build-alctg2io
-       cwd: None
-  Complete output (5 lines):
-  error: RPC failed; curl 56 GnuTLS recv error (-54): Error in the pull function.
-  error: 59 bytes of body are still expected
-  fetch-pack: unexpected disconnect while reading sideband packet
-  fatal: early EOF
-  fatal: index-pack failed
-  ----------------------------------------</span>
-<span class="ansi-yellow-fg">WARNING: Discarding git+https://github.com/drscotthawley/espiownage. Command errored out with exit status 128: git clone -q https://github.com/drscotthawley/espiownage /tmp/pip-req-build-alctg2io Check the logs for full command output.</span>
-<span class="ansi-red-fg">ERROR: Command errored out with exit status 128: git clone -q https://github.com/drscotthawley/espiownage /tmp/pip-req-build-alctg2io Check the logs for full command output.</span>
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
 </div>
     {% endraw %}
 
@@ -113,7 +88,7 @@ nb_path: "nbs/count_in_crops_real.ipynb"
 CUDA available = True, Device count = 1, Current device = 0
 Device name = NVIDIA GeForce RTX 2070 with Max-Q Design
 hostname: oryxpro
-espiownage version 0.0.46
+espiownage version 0.0.47
 </pre>
 </div>
 </div>
@@ -272,7 +247,7 @@ espiownage version 0.0.46
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>Path(&#39;/home/shawley/.espiownage/dataespiownage-cleaner/crops&#39;)</pre>
+<pre>Path(&#39;/home/shawley/.espiownage/data/espiownage-cleaner/crops&#39;)</pre>
 </div>
 
 </div>
@@ -306,38 +281,19 @@ espiownage version 0.0.46
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>0 total cropped images
+<pre>6614 total cropped images
 </pre>
 </div>
 </div>
 
 <div class="output_area">
 
-<div class="output_subarea output_text output_error">
-<pre>
-<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">IndexError</span>                                Traceback (most recent call last)
-<span class="ansi-green-fg">/tmp/ipykernel_935758/3588156585.py</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
-<span class="ansi-green-intense-fg ansi-bold">      2</span> print<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">f&#34;{len(fnames)} total cropped images&#34;</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">      3</span> ind <span class="ansi-blue-fg">=</span> <span class="ansi-cyan-fg">1</span>  <span class="ansi-red-fg"># pick one cropped image</span>
-<span class="ansi-green-fg">----&gt; 4</span><span class="ansi-red-fg"> </span>fnames<span class="ansi-blue-fg">[</span>ind<span class="ansi-blue-fg">]</span>
 
-<span class="ansi-green-fg">~/envs/espi/lib/python3.9/site-packages/fastcore/foundation.py</span> in <span class="ansi-cyan-fg">__getitem__</span><span class="ansi-blue-fg">(self, idx)</span>
-<span class="ansi-green-intense-fg ansi-bold">    109</span>     <span class="ansi-green-fg">def</span> _xtra<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span> <span class="ansi-green-fg">return</span> <span class="ansi-green-fg">None</span>
-<span class="ansi-green-intense-fg ansi-bold">    110</span>     <span class="ansi-green-fg">def</span> _new<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> items<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">*</span>args<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span> <span class="ansi-green-fg">return</span> type<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">(</span>items<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">*</span>args<span class="ansi-blue-fg">,</span> use_list<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-fg">--&gt; 111</span><span class="ansi-red-fg">     </span><span class="ansi-green-fg">def</span> __getitem__<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> idx<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span> <span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">.</span>_get<span class="ansi-blue-fg">(</span>idx<span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">if</span> is_indexer<span class="ansi-blue-fg">(</span>idx<span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">else</span> L<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>_get<span class="ansi-blue-fg">(</span>idx<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">,</span> use_list<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    112</span>     <span class="ansi-green-fg">def</span> copy<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span> <span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">.</span>_new<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>items<span class="ansi-blue-fg">.</span>copy<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    113</span> 
 
-<span class="ansi-green-fg">~/envs/espi/lib/python3.9/site-packages/fastcore/foundation.py</span> in <span class="ansi-cyan-fg">_get</span><span class="ansi-blue-fg">(self, i)</span>
-<span class="ansi-green-intense-fg ansi-bold">    113</span> 
-<span class="ansi-green-intense-fg ansi-bold">    114</span>     <span class="ansi-green-fg">def</span> _get<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> i<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-fg">--&gt; 115</span><span class="ansi-red-fg">         </span><span class="ansi-green-fg">if</span> is_indexer<span class="ansi-blue-fg">(</span>i<span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">or</span> isinstance<span class="ansi-blue-fg">(</span>i<span class="ansi-blue-fg">,</span>slice<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span> <span class="ansi-green-fg">return</span> getattr<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>items<span class="ansi-blue-fg">,</span><span class="ansi-blue-fg">&#39;iloc&#39;</span><span class="ansi-blue-fg">,</span>self<span class="ansi-blue-fg">.</span>items<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">[</span>i<span class="ansi-blue-fg">]</span>
-<span class="ansi-green-intense-fg ansi-bold">    116</span>         i <span class="ansi-blue-fg">=</span> mask2idxs<span class="ansi-blue-fg">(</span>i<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    117</span>         return (self.items.iloc[list(i)] if hasattr(self.items,&#39;iloc&#39;)
-
-<span class="ansi-red-fg">IndexError</span>: list index out of range</pre>
+<div class="output_text output_subarea output_execute_result">
+<pre>Path(&#39;/home/shawley/.espiownage/data/espiownage-cleaner/crops/06241902_proc_00670_182_252_259_319_1.0.png&#39;)</pre>
 </div>
+
 </div>
 
 </div>
