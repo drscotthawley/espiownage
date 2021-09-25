@@ -30,7 +30,6 @@
     "K-Fold Testing" : {
       "Ring Count K-Fold" : "kfold_count_in_crops_real.html",
       "Boundig Box K-Fold": "kfold_bboxes.html",
-      "BB K-Fold (old)": "iv_bboxes_real_kfold_train.html",
       "Segmentation Regression K-Fold" : "kfold_seg_reg_real.html"
     },
     "Inference" : {

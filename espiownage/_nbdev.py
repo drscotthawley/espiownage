@@ -5,6 +5,7 @@ __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 index = {"sysinfo": "00_core.ipynb",
          "mkdir_if_needed": "00_core.ipynb",
          "get_data": "00_core.ipynb",
+         "get_weights": "00_core.ipynb",
          "meta_to_img_path": "00_core.ipynb",
          "meta_to_mask_path": "00_core.ipynb",
          "meta_from_str": "00_core.ipynb",
