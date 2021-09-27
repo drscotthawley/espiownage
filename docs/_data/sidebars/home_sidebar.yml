@@ -19,6 +19,12 @@ entries:
     title: espiownage
   - folderitems:
     - output: web,pdf
+      title: Generating Graphs
+      url: make_graphs.html
+    output: web
+    title: Reproducing the Paper
+  - folderitems:
+    - output: web,pdf
       title: Real Data
       url: count_in_crops_real.html
     - output: web,pdf
@@ -101,11 +107,5 @@ entries:
       url: pred_segreg_bulk.html
     output: web
     title: Inference
-  - folderitems:
-    - output: web,pdf
-      title: Generating Graphs
-      url: make_graphs.html
-    output: web
-    title: Paper
   output: web
   title: Sidebar

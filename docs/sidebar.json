@@ -6,7 +6,7 @@
    },
    "Reproducing the Paper": {
      "Generating Graphs": "make_graphs.html"
-   }
+   },
    "Ring Counts": {
        "Real Data": "count_in_crops_real.html",
        "CycleGAN Data": "count_in_crops_cyclegan.html",
