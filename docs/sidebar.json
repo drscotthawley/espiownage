@@ -36,5 +36,8 @@
       "Bounding Boxes": "inference_iv_bb.html",
       "Rings from BBoxes": "infer_rings_in_crops.html",
       "Segmentation Regression": "pred_segreg_bulk.html"
+    },
+    "Paper": {
+      "Generating Graphs": "make_graphs.html"
     }
 }

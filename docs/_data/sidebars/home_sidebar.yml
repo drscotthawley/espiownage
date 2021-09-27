@@ -101,5 +101,11 @@ entries:
       url: pred_segreg_bulk.html
     output: web
     title: Inference
+  - folderitems:
+    - output: web,pdf
+      title: Generating Graphs
+      url: make_graphs.html
+    output: web
+    title: Paper
   output: web
   title: Sidebar
