@@ -19,7 +19,7 @@ entries:
     title: espiownage
   - folderitems:
     - output: web,pdf
-      title: 'Supplmental: Generalization to Other Instruments'
+      title: 'Supplmental: Inference on Other Instruments'
       url: pred_segreg_new.html
     - output: web,pdf
       title: Reprodudicing Graphs
