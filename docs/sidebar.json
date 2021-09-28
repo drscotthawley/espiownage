@@ -4,8 +4,10 @@
     "espiownage core": "core.html",
     "Console Scripts": "script_doc.html"
    },
-   "Reproducing the Paper": {
-     "Generating Graphs": "make_graphs.html"
+   "Materials for the Paper": {
+     "Supplmental: Generalization to Other Instruments": "pred_segreg_new.html",
+     "Reprodudicing Graphs": "make_graphs.html"
+
    },
    "Ring Counts": {
        "Real Data": "count_in_crops_real.html",

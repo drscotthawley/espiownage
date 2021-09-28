@@ -19,10 +19,13 @@ entries:
     title: espiownage
   - folderitems:
     - output: web,pdf
-      title: Generating Graphs
+      title: 'Supplmental: Generalization to Other Instruments'
+      url: pred_segreg_new.html
+    - output: web,pdf
+      title: Reprodudicing Graphs
       url: make_graphs.html
     output: web
-    title: Reproducing the Paper
+    title: Materials for the Paper
   - folderitems:
     - output: web,pdf
       title: Real Data
