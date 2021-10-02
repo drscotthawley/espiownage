@@ -62,6 +62,7 @@ import re
 from espiownage.core import *
 from itertools import cycle
 from collections import defaultdict
+import matplotlib.pyplot as plt
 
 
 
@@ -162,6 +163,7 @@ class EllipseEditor(tk.Frame):
 
         # create a canvas
         self.width, self.height = 512, 384   # size of images
+        self.fps = 15037
         self.y0 = 0# self.height    # y offset for all operations
         self.readout = 700                   # width for additional annotation text
         self.canvas = tk.Canvas(width=self.width + self.readout, height=20+2*self.height )
@@ -180,6 +182,16 @@ class EllipseEditor(tk.Frame):
         self.bbox_list = []
         self.bbox_df = pd.read_csv(self.bbox_pred_file, converters={'bblist': eval})
         self.bbox_df.apply(clean_pandas_list)
+
+        self.segreg_volume_file = 'seg_reg_array_uint8.npy'
+        self.segreg_volume = []
+        self.segreg_bin_size = 0.7
+        if os.path.exists(self.segreg_volume_file):
+            print("Reading seg-reg volume data file ",self.segreg_volume_file)
+            # read file as memory-mapped object, cf. https://numpy.org/doc/stable/reference/generated/numpy.memmap.html#numpy.memmap
+            self.segreg_volume = np.load(self.segreg_volume_file)#, mmap_mode="r")
+            self.segreg_volume_times = np.arange(self.segreg_volume.shape[0]) #/self.fps
+            #print("self.segreg_volume.shape =",self.segreg_volume.shape)
 
         self.tl_ring_count_file, self.tl_ring_count_dict = '', {}
         self.tl_ring_count_dict = defaultdict(lambda: [], self.tl_ring_count_dict) # map filenames to lists of rings info; defaults to empty list
@@ -205,16 +217,18 @@ class EllipseEditor(tk.Frame):
         self.canvas.bind("<ButtonPress-3>", self.on_rightpress)   # on linux, button 3 is right mouse
 
         self.canvas.focus_set()
-        self.canvas.bind("<Q>", self.on_qkey)
-        self.canvas.bind("<q>", self.on_qkey)
-        self.canvas.bind("<S>", self.on_skey)
-        self.canvas.bind("<s>", self.on_skey)
+        self.canvas.bind("<B>", self.on_bkey)
+        self.canvas.bind("<b>", self.on_bkey)
+        self.canvas.bind("<G>", self.on_gkey)
+        self.canvas.bind("<g>", self.on_gkey)
         self.canvas.bind("<M>", self.on_mkey)
         self.canvas.bind("<m>", self.on_mkey)
         self.canvas.bind("<R>", self.on_rkey)
         self.canvas.bind("<r>", self.on_rkey)
-        self.canvas.bind("<B>", self.on_bkey)
-        self.canvas.bind("<b>", self.on_bkey)
+        self.canvas.bind("<Q>", self.on_qkey)
+        self.canvas.bind("<q>", self.on_qkey)
+        self.canvas.bind("<S>", self.on_skey)
+        self.canvas.bind("<s>", self.on_skey)
         self.canvas.bind("<Left>", self.on_leftarrow)
         self.canvas.bind("<Right>", self.on_rightarrow)
         self.canvas.bind('<Motion>', self.mouse_move)
@@ -354,13 +368,21 @@ class EllipseEditor(tk.Frame):
         self.canvas.tag_bind("handle", "<ButtonRelease-1>", self.on_handle_release)
         self.canvas.tag_bind("handle", "<B1-Motion>", self.on_handle_motion)
 
-    def on_qkey(self, event):
-        print("Quitting")
-        sys.exit()
-    def on_skey(self,event):
-        print("Saving file ",self.meta_file)
-        # TODO: add code to enforce a > b (and fix angle)
-        self.df.to_csv(self.meta_file,index=False,header=None)
+    def graph_segreg_ts(self,event):
+        if 0 == len(self.segreg_volume): return
+        x, y = event.x, event.y
+        if (x>self.width) or (y>self.height): return
+        print("graph_segreg_ts: x, y =",x,y)
+        slice = self.segreg_volume[:,y,x]*self.segreg_bin_size
+        plt.plot(self.segreg_volume_times, slice, 'o-')
+        plt.show()
+
+    def on_bkey(self,event):
+        self.showing_bboxes = not self.showing_bboxes
+        self.load_new_files()
+    def on_gkey(self,event):
+        self.showing_bboxes = not self.showing_bboxes
+        self.graph_segreg_ts(event)
     def on_mkey(self,event):
         self.showing_mask = not self.showing_mask
         if self.showing_mask and self.mask_img is not None:
@@ -372,9 +394,13 @@ class EllipseEditor(tk.Frame):
     def on_rkey(self,event):
         self.showing_predrings = not self.showing_predrings
         self.load_new_files()
-    def on_bkey(self,event):
-        self.showing_bboxes = not self.showing_bboxes
-        self.load_new_files()
+    def on_qkey(self, event):
+        print("Quitting")
+        sys.exit()
+    def on_skey(self,event):
+        print("Saving file ",self.meta_file)
+        # TODO: add code to enforce a > b (and fix angle)
+        self.df.to_csv(self.meta_file,index=False,header=None)
     def on_rightarrow(self,event):               # right arrow on keyboard
         self.file_index += 1                     # TODO: grab from top_losses
         if (self.file_index >= len(self.meta_file_list)):

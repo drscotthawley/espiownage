@@ -68,34 +68,32 @@ def get_data(dataset_name='cleaner',    # 'cleaner','preclean','spnet','cyclegan
 # Cell
 def get_checkpoint(
         model_type='segreg', # 'segreg', 'rings', 'bboxes' . trained on real data only
-        learner_or_model=None, # for segreg & rings you need to pass in a defined fastai Learner; for bboxes we grab a whole model
         force_download=False,  # re-downloads even if you've already got one
         dest_root='~/.espiownage/models', # where the model weights gets saved
         ):
-    "For inference: Grab checkpoint of a pretrained espiownage model"
-    assert model_type in ['segreg', 'rings', 'bboxes']
+    "For inference: Grab checkpoint of a pretrained espiownage model and return path to its location"
+    assert model_type in ['segreg', 'rings', 'bboxes', 'seg']
     urls = {}
-    urls['segreg']  = ''
-    urls['rings'] = ''
-    urls['bboxes']    = ''
+    urls['segreg']  = 'https://www.dropbox.com/s/4dnad92r37ji0ah/seg_reg_full_real_2.pth?dl=0'
+    urls['rings'] = 'https://www.dropbox.com/s/awpgvqeonwhjgza/crop-rings-real_k0.pth?dl=0'
+    urls['bboxes'] = 'https://www.dropbox.com/s/yiip69zfig7rfob/espi-retinanet-checkpoint-real-k0.pth?dl=0'
+    urls['seg'] = 'https://www.dropbox.com/s/woa0gwemio4gami/seg_allone_full_real.pth?dl=0'
+
+    filename = urls[model_type].split('/')[-1].replace('?dl=0','')
+
     if 'bboxes' == model_type:
         print("Warning: the IceVision install is incompatible with the fastai version used for the seg-reg and ring counting")
         print("For bounding boxes you (probably) need a dedicated Python environment for that.")
-    else:
-        assert learner_or_model is not None, "You need to define the Learner so we can load the weights"
 
-    print("FAILURE: This isn't ready yet. Returning")
-    return None, model
-
-    data_dir = f'espiownage-{dataset_name}'
     dest_root = os.path.expanduser(dest_root)+'/'
     mkdir_if_needed(dest_root)
-    dest = dest_root+data_dir
+    dest = dest_root+filename
     if (not os.path.exists(dest)) or (force_download):
-        cmd = f"curl -L -o {dest+'.tgz'} {urls[dataset_name]}; tar xfz {dest+'.tgz'} -C {dest_root}"
+        cmd = f"curl -L -o {dest} {urls[model_type]}"
         print(cmd)
         os.system(cmd)
-    return Path(dest_root+data_dir)
+
+    return Path(dest)  # return where we saved the checkpoint
 
 # Cell
 def meta_to_img_path(
