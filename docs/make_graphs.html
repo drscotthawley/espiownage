@@ -1,6 +1,6 @@
 ---
 
-title: Making Graphs for the Paper
+title: Making Graphs & Tables for the Paper
 
 
 keywords: fastai
@@ -67,6 +67,15 @@ nb_path: "nbs/make_graphs.ipynb"
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Tables-1-&amp;-2:-See-&quot;K-fold-Testing&quot;-Tab">Tables 1 &amp; 2: See "K-fold Testing" Tab<a class="anchor-link" href="#Tables-1-&amp;-2:-See-&quot;K-fold-Testing&quot;-Tab"> </a></h2><p>The numbers in the tables were derived from the 5-fold cross-validation runs. See the "K-Fold Testing" on the sidebar on the left for sample notebooks. 
+All these runs were tracked via <a href="https://wandb.ai/">WandB.ai</a>, but the accounts for these are not anonymous, so...we're not linking to those pages here.<br>
+{% include note.html content='On those K-Fold example notebooks, the WandB links will 404 because there is no actual "maskedstudent" wandb account; we just used <code>sed</code> to replace the real username in the .ipynb files after the fact.' %}</p>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Figure-2:-Ring-Counts">Figure 2: Ring Counts<a class="anchor-link" href="#Figure-2:-Ring-Counts"> </a></h2><p>This notebook simply consolidates the individual graphs produced by the various Ring Counts / <code>count_in_crops_*.ipynb</code> files which are under the main "Ring Counts" tab in the sidebar.  Each one of those will generate one column of Figure 3 at the bottom of their respective notebooks.  From those output csv files, this notebook reads them and fuses them into a single image.</p>
@@ -198,14 +207,14 @@ nb_path: "nbs/make_graphs.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Figure-4:-Agreement-of-Methods">Figure 4: Agreement of Methods<a class="anchor-link" href="#Figure-4:-Agreement-of-Methods"> </a></h2><p>This is for the left panel in Figure 4. (The middle and right panels were done with Excel and other software.)</p>
+<h2 id="Figure-4:-Agreement-of-Methods">Figure 4: Agreement of Methods<a class="anchor-link" href="#Figure-4:-Agreement-of-Methods"> </a></h2><p>{% include note.html content='Generation of the <code>.txt</code> files that this section reads from requires access to the full 14,000 (previously unlabeled) video frames, which are not part of our dataset release. If this is a point of contention for reviewers, temporary access to these frames will be  enabled so that these graphs can be reproduced. However for now, these data are considered "proprietary". ' %}
+This is for the left panel in Figure 4. (The middle and right panels were done with Excel and other software.)</p>
 <p>This combines two curves:</p>
 <ol>
 <li>The bottom of the <a href="pred_segreg_bulk.html">"Inference &gt; Segmentation Regression" notebook</a> shows a time series graph that gets saved to a file called <code>rings_vs_t_13400-13600_sr.txt</code>.</li>
 <li>The bottom of the <a href="infer_rings_in_crops.html">"Inference &gt; Rings From BBoxes" notebook</a> shows a very similar-looking time-series graph, saved to the file <code>rings_vs_t_13400-13600_crops.txt</code>.</li>
 </ol>
-<p>To make the graph we combined these two time series using <code>xmgrace</code>, which...doesn't have a Jupyter plugin.
-We can try to recreate the basic aspect of the plot but it won't look the same as in the paper:</p>
+<p>To make the graph we combined these two time series:</p>
 
 </div>
 </div>
@@ -277,6 +286,8 @@ We can try to recreate the basic aspect of the plot but it won't look the same a
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Wow! They're right on top of each other!</p>
+<p>This was super exciting to see, as the "count rings in crops" method was shown to be quite accurate, whereas the "segmentation-regression" method was conceived as a "hail mary" invented during the 3 days we couldn't get the IceVision bbox detector to run in inference mode without CUDA OOM errors. The fact that these two different methods produced predictions that agreed so well was both encouraging and, TBH, surprising.</p>
+<p>This gave us reason to "believe" the S-R method and to use it for extracting science.  Future version of the <code>ellipse_editor</code> tool will allow the user to click on a pixel and then immediately see graphs of the time series at that pixel, and using the S-R data will be easier to implement than the count-in-crops method (though both will be possible and eventually included).</p>
 
 </div>
 </div>

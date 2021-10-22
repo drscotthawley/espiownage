@@ -33,8 +33,14 @@ nb_path: "nbs/index.ipynb"
 <div class="text_cell_render border-box-sizing rendered_html">
 <blockquote><p>Ownage of ESPI image inference. (Pronounced like "espionage" but with a little "own" in the middle.)</p>
 </blockquote>
-<p>Welcome to the new phase of <a href="https://github.com/drscotthawley/SPNet">SPNet</a> developement -- IN PROGRESS.
-In this incarnation, we'll be making it an image-segmentation code instead of an object detector, and we'll use <a href="fast.ai">fast.ai</a>.</p>
+<p>This code repository accompanies the paper submission <a href="https://www.dropbox.com/s/30nqyl0srekmu0s/steelpan_neurips_2021.pdf?dl=0"><strong>"espiownage:Tracking Transients in Drum Strikes Using Surveillance Technology"</strong></a> for the <a href="https://nips.cc/Conferences/2021/">NeurIPS 2021</a> workshop on <a href="https://ml4physicalsciences.github.io/2021/">Machine Learning and the Physical Sciences.</a></p>
+<div align="center">
+{% include image.html width="40%" style="display:inline; vertical-align: bottom" max-width="40%" file="/espiownage/images/ellipse_editor_screenshot.png" %}
+<div style="display:inline;width:10px;"></div>
+{% include image.html width="36%" style="display:inline; vertical-align: bottom" max-width="36%" file="/espiownage/images/infer_others.png" %}
+</div><p>This study consists of 3 models:  Two that go together (a bounding box detector that feeds cropped images into an antinode ring-counter) and another complements them (an image sementation code we use for regression by scaling the final activation of a "one-class" model.)</p>
+<p>All this documentation is fully executable, either locally or on Colab. This is made possible by <a href="nbdev.fast.ai">nbdev</a>, the development system that enabled us to stay organized and do this project in only 18 days!</p>
+<p>These pages and <a href="https://github.com/maskedstudent/espiownage">the GitHub repo they are generated from</a> are fully anonymized as are all the links that are used, so they're "safe" for reviewers to explore.  <em>Note that there is a "real" espiownage repo and PyPi entry (which is where the pip-installs used in these notebooks will pull from for setup/speed purposes) so don't go searching for that.</em>  Pending successful review of the paper, this repository will be redirected to the non-anonymous version.</p>
 
 </div>
 </div>
@@ -81,16 +87,7 @@ I like to put my environments in <code>~/envs</code>:</p>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>If you're reading this, you probably have access to the "real" data, which sits (on my machine) in <code>~/Dropbox/Data/espiownage-data</code>.  So <code>cd</code> to that directory, i.e.,</p>
-
-<pre><code>$ cd ~/Dropbox/Data/espiownage-data</code></pre>
-<p>...(or whereever you've got it) for what follows.</p>
-<p><strong>AND THEN</strong>, so we don't "clobber" each other's work, make <em>your own copy</em> (~17MB) of the main <code>annotations</code> directory, as in append your last name (hawley, morrison, morgan, etc):</p>
-<div class="highlight"><pre><span></span>cp -r annotations annotations_yourlastname
-</pre></div>
-<p>and then we'll each edit our own copy just to avoid...confusion.</p>
-<blockquote><p><em>Note:If you don't have access to the real data,</em> you can still grab the <a href="https://zenodo.org/record/4445434">fake SPNet data</a> and then, for each of those datasets: Move (or symlink) all the images to a directory called <code>images/</code>, and all the <code>.csv</code> files to a directory called <code>annotations/</code>, and proceed.</p>
-</blockquote>
+<p>Take a look at the tabs in the sidebar, which arranged in sections according the tasks of detecting antinodes in steelpan drum oscillations, counting the interference friges, and reporting tracking information so that scientists can better understand the rapid transient dynamics of these instruments -- it is the transients that give the instrument its distinctive sound!</p>
 
 </div>
 </div>
@@ -110,26 +107,6 @@ I like to put my environments in <code>~/envs</code>:</p>
 <p>Fork this repo.  When you want to update your repo, one macro does it all (see <code>Makefile</code>):</p>
 <div class="highlight"><pre><span></span>make git_update
 </pre></div>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Asides">Asides<a class="anchor-link" href="#Asides"> </a></h2><h3 id="Handy-tips-for-students">Handy tips for students<a class="anchor-link" href="#Handy-tips-for-students"> </a></h3><p>I can never remember how to start up virtual environments / or I don't <em>want</em> to remember. So in my <code>~/.bashrc</code> file (you may have a <code>~/.zshrc</code>) I put in a line where I define an alias/function I call <code>gimme</code>, that reads like so:</p>
-<div class="highlight"><pre><span></span>gimme<span class="o">()</span> <span class="o">{</span> <span class="nb">source</span> ~/envs/<span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span>/bin/activate<span class="p">;</span>  <span class="o">}</span>
-</pre></div>
-<p>(note that in order for this alias to be recognized, you need to either logout and log back in or else run <code>$ source ~/.bashrc</code>)</p>
-<p>Then when I want to load environment like <code>espi</code> I just type...</p>
-<div class="highlight"><pre><span></span>gimme espi
-</pre></div>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>--Scott H. Hawley, September 2021</p>
 
 </div>
 </div>

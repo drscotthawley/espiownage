@@ -32,7 +32,8 @@ nb_path: "nbs/kfold_count_in_crops_real.ipynb"
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Mod of <a href="https://walkwithfastai.com/Custom">Zach Muller's WWF 01_Custom.ipynb</a>.</p>
-<p>Here we'll take cropped images of antinodes and try to count the rings.</p>
+<p>Here we'll take cropped images of antinodes and try to count the rings.
+{% include note.html content='This is just a stripped-down, streamlined version of the longer <a href="count_in_crops_real.html">Counting Rings in Cropped Images</a> notebook, with a k-fold cross-validation added in. See that other notebook for a better explanation of what we&#8217;re doing. ' %}{% include note.html content='The WandB links will 404, because there is no "maskedstudent" WandB account. We just used <code>sed</code> to replace the real username in the .ipynb files. ' %}</p>
 
 </div>
 </div>
@@ -122,13 +123,25 @@ espiownage version 0.0.41
 <span class="kn">from</span> <span class="nn">fastai.vision.utils</span> <span class="kn">import</span> <span class="n">download_images</span><span class="p">,</span> <span class="n">verify_images</span>
 
 <span class="kn">from</span> <span class="nn">mrspuff.utils</span> <span class="kn">import</span> <span class="n">on_colab</span>
+</pre></div>
 
-<span class="n">on_colab</span> <span class="o">=</span> <span class="n">on_colab</span><span class="p">()</span>
+    </div>
+</div>
+</div>
 
-<span class="k">if</span> <span class="n">on_colab</span><span class="p">:</span>
-    <span class="n">path</span> <span class="o">=</span> <span class="n">untar_data</span><span class="p">(</span><span class="s1">&#39;http://hedges.belmont.edu/~shawley/espiownage-cleaner.tgz&#39;</span><span class="p">)</span> <span class="o">/</span> <span class="s1">&#39;crops&#39;</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">&#39;/home/shawley/datasets/espiownage-cleaner/crops&#39;</span><span class="p">)</span> 
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dataset_name</span> <span class="o">=</span> <span class="s1">&#39;cleaner&#39;</span> <span class="c1"># choose from: cleaner(=real), preclean, spnet, cyclegan, fake</span>
+
+<span class="n">path</span> <span class="o">=</span> <span class="n">get_data</span><span class="p">(</span><span class="n">dataset_name</span><span class="p">)</span> <span class="o">/</span> <span class="s1">&#39;crops&#39;</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
 
@@ -154,7 +167,7 @@ espiownage version 0.0.41
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>/home/shawley/datasets/espiownage-cleaner/crops
+<pre>/home/sstudent/datasets/espiownage-cleaner/crops
 6614 total cropped images
 1.8
 </pre>
@@ -190,7 +203,7 @@ espiownage version 0.0.41
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre><span class="ansi-blue-intense-fg ansi-bold">wandb</span>: Currently logged in as: <span class="ansi-yellow-fg">drscotthawley</span> (use `wandb login --relogin` to force relogin)
+<pre><span class="ansi-blue-intense-fg ansi-bold">wandb</span>: Currently logged in as: <span class="ansi-yellow-fg">maskedstudent</span> (use `wandb login --relogin` to force relogin)
 </pre>
 </div>
 </div>
@@ -256,7 +269,7 @@ espiownage version 0.0.41
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">wandb</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">project</span><span class="o">=</span><span class="s1">&#39;ringcounts_kfold&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">wandb</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">project</span><span class="o">=</span><span class="s1">&#39;ringcounts_kfold&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;k=</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s1">,</span><span class="si">{</span><span class="n">dataset_name</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 
 <span class="n">learn</span> <span class="o">=</span> <span class="n">cnn_learner</span><span class="p">(</span><span class="n">dls</span><span class="p">,</span> <span class="n">resnet34</span><span class="p">,</span> <span class="n">n_out</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">y_range</span><span class="o">=</span><span class="n">y_range</span><span class="p">,</span> 
                     <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="n">mae</span><span class="p">,</span> <span class="n">acc_reg05</span><span class="p">,</span><span class="n">acc_reg07</span><span class="p">,</span> <span class="n">acc_reg1</span><span class="p">,</span><span class="n">acc_reg15</span><span class="p">,</span><span class="n">acc_reg2</span><span class="p">],</span> <span class="n">loss_func</span><span class="o">=</span><span class="n">MSELossFlat</span><span class="p">(),</span> 
@@ -288,9 +301,9 @@ espiownage version 0.0.41
 
                 Tracking run with wandb version 0.12.2<br/>
                 Syncing run <strong style="color:#cdcd00">daily-night-9</strong> to <a href="https://wandb.ai" target="_blank">Weights & Biases</a> <a href="https://docs.wandb.com/integrations/jupyter.html" target="_blank">(Documentation)</a>.<br/>
-                Project page: <a href="https://wandb.ai/drscotthawley/ringcounts_kfold" target="_blank">https://wandb.ai/drscotthawley/ringcounts_kfold</a><br/>
-                Run page: <a href="https://wandb.ai/drscotthawley/ringcounts_kfold/runs/1i5razbe" target="_blank">https://wandb.ai/drscotthawley/ringcounts_kfold/runs/1i5razbe</a><br/>
-                Run data is saved locally in <code>/home/shawley/espi-work/wandb/run-20210923_153144-1i5razbe</code><br/><br/>
+                Project page: <a href="https://wandb.ai/maskedstudent/ringcounts_kfold" target="_blank">https://wandb.ai/maskedstudent/ringcounts_kfold</a><br/>
+                Run page: <a href="https://wandb.ai/maskedstudent/ringcounts_kfold/runs/1i5razbe" target="_blank">https://wandb.ai/maskedstudent/ringcounts_kfold/runs/1i5razbe</a><br/>
+                Run data is saved locally in <code>/home/sstudent/espi-work/wandb/run-20210923_153144-1i5razbe</code><br/><br/>
             
 </div>
 

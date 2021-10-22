@@ -46,6 +46,15 @@ nb_path: "nbs/infer_rings_in_crops.ipynb"
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Here we demonstrate the inference capability of the ring-counter model on crops of antinodes to see what "physics" can be learned from the additional 12,000 images not included in the labeled 'cleaner' dataset. 
+(The crops are obtained from the bounding boxes prediced by the IceVision bounding box object detector.)
+{% include note.html content='This section reads requires access to the full 14,000 (previously unlabeled) video frames, which are not part of our dataset release. If this is a point of contention for reviewers, temporary access to these frames will be  enabled so that these graphs can be reproduced. However for now, these data are considered "proprietary". ' %}</p>
+
+</div>
+</div>
+</div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -145,14 +154,8 @@ espiownage version 0.0.41
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">on_colab</span> <span class="o">=</span> <span class="n">on_colab</span><span class="p">()</span>
-
-<span class="k">if</span> <span class="n">on_colab</span><span class="p">:</span>
-    <span class="n">path</span> <span class="o">=</span> <span class="n">untar_data</span><span class="p">(</span><span class="s1">&#39;http://hedges.belmont.edu/~shawley/espiownage-cleaner.tgz&#39;</span><span class="p">)</span> <span class="o">/</span> <span class="s1">&#39;crops&#39;</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">&#39;/home/shawley/datasets/espiownage-cleaner/crops&#39;</span><span class="p">)</span> 
-
-<span class="nb">print</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dataset_name</span> <span class="o">=</span> <span class="s1">&#39;cleaner&#39;</span>
+<span class="n">path</span> <span class="o">=</span> <span class="n">get_data</span><span class="p">(</span><span class="s1">&#39;cleaner&#39;</span><span class="p">);</span> <span class="n">path</span>
 </pre></div>
 
     </div>
@@ -165,7 +168,7 @@ espiownage version 0.0.41
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>/home/shawley/datasets/espiownage-cleaner/crops
+<pre>/home/sstudent/datasets/espiownage-cleaner/crops
 </pre>
 </div>
 </div>
@@ -223,7 +226,7 @@ espiownage version 0.0.41
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>6614 total cropped images
-/home/shawley/datasets/espiownage-cleaner/crops/06241902_proc_00618_0_36_76_255_11.0.png
+/home/sstudent/datasets/espiownage-cleaner/crops/06241902_proc_00618_0_36_76_255_11.0.png
 11.0
 </pre>
 </div>
@@ -265,7 +268,7 @@ espiownage version 0.0.41
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>/home/shawley/envs/espi/lib/python3.6/site-packages/torch/nn/functional.py:718: UserWarning:
+<pre>/home/sstudent/envs/espi/lib/python3.6/site-packages/torch/nn/functional.py:718: UserWarning:
 
 Named tensors and all their associated APIs are an experimental feature and subject to change. Please do not use them for anything important until they are released as stable. (Triggered internally at  /pytorch/c10/core/TensorImpl.h:1156.)
 
@@ -543,7 +546,7 @@ torch.Size([30980])
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">fs_imgdir</span> <span class="o">=</span> <span class="s1">&#39;/home/shawley/datasets/zooniverse_steelpan/&#39;</span> <span class="c1"># where all full size images are stored</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">fs_imgdir</span> <span class="o">=</span> <span class="s1">&#39;/home/sstudent/datasets/zooniverse_steelpan/&#39;</span> <span class="c1"># where all full size images are stored</span>
 <span class="n">imlist</span> <span class="o">=</span> <span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">fs_imgdir</span><span class="o">+</span><span class="s1">&#39;/*.png&#39;</span><span class="p">))]</span>
 
 <span class="n">name2frame</span><span class="o">=</span> <span class="p">{</span><span class="n">v</span><span class="p">:</span><span class="nb">int</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">imlist</span><span class="p">)}</span> <span class="c1"># map filename to frame number</span>

@@ -38,6 +38,23 @@ nb_path: "nbs/count_in_crops_fake2.ipynb"
 </div>
 </div>
 </div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Installs-&amp;-Imports">Installs &amp; Imports<a class="anchor-link" href="#Installs-&amp;-Imports"> </a></h2>
@@ -244,33 +261,16 @@ espiownage version 0.0.47
 
 <div class="output_area">
 
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>curl -L -o /home/shawley/.espiownage/data/espiownage-fake.tgz https://www.dropbox.com/sh/24eqya4frqg5i7c/AAAQK6S36pMWkxd-XrXqcf0ma/data/espiownage-fake.tgz; tar xfz /home/shawley/.espiownage/data/espiownage-fake.tgz -C /home/shawley/.espiownage/data/
-</pre>
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
+<span class="ansi-green-fg">/tmp/ipykernel_1189450/911103483.py</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-intense-fg ansi-bold">      1</span> <span class="ansi-red-fg">#slow</span>
+<span class="ansi-green-fg">----&gt; 2</span><span class="ansi-red-fg"> </span>path <span class="ansi-blue-fg">=</span> get_data<span class="ansi-blue-fg">(</span>dataset_name<span class="ansi-blue-fg">)</span> <span class="ansi-blue-fg">/</span> <span class="ansi-blue-fg">&#39;crops&#39;</span><span class="ansi-blue-fg">;</span> path
+
+<span class="ansi-red-fg">NameError</span>: name &#39;get_data&#39; is not defined</pre>
 </div>
-</div>
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                 Dload  Upload   Total   Spent    Left  Speed
-100   176    0   176    0     0    712      0 --:--:-- --:--:-- --:--:--   712
-100   318  100   318    0     0    581      0 --:--:-- --:--:-- --:--:--     0
-100  1076    0  1076    0     0    953      0 --:--:--  0:00:01 --:--:--   953
-100  428M  100  428M    0     0  17.6M      0  0:00:24  0:00:24 --:--:-- 20.3M
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>Path(&#39;/home/shawley/.espiownage/data/espiownage-fake/crops&#39;)</pre>
-</div>
-
 </div>
 
 </div>
@@ -312,7 +312,7 @@ espiownage version 0.0.47
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>Path(&#39;/home/shawley/.espiownage/data/espiownage-fake/crops/steelpan_0001825_56_60_235_129_4.4.png&#39;)</pre>
+<pre>Path(&#39;/home/sstudent/.espiownage/data/espiownage-fake/crops/steelpan_0001825_56_60_235_129_4.4.png&#39;)</pre>
 </div>
 
 </div>
@@ -393,7 +393,7 @@ espiownage version 0.0.47
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>/home/shawley/envs/espi/lib/python3.9/site-packages/torch/_tensor.py:1023: UserWarning: torch.solve is deprecated in favor of torch.linalg.solveand will be removed in a future PyTorch release.
+<pre>/home/sstudent/envs/espi/lib/python3.9/site-packages/torch/_tensor.py:1023: UserWarning: torch.solve is deprecated in favor of torch.linalg.solveand will be removed in a future PyTorch release.
 torch.linalg.solve has its arguments reversed and does not return the LU factorization.
 To get the LU factorization see torch.lu, which can be used with torch.lu_solve or torch.lu_unpack.
 X = torch.solve(B, A).solution
@@ -490,7 +490,7 @@ X = torch.linalg.solve(A, B) (Triggered internally at  /pytorch/aten/src/ATen/na
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>/home/shawley/envs/espi/lib/python3.9/site-packages/torch/nn/functional.py:718: UserWarning: Named tensors and all their associated APIs are an experimental feature and subject to change. Please do not use them for anything important until they are released as stable. (Triggered internally at  /pytorch/c10/core/TensorImpl.h:1156.)
+<pre>/home/sstudent/envs/espi/lib/python3.9/site-packages/torch/nn/functional.py:718: UserWarning: Named tensors and all their associated APIs are an experimental feature and subject to change. Please do not use them for anything important until they are released as stable. (Triggered internally at  /pytorch/c10/core/TensorImpl.h:1156.)
   return torch.max_pool2d(input, kernel_size, stride, padding, dilation, ceil_mode)
 </pre>
 </div>
@@ -531,7 +531,7 @@ X = torch.linalg.solve(A, B) (Triggered internally at  /pytorch/aten/src/ATen/na
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>/home/shawley/envs/espi/lib/python3.9/site-packages/fastai/callback/schedule.py:269: UserWarning: color is redundantly defined by the &#39;color&#39; keyword argument and the fmt string &#34;ro&#34; (-&gt; color=&#39;r&#39;). The keyword argument will take precedence.
+<pre>/home/sstudent/envs/espi/lib/python3.9/site-packages/fastai/callback/schedule.py:269: UserWarning: color is redundantly defined by the &#39;color&#39; keyword argument and the fmt string &#34;ro&#34; (-&gt; color=&#39;r&#39;). The keyword argument will take precedence.
   ax.plot(val, idx, &#39;ro&#39;, label=nm, c=color)
 </pre>
 </div>

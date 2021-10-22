@@ -183,9 +183,8 @@ class EllipseEditor(tk.Frame):
         self.bbox_df = pd.read_csv(self.bbox_pred_file, converters={'bblist': eval})
         self.bbox_df.apply(clean_pandas_list)
 
-        self.segreg_volume_file = 'seg_reg_array_uint8.npy'
+        self.segreg_volume_file = 'segreg_volume_f16.npy'
         self.segreg_volume = []
-        self.segreg_bin_size = 0.7
         if os.path.exists(self.segreg_volume_file):
             print("Reading seg-reg volume data file ",self.segreg_volume_file)
             # read file as memory-mapped object, cf. https://numpy.org/doc/stable/reference/generated/numpy.memmap.html#numpy.memmap
@@ -373,7 +372,7 @@ class EllipseEditor(tk.Frame):
         x, y = event.x, event.y
         if (x>self.width) or (y>self.height): return
         print("graph_segreg_ts: x, y =",x,y)
-        slice = self.segreg_volume[:,y,x]*self.segreg_bin_size
+        slice = self.segreg_volume[:,y,x]
         plt.plot(self.segreg_volume_times, slice, 'o-')
         plt.show()
 
