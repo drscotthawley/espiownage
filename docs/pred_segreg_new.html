@@ -53,7 +53,7 @@ nb_path: "nbs/pred_segreg_new.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>pip install -Uqq espiownage
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>pip install -Uqq espiownage fastai
 </pre></div>
 
     </div>
@@ -101,9 +101,10 @@ nb_path: "nbs/pred_segreg_new.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">model_to_load</span> <span class="o">=</span> <span class="s1">&#39;seg_reg_full_real_2&#39;</span> <span class="c1"># .pth&#39;</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">checkpoint</span> <span class="o">=</span> <span class="n">get_checkpoint</span><span class="p">(</span><span class="s1">&#39;segreg&#39;</span><span class="p">)</span>
 
-<span class="n">imgdir</span> <span class="o">=</span> <span class="s1">&#39;/home/sstudent/datasets/other_espi_instruments/resized&#39;</span>
+<span class="c1"># TODO: move local directory to someplace user-downloadable</span>
+<span class="n">imgdir</span> <span class="o">=</span> <span class="s1">&#39;/home/shawley/datasets/other_espi_instruments/resized&#39;</span>
 </pre></div>
 
     </div>
@@ -248,7 +249,7 @@ X = torch.linalg.solve(A, B) (Triggered internally at  /pytorch/aten/src/ATen/na
 <span class="n">codes</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">16</span><span class="p">)];</span> <span class="n">codes</span>
 <span class="n">y_range</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">codes</span><span class="p">)</span><span class="o">*</span><span class="n">hrfac</span><span class="p">))</span>  <span class="c1"># balance between &quot;clamping&quot; to range of real data vs too much &quot;compression&quot; from sigmoid nonlineari</span>
 <span class="n">learn</span> <span class="o">=</span> <span class="n">unet_learner</span><span class="p">(</span><span class="n">dls</span><span class="p">,</span> <span class="n">resnet34</span><span class="p">,</span> <span class="n">n_out</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">y_range</span><span class="o">=</span><span class="n">y_range</span><span class="p">,</span> <span class="n">loss_func</span><span class="o">=</span><span class="n">MSELossFlat</span><span class="p">(),</span> <span class="n">self_attention</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">act_cls</span><span class="o">=</span><span class="n">Mish</span><span class="p">,</span> <span class="n">opt_func</span><span class="o">=</span><span class="n">opt</span><span class="p">)</span>
-<span class="n">learn</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;seg_reg_full_real_2&#39;</span><span class="p">)</span>
+<span class="n">learn</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">checkpoint</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;.pth&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">))</span>
 </pre></div>
 
     </div>
