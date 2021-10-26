@@ -168,7 +168,7 @@ espiownage version 0.0.41
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>/home/sstudent/datasets/espiownage-cleaner/crops
+<pre>/home/drscotthawley/datasets/espiownage-cleaner/crops
 </pre>
 </div>
 </div>
@@ -226,7 +226,7 @@ espiownage version 0.0.41
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>6614 total cropped images
-/home/sstudent/datasets/espiownage-cleaner/crops/06241902_proc_00618_0_36_76_255_11.0.png
+/home/drscotthawley/datasets/espiownage-cleaner/crops/06241902_proc_00618_0_36_76_255_11.0.png
 11.0
 </pre>
 </div>
@@ -268,7 +268,7 @@ espiownage version 0.0.41
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>/home/sstudent/envs/espi/lib/python3.6/site-packages/torch/nn/functional.py:718: UserWarning:
+<pre>/home/drscotthawley/envs/espi/lib/python3.6/site-packages/torch/nn/functional.py:718: UserWarning:
 
 Named tensors and all their associated APIs are an experimental feature and subject to change. Please do not use them for anything important until they are released as stable. (Triggered internally at  /pytorch/c10/core/TensorImpl.h:1156.)
 
@@ -546,7 +546,7 @@ torch.Size([30980])
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">fs_imgdir</span> <span class="o">=</span> <span class="s1">&#39;/home/sstudent/datasets/zooniverse_steelpan/&#39;</span> <span class="c1"># where all full size images are stored</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">fs_imgdir</span> <span class="o">=</span> <span class="s1">&#39;/home/drscotthawley/datasets/zooniverse_steelpan/&#39;</span> <span class="c1"># where all full size images are stored</span>
 <span class="n">imlist</span> <span class="o">=</span> <span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">fs_imgdir</span><span class="o">+</span><span class="s1">&#39;/*.png&#39;</span><span class="p">))]</span>
 
 <span class="n">name2frame</span><span class="o">=</span> <span class="p">{</span><span class="n">v</span><span class="p">:</span><span class="nb">int</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">imlist</span><span class="p">)}</span> <span class="c1"># map filename to frame number</span>
